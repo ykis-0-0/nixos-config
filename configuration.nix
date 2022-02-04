@@ -11,9 +11,13 @@
     hostName = "rpinix";
     wireless = {
       enable = true;
-      interfaces = [ "wlan0" ];
+      # interfaces = []; # A shared instance is enough for Pi
+      extraConfig = ''
+        country=HK
+      ''; # We need this to properly connect and have 5GHz, good thing!
       networks = with (import ./secrets.nix);
         wifi;
+      userControlled.enable = true;
     };
   };
 
