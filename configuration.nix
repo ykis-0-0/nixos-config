@@ -20,6 +20,15 @@
         ClientAliveInterval 10
       '';
     };
+
+    ddclient = with (import ./secrets.nix); {
+      enable = true;
+      interval = "12 hours";
+      protocol = "noip";
+      # server = "dynupdate.no-ip.com" # default
+      use = "web, web=checkip.dyndns.com";
+      inherit (ddclient_noip) username passwordFile domains;
+    };
   };
 
   networking = {
