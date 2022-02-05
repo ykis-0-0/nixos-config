@@ -36,7 +36,7 @@
       options = [ "noatime" ];
     };
 
-    "/boot" = {
+    "/boot/FIRMWARE" = {
       device = "/dev/sda1";
       fsType = "vfat";
       options = [ "noatime" ];
