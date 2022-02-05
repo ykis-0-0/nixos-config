@@ -4,7 +4,13 @@
 
   services = {
     avahi.enable = true;
-    openssh.enable = true;
+
+    openssh = {
+      enable = true;
+      extraConfig = ''
+        ClientAliveInterval 10
+      '';
+    };
   };
 
   networking = {
