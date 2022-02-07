@@ -12,9 +12,13 @@
   boot = {
     # kernelPackages = pkgs.linuxPackages_rpi4; # done in <nixos-hardware>
     initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" "uas" "vc4" ];
-    loader.raspberryPi = {
-      enable = true;
-      version = 4;
+
+    loader = {
+      generic-extlinux-compatible.enable = false;
+      raspberryPi = {
+        enable = true;
+        version = 4;
+      };
     };
   };
 
