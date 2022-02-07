@@ -1,13 +1,13 @@
 {
   imports =
     let
-      nixos-hardware = {
+      nixos-hardware = fetchGit {
         url = "https://github.com/NixOS/nixos-hardware.git";
         ref = "master";
       };
     in
       # [] ++ map builtin.toString ((map fetchTarball []) ++ (map fetchGit [ nixos-hardware ]));
-      [ "${fetchGit nixos-hardware}/raspberry-pi/4" ];
+      [ "${nixos-hardware}/raspberry-pi/4" ];
 
   boot = {
     # kernelPackages = pkgs.linuxPackages_rpi4; # done in <nixos-hardware>
