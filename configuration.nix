@@ -2,6 +2,8 @@
 {
   imports = [ ./rpi-hardware.nix ];
 
+  time.timeZone = "Asia/Hong_Kong";
+
   services = {
     avahi = {
       enable = true;
