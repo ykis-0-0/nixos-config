@@ -6,7 +6,6 @@
         ref = "master";
       };
     in
-      # [] ++ map builtin.toString ((map fetchTarball []) ++ (map fetchGit [ nixos-hardware ]));
       [ "${nixos-hardware}/raspberry-pi/4" ];
 
   boot = {
