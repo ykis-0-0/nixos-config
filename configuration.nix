@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [ ./rpi-hardware.nix ];
+  imports = [ ./passwdmgr.nix ./rpi-hardware.nix ];
 
   time.timeZone = "Asia/Hong_Kong";
 
@@ -47,13 +47,14 @@
     };
   };
 
+  pwdHashMgr = {
+    enable = true;
+    inherit (import ./secrets.nix) passwords;
+  };
+
   users = {
     mutableUsers = false;
-    users =
-      let
-        pwds = (import ./secrets.nix).passwords;
-        pwdmap = uname: if pwds ? uname then { password = pwds."${uname}"; } else {};
-      in builtins.mapAttrs (uname: conf: conf // pwdmap uname) {
+    users = {
         nixos = {
           isNormalUser = true;
           /* auto-set:
@@ -64,7 +65,6 @@
             isSystemUser = false;
           */
           extraGroups = [ "wheel" ];
-          password = "nixos";
         };
       };
   };
