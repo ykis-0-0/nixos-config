@@ -2,10 +2,14 @@
 {
   imports = [ ./channels.nix ./passwdmgr.nix ./rpi-hardware.nix ];
 
-  nix-decl-channels = {
+  nix-channels = {
     enable = true;
-    systemChannels = {
-      nixos = "https://nixos.org/channels/nixos-21.11-aarch64";
+    nixpkgs = {
+      channelName = "nixos";
+      url = "https://nixos.org/channels/nixos-21.11-aarch64/nixexprs.tar.xz";
+    };
+
+    extraChannels = {
       home-manager = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
     };
   };
