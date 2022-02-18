@@ -1,4 +1,7 @@
 { config, pkgs, lib, ... }:
+let
+  secrets = import ./secrets.nix;
+in
 {
   imports = [ ./channels.nix ./passwdmgr.nix ./rpi-hardware.nix ];
 
@@ -35,13 +38,13 @@
       '';
     };
 
-    ddclient = with (import ./secrets.nix); {
+    ddclient = {
       enable = true;
       interval = "12 hours";
       protocol = "noip";
       # server = "dynupdate.no-ip.com" # default
       use = "web, web=checkip.dyndns.com";
-      inherit (ddclient_noip) username passwordFile domains;
+      inherit (secrets.ddclient_noip) username passwordFile domains;
     };
   };
 
@@ -53,15 +56,14 @@
       extraConfig = ''
         country=HK
       ''; # We need this to properly connect and have 5GHz, good thing!
-      networks = with (import ./secrets.nix);
-        wifi;
+      networks = secrets.wifi;
       userControlled.enable = true;
     };
   };
 
   pwdHashMgr = {
     enable = true;
-    inherit (import ./secrets.nix) passwords;
+    inherit (secrets) passwords;
   };
 
   users = {

@@ -1,12 +1,8 @@
 { lib, pkgs, config, options, ... }:
-let
-  inherit (lib) mkEnableOption mkOption mkIf;
-  cfg = config.pwdHashMgr;
-in
 {
   options.pwdHashMgr = {
-    enable = mkEnableOption "Password Hash Generator";
-    passwords = mkOption {
+    enable = lib.mkEnableOption "Password Hash Generator";
+    passwords = lib.mkOption {
       example = ''{
         nixos = "nixos"
         bob = "i<3alice"
@@ -19,18 +15,18 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = let
+    cfg = config.pwdHashMgr;
+  in lib.mkIf cfg.enable {
     users.users = let
-      inherit (builtins) readFile;
-      inherit (pkgs) runCommand;
       drvArgGen = pwdRaw: {
         nativeBuildInputs = [ pkgs.mkpasswd ];
         PASSWORD = pwdRaw;
       };
-      mkHash = pwdRaw: (runCommand "mkpasswd") (drvArgGen pwdRaw) ''
+      mkHash = pwdRaw: (pkgs.runCommand "mkpasswd") (drvArgGen pwdRaw) ''
         mkpasswd -m sha-512 $PASSWORD | tr -d "\n" > $out
       '';
-      getHash = pwdRaw: readFile (mkHash pwdRaw);
+      getHash = pwdRaw: builtins.readFile (mkHash pwdRaw);
     in
       builtins.mapAttrs (uname: cPwd: { hashedPassword = getHash cPwd; }) cfg.passwords;
   };
