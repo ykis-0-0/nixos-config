@@ -1,6 +1,14 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [ ./passwdmgr.nix ./rpi-hardware.nix ];
+  imports = [ ./channels.nix ./passwdmgr.nix ./rpi-hardware.nix ];
+
+  nix-decl-channels = {
+    enable = true;
+    systemChannels = {
+      nixos = "https://nixos.org/channels/nixos-21.11-aarch64";
+      home-manager = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+    };
+  };
 
   time.timeZone = "Asia/Hong_Kong";
 
