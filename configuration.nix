@@ -3,41 +3,13 @@ let
   secrets = import ./secrets.nix;
 in
 {
-  imports = [ ./channels.nix ./passwdmgr.nix ./rpi-hardware.nix ];
+  imports = [ ./passwdmgr.nix ./roles/avahi.nix ./roles/sshd.nix];
 
-  nix-channels = {
-    enable = true;
-    nixpkgs = {
-      channelName = "nixos";
-      url = "https://nixos.org/channels/nixos-21.11-aarch64/nixexprs.tar.xz";
-    };
-
-    extraChannels = {
-      home-manager = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-    };
-  };
+  system.stateVersion = "21.11";
 
   time.timeZone = "Asia/Hong_Kong";
 
   services = {
-    avahi = {
-      enable = true;
-      nssmdns = true;
-      publish = {
-        enable = true;
-        userServices = true;
-        addresses = true;
-        domain = true;
-      };
-    };
-
-    openssh = {
-      enable = true;
-      extraConfig = ''
-        ClientAliveInterval 10
-      '';
-    };
-
     ddclient = {
       enable = true;
       interval = "12 hours";
@@ -51,7 +23,7 @@ in
   networking = {
     hostName = "rpinix";
     wireless = {
-      enable = true;
+      enable = true; # Enables wireless support via wpa_supplicant.
       # interfaces = []; # A shared instance is enough for Pi
       extraConfig = ''
         country=HK
