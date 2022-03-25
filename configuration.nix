@@ -3,19 +3,9 @@ let
   secrets = import ./secrets.nix;
 in
 {
-  imports = [ ./channels.nix ./passwdmgr.nix ./rpi-hardware.nix ./roles/avahi.nix ./roles/sshd.nix ];
+  imports = [ ./passwdmgr.nix ./roles/avahi.nix ./roles/sshd.nix];
 
-  nix-channels = {
-    enable = true;
-    nixpkgs = {
-      channelName = "nixos";
-      url = "https://nixos.org/channels/nixos-21.11-aarch64/nixexprs.tar.xz";
-    };
-
-    extraChannels = {
-      home-manager = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-    };
-  };
+  system.stateVersion = "21.11";
 
   time.timeZone = "Asia/Hong_Kong";
 

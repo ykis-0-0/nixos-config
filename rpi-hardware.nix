@@ -1,12 +1,6 @@
+{ nixos-hardware, ... }:
 {
-  imports =
-    let
-      nixos-hardware = fetchGit {
-        url = "https://github.com/NixOS/nixos-hardware.git";
-        ref = "master";
-      };
-    in
-      [ "${nixos-hardware}/raspberry-pi/4" ];
+  imports = [ nixos-hardware.nixosModules.raspberry-pi-4 ];
 
   boot = {
     # kernelPackages = pkgs.linuxPackages_rpi4; # done in <nixos-hardware>
@@ -24,6 +18,11 @@
     raspberry-pi."4" = {
       audio.enable = true;
       fkms-3d.enable = true;
+    };
+
+    opengl = {
+      enable = true;
+      driSupport = true;
     };
   };
 
