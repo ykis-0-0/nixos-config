@@ -27,11 +27,11 @@
           inherit (inputs) nixos nixpkgs-unstable home-manager nixos-hardware argononed impermanence;
         };
         modules = [
-          ./add_flakes.nix
+          ./expectations/flakes.nix
           ./configuration.nix
-          ./rpi-hardware.nix
-          ./hm-stub.nix
-          ./tmpfs_rootfs.nix
+          ./expectations/hardware/raspberrypi.nix
+          ./expectations/home-manager.nix
+          ./expectations/impermanence.nix
           # ./argononed.nix
         ];
       };

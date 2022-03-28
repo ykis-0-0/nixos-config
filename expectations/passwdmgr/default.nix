@@ -1,4 +1,4 @@
-{ lib, pkgs, config, options, ... }:
+{ nixpkgs-unstable, lib, pkgs, config, options, ... }:
 {
   options.pwdHashMgr = {
     enable = lib.mkEnableOption "Password Hash Generator";
@@ -17,15 +17,19 @@
 
   config = let
     cfg = config.pwdHashMgr;
+    pkgs-unstable = nixpkgs-unstable.legacyPackages.${pkgs.system}.pkgs;
   in lib.mkIf cfg.enable {
-    nix.extraOptions = ''
+    nix.extraOptions = let
+      inherit (pkgs-unstable) nix-plugins;
+    in ''
       plugin-files = ${pkgs.nix-plugins}/lib/nix/plugins
       extra-builtins-file = ${./extra_builtins.nix}
     '';
 
     users.users = let
+      inherit (pkgs-unstable) mkpasswd;
       mkPasswd = password:
-        bulitins.replaceStrings [ "\n" ] [ "" ] (
+        builtins.replaceStrings [ "\n" ] [ "" ] (
           builtins.extraBuiltins.exec [ "${pkgs.mkpasswd}/bin/mkpasswd" "-m" "sha-512" password ]
         );
     in
