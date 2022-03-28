@@ -1,0 +1,4 @@
+{ importNative, exec, ... }:
+{
+  inherit exec;
+}

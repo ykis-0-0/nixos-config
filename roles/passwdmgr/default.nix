@@ -18,16 +18,17 @@
   config = let
     cfg = config.pwdHashMgr;
   in lib.mkIf cfg.enable {
+    nix.extraOptions = ''
+      plugin-files = ${pkgs.nix-plugins}/lib/nix/plugins
+      extra-builtins-file = ${./extra_builtins.nix}
+    '';
+
     users.users = let
-      drvArgGen = pwdRaw: {
-        nativeBuildInputs = [ pkgs.mkpasswd ];
-        PASSWORD = pwdRaw;
-      };
-      mkHash = pwdRaw: (pkgs.runCommand "mkpasswd") (drvArgGen pwdRaw) ''
-        mkpasswd -m sha-512 $PASSWORD | tr -d "\n" > $out
-      '';
-      getHash = pwdRaw: builtins.readFile (mkHash pwdRaw);
+      mkPasswd = password:
+        bulitins.replaceStrings [ "\n" ] [ "" ] (
+          builtins.extraBuiltins.exec [ "${pkgs.mkpasswd}/bin/mkpasswd" "-m" "sha-512" password ]
+        );
     in
-      builtins.mapAttrs (uname: cPwd: { hashedPassword = getHash cPwd; }) cfg.passwords;
+      builtins.mapAttrs (uname: cPwd: { hashedPassword = mkPasswd cPwd; }) cfg.passwords;
   };
 }

@@ -3,7 +3,7 @@ let
   secrets = import ./secrets.nix;
 in
 {
-  imports = [ ./passwdmgr.nix ./roles/avahi.nix ./roles/sshd.nix];
+  imports = [ ./roles/passwdmgr ./roles/avahi.nix ./roles/sshd.nix ];
 
   system.stateVersion = "21.11";
 
