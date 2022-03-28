@@ -16,6 +16,7 @@
       # };
       flake = false;
     };
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = { self, ... }@inputs : {
@@ -23,14 +24,15 @@
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = {
-          inherit (inputs) nixos nixpkgs-unstable home-manager nixos-hardware argononed;
+          inherit (inputs) nixos nixpkgs-unstable home-manager nixos-hardware argononed impermanence;
         };
         modules = [
           ./add_flakes.nix
           ./configuration.nix
           ./rpi-hardware.nix
           ./hm-stub.nix
-          /*./argononed.nix*/
+          ./tmpfs_rootfs.nix
+          # ./argononed.nix
         ];
       };
     };
