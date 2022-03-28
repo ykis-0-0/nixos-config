@@ -41,18 +41,18 @@ in
   users = {
     mutableUsers = false;
     users = {
-        nixos = {
-          isNormalUser = true;
-          /* auto-set:
-            group = "users";
-            home = "/home/<username>";
-            createHome = true;
-            useDefaultShell = true;
-            isSystemUser = false;
-          */
-          extraGroups = [ "wheel" ];
-        };
+      nixos = {
+        isNormalUser = true;
+        /* auto-set:
+          group = "users";
+          home = "/home/<username>";
+          createHome = true;
+          useDefaultShell = true;
+          isSystemUser = false;
+        */
+        extraGroups = [ "wheel" ];
       };
+    };
   };
 
 }
