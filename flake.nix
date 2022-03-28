@@ -2,8 +2,7 @@
   description = "System Configuration(s)";
 
   inputs = {
-    nixos.url = "github:NixOS/nixpkgs/nixos-21.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     argononed = {
       url = "gitlab:ykis-0-0/argononed/feat/nixos";
@@ -24,7 +23,7 @@
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = {
-          inherit (inputs) nixos nixpkgs-unstable home-manager nixos-hardware argononed impermanence;
+          inherit (inputs) nixos home-manager nixos-hardware argononed impermanence;
         };
         modules = [
           ./expectations/flakes.nix

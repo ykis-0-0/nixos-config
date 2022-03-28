@@ -6,10 +6,10 @@
     # kernelPackages = pkgs.linuxPackages_rpi4; # done in <nixos-hardware>
     initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" "uas" "vc4" ];
 
-    loader.raspberryPi = {
+    /* loader.raspberryPi = {
       enable = true;
       version = 4;
-    };
+    }; */
   };
 
   hardware = {

@@ -1,6 +1,5 @@
-{ nixos, home-manager, nixpkgs-unstable, pkgs, ... }: {
+{ nixos, home-manager, pkgs, ... }: {
   nix = {
-    package = nixpkgs-unstable.legacyPackages.${pkgs.system}.pkgs.nix;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
