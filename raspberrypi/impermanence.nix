@@ -1,6 +1,9 @@
 { lib, impermanence, ... }:
 let
-  persistMount = "/persist";
+  persistRoot = {
+    mountpoint = "/persist";
+    device = "/dev/sda2";
+  };
   _mkPersist = onInitrd: mountPoint: source: {
     name = mountPoint;
     value = {
@@ -9,12 +12,12 @@ let
       neededForBoot = onInitrd;
     };
   };
-  mkPersist = mountPoint: _mkPersist true mountPoint (persistMount + mountPoint);
+  mkPersist = mountPoint: _mkPersist true mountPoint (persistRoot.mountpoint + mountPoint);
   earlyMaps = [ "/boot" "/nix" ];
 in {
   imports = [ impermanence.nixosModule ];
 
-  environment.persistence.${persistMount} = {
+  environment.persistence.${persistRoot.mountpoint} = {
     directories = [
       {
         directory = "/etc/nixos";
@@ -43,11 +46,17 @@ in {
       options = [ "size=1G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
     };
 
-    ${persistMount} = {
-      device = "/dev/sda2";
+    ${persistRoot.mountpoint} = {
+      device = persistRoot.device;
       fsType = "ext4";
       options = [ "noatime" ];
       neededForBoot = true;
+    };
+
+    "/boot/FIRMWARE" = {
+      device = "/dev/sda1";
+      fsType = "vfat";
+      options = [ "noatime" ];
     };
 
   } // builtins.listToAttrs (map mkPersist earlyMaps);
