@@ -2,7 +2,7 @@
   boot = {
     kernelModules = [];
     initrd = {
-      availableKernelModules = [ "ata_piix" "ochi_pci" "ehci_pci" "sd_mod" "sr_mod" ];
+      availableKernelModules = [ "ata_piix" "ohci_pci" "ehci_pci" "sd_mod" "sr_mod" ];
       kernelModules = [];
     };
     extraModulePackages = [];
