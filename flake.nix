@@ -23,14 +23,14 @@
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = {
-          inherit (inputs) nixos home-manager nixos-hardware argononed impermanence;
+          inherit (inputs) nixos home-manager impermanence nixos-hardware argononed;
         };
         modules = [
           ./expectations/flakes.nix
-          ./configuration.nix
-          ./expectations/hardware/raspberrypi.nix
+          ./raspberrypi/configuration.nix
+          ./raspberrypi/hardware.nix
           ./expectations/home-manager.nix
-          ./expectations/impermanence.nix
+          ./raspberrypi/storage.nix
           # ./argononed.nix
         ];
       };

@@ -27,18 +27,4 @@
   };
 
   powerManagement.cpuFreqGovernor = "ondemand";
-
-  fileSystems = {
-    "/" = {
-      device = "/dev/sda2";
-      fsType = "ext4";
-      options = [ "noatime" ];
-    };
-
-    "/boot/FIRMWARE" = {
-      device = "/dev/sda1";
-      fsType = "vfat";
-      options = [ "noatime" ];
-    };
-  };
 }
