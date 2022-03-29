@@ -34,6 +34,18 @@
           # ./argononed.nix
         ];
       };
+
+      vbox = inputs.nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit (inputs) nixos home-manager impermanence;
+        };
+        modules = [
+          ./virtualbox/configuration.nix
+          ./virtualbox/hardware.nix
+          ./virtualbox/storage.nix
+        ];
+      };
     };
   };
 
