@@ -6,16 +6,7 @@ let
     device = "/dev/sda2";
   };
   earlyBinds = [ "/boot" "/nix" ];
-  _mkPersist = onInitrd: mountPoint: source: {
-    name = mountPoint;
-    value = {
-      device = source;
-      options = [ "bind" ];
-      neededForBoot = onInitrd;
-    };
-  };
-  mkPersist = mountPoint: _mkPersist true mountPoint (persistRoot.mountpoint + mountPoint);
-  persistenceSetup = {
+  maybePersistenceSetup = if doImpermanence then {
     imports = [ impermanence.nixosModule ];
 
     environment.persistence.${persistRoot.mountpoint} = {
@@ -39,16 +30,23 @@ let
         "/etc/ssh/ssh_host_rsa_key.pub"
       ];
     };
-  };
-in persistenceSetup // {
-  fileSystems = {
-    "/" = lib.mkForce {
-      device = "none";
-      fsType = "tmpfs";
-      options = [ "size=1G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
-    };
+  } else {};
+  #region Miscellaneous Functions
 
-    ${persistRoot.mountpoint} = {
+  _mkPersist = onInitrd: mountPoint: source: {
+    name = mountPoint;
+    value = {
+      device = source;
+      options = [ "bind" ];
+      neededForBoot = onInitrd;
+    };
+  };
+  mkPersist = mountPoint: _mkPersist true mountPoint (persistRoot.mountpoint + mountPoint);
+
+  #endregion End Miscellaneous Functions
+in maybePersistenceSetup // {
+  fileSystems = {
+    ${if doImpermanence then persistRoot.mountpoint else "/"} = {
       device = persistRoot.device;
       fsType = "ext4";
       options = [ "noatime" ];
@@ -60,6 +58,14 @@ in persistenceSetup // {
       fsType = "vfat";
       options = [ "noatime" ];
     };
-
-  } // builtins.listToAttrs (map mkPersist earlyBinds);
+  } // (
+    if !doImpermanence then {}
+    else {
+      "/" = {
+        device = "none";
+        fsType = "tmpfs";
+        options = [ "size=1G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
+      };
+    } // builtins.listToAttrs (map mkPersist earlyBinds)
+  );
 }
