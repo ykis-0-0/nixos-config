@@ -41,9 +41,11 @@
           inherit (inputs) nixos home-manager impermanence;
         };
         modules = [
+          ./expectations/flakes.nix
           ./virtualbox/configuration.nix
           ./virtualbox/hardware.nix
           ./virtualbox/storage.nix
+          ./expectations/home-manager.nix
         ];
       };
     };
