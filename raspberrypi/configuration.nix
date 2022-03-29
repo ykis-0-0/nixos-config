@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 let
-  secrets = import ./secrets.nix;
+  secrets = import ../secrets.nix;
 in
 {
-  imports = [ ./expectations/avahi.nix ./expectations/sshd.nix ];
+  imports = [ ../expectations/avahi.nix ../expectations/sshd.nix ];
 
   system.stateVersion = "21.11";
 
@@ -33,10 +33,10 @@ in
     };
   };
 
-  pwdHashMgr = {
-    enable = true;
-    inherit (secrets) passwords;
-  };
+  # pwdHashMgr = {
+  #   enable = true;
+  #   inherit (secrets) passwords;
+  # };
 
   users = {
     mutableUsers = false;
