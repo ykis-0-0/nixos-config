@@ -30,7 +30,7 @@
           ./raspberrypi/configuration.nix
           ./raspberrypi/hardware.nix
           ./expectations/home-manager.nix
-          ./raspberrypi/impermanence.nix
+          ./raspberrypi/storage.nix
           # ./argononed.nix
         ];
       };
