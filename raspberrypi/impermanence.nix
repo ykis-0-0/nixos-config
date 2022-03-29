@@ -1,9 +1,11 @@
 { lib, impermanence, ... }:
 let
+  doImpermanence = true;
   persistRoot = {
     mountpoint = "/persist";
     device = "/dev/sda2";
   };
+  earlyBinds = [ "/boot" "/nix" ];
   _mkPersist = onInitrd: mountPoint: source: {
     name = mountPoint;
     value = {
@@ -13,32 +15,32 @@ let
     };
   };
   mkPersist = mountPoint: _mkPersist true mountPoint (persistRoot.mountpoint + mountPoint);
-  earlyMaps = [ "/boot" "/nix" ];
-in {
-  imports = [ impermanence.nixosModule ];
+  persistenceSetup = {
+    imports = [ impermanence.nixosModule ];
 
-  environment.persistence.${persistRoot.mountpoint} = {
-    directories = [
-      {
-        directory = "/etc/nixos";
-        user = "root";
-        group = "wheel";
-        mode = "0774";
-      }
-      "/var/lib"
-      "/var/log"
-      "/root"
-      "/home"
-    ];
-     files = [
-      "/etc/machine-id"
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/ssh/ssh_host_rsa_key"
-      "/etc/ssh/ssh_host_rsa_key.pub"
-     ];
+    environment.persistence.${persistRoot.mountpoint} = {
+      directories = [
+        {
+          directory = "/etc/nixos";
+          user = "root";
+          group = "wheel";
+          mode = "0774";
+        }
+        "/var/lib"
+        "/var/log"
+        "/root"
+        "/home"
+      ];
+      files = [
+        "/etc/machine-id"
+        "/etc/ssh/ssh_host_ed25519_key"
+        "/etc/ssh/ssh_host_ed25519_key.pub"
+        "/etc/ssh/ssh_host_rsa_key"
+        "/etc/ssh/ssh_host_rsa_key.pub"
+      ];
+    };
   };
-
+in persistenceSetup // {
   fileSystems = {
     "/" = lib.mkForce {
       device = "none";
@@ -59,5 +61,5 @@ in {
       options = [ "noatime" ];
     };
 
-  } // builtins.listToAttrs (map mkPersist earlyMaps);
+  } // builtins.listToAttrs (map mkPersist earlyBinds);
 }
