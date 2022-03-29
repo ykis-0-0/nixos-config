@@ -18,8 +18,10 @@
   config = let
     cfg = config.pwdHashMgr;
   in lib.mkIf cfg.enable {
-    nix.extraOptions = ''
-      plugin-files = ${pkgs.nix-plugins}/lib/nix/plugins
+    nix.extraOptions = let
+      nix-plugins = pkgs.nix-plugins.override { nix = config.nix.package; };
+    in ''
+      plugin-files = ${nix-plugins}/lib/nix/plugins
       extra-builtins-file = ${./extra_builtins.nix}
     '';
 

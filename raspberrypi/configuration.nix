@@ -33,10 +33,10 @@ in
     };
   };
 
-  # pwdHashMgr = {
-  #   enable = true;
-  #   inherit (secrets) passwords;
-  # };
+  pwdHashMgr = {
+    enable = true;
+    inherit (secrets) passwords;
+  };
 
   users = {
     mutableUsers = false;
