@@ -14,7 +14,6 @@
         enable = true;
         version = 2;
         device = "/dev/sda";
-        efiSupport = true;
       };
       # systemd-boot.enable = true;
     };
