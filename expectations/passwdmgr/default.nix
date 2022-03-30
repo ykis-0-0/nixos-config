@@ -17,21 +17,31 @@
 
   config = let
     cfg = config.pwdHashMgr;
-  in lib.mkIf cfg.enable {
-    nix.extraOptions = let
-      nix-plugins = pkgs.nix-plugins.override { nix = config.nix.package; };
-    in ''
-      plugin-files = ${nix-plugins}/lib/nix/plugins
-      extra-builtins-file = ${./extra_builtins.nix}
-    '';
+    useNixPlugin = false;
+    mkPasswd_ = caller:
+      let
+        mkPwdCmd = "${pkgs.mkpasswd}/bin/mkpasswd -m sha512crypt";
+        awkScript =  password: "BEGIN { \"${mkPwdCmd} ${password}\" | getline out; printf(\"\\\"%s\\\"\", out); }";
+      in
+        passwd: caller [ "${pkgs.gawk}/bin/awk" (awkScript passwd) ];
 
-    users.users = let
-      inherit (pkgs-unstable) mkpasswd;
-      mkPasswd = password:
-        builtins.replaceStrings [ "\n" ] [ "" ] (
-          builtins.extraBuiltins.exec [ "${pkgs.mkpasswd}/bin/mkpasswd" "-m" "sha-512" password ]
-        );
-    in
-      builtins.mapAttrs (uname: cPwd: { hashedPassword = mkPasswd cPwd; }) cfg.passwords;
+    doPlugin = {
+      nixExtraOptions = ''
+        plugin-files = ${pkgs.nix-plugins}/lib/nix/plugins
+        extra-builtins-file = ${./extra_builtins.nix}
+      '';
+
+      caller = builtins.extraBuiltins.exec;
+    };
+    doExec = {
+      nixExtraOptions = "allow-unsafe-native-code-during-evaluation = true";
+
+      caller = builtins.exec;
+    };
+
+    method = if useNixPlugin then doPlugin else doExec;
+  in lib.mkIf cfg.enable {
+    nix.extraOptions = method.nixExtraOptions;
+    users.users = builtins.mapAttrs (uname: cPwd: { hashedPassword = mkPasswd_ method.caller cPwd; }) cfg.passwords;
   };
 }
