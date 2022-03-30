@@ -18,7 +18,6 @@
     # Per-interface useDHCP will be mandatory in the future, so this generated config
     # replicates the default behaviour.
     useDHCP = false;
-
     interfaces.enp0s3.useDHCP = true;
   };
 
@@ -34,7 +33,7 @@
           useDefaultShell = true;
           isSystemUser = false;
         */
-        extraGroups = [ "wheel" ];
+        extraGroups = [ "wheel" "vboxsf" ];
         password = "nixos";
       };
     };

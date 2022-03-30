@@ -46,6 +46,7 @@
           ./virtualbox/hardware.nix
           ./virtualbox/storage.nix
           ./expectations/home-manager.nix
+          ./expectations/gui/fluxbox.nix
         ];
       };
     };
