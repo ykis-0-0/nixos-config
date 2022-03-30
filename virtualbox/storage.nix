@@ -1,6 +1,6 @@
 { lib, impermanence, ... }:
 let
-  doImpermanence = false;
+  doImpermanence = false; # Set to true to enable impermanence
   persistRoot = {
     mountpoint = "/persist";
     device = "/dev/sda2";
