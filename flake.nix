@@ -27,7 +27,6 @@
           ./expectations/flakes.nix
           ./raspberrypi/configuration.nix
           ./raspberrypi/hardware.nix
-          ./expectations/home-manager.nix
           ./raspberrypi/storage.nix
           # ./argononed.nix
         ];
@@ -43,7 +42,6 @@
           ./virtualbox/configuration.nix
           ./virtualbox/hardware.nix
           ./virtualbox/storage.nix
-          ./expectations/home-manager.nix
           ./expectations/gui/fluxbox.nix
         ];
       };
