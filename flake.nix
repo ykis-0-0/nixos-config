@@ -10,15 +10,13 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      # inputs = {
-      #   nixpkgs.follows = "nixos";
-      # };
-      flake = false;
+      inputs.nixpkgs.follows = "nixos";
+      # flake = false;
     };
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { self, ... }@inputs : {
+  outputs = { self, ... }@inputs : rec {
     nixosConfigurations = {
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
@@ -55,7 +53,7 @@
       # Copied from https://github.com/nix-community/home-manager/blob/master/flake.nix#L6
       #
       # List of systems supported by home-manager binary (NixOS only in our case)
-      supportedSystems = inputs.nixos.lib.platforms.linux;
+      supportedSystems = builtins.attrNames inputs.nixos.legacyPackages; # inputs.nixos.lib.platforms.linux;
 
       # Function to generate a set based on supported systems
       forAllSystems = f:
@@ -67,6 +65,30 @@
     in forAllSystems (system: {
       hm-install = (import "${inputs.home-manager}" (callArg system)).install;
     });
-  };
 
+
+    homeConfigurations = let
+      _mkHomeConfig = inputs.home-manager.lib.homeManagerConfiguration;
+      mkHomeConfig = {
+        username, host,
+        profileName ? "${username}@${host}", homeDirectory ? "/home/${username}",
+        stateVersion ? "20.09", configuration
+      }: {
+        name = profileName;
+        value = _mkHomeConfig {
+          inherit username homeDirectory stateVersion configuration;
+          system = nixosConfigurations.${host}.pkgs.system;
+        };
+      };
+      mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig builders);
+    in mkHomeConfigurations [
+      {
+        username = "nixos";
+        host = "vbox";
+        stateVersion = "22.05";
+        configuration = import ./home-manager/nixos/vbox.host.nix;
+      }
+    ];
+
+  };
 }
