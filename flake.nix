@@ -14,6 +14,10 @@
       # flake = false;
     };
     impermanence.url = "github:nix-community/impermanence";
+    vscode-server-patch = {
+      url = "github:msteen/nixos-vscode-server/master";
+      flake = false;
+    };
   };
 
   outputs = { self, ... }@inputs : rec {
@@ -71,13 +75,13 @@
       mkHomeConfig = {
         username, host,
         profileName ? "${username}@${host}", homeDirectory ? "/home/${username}",
-        stateVersion ? "20.09", configuration
-      }: {
+        ...
+      }@args: {
         name = profileName;
-        value = _mkHomeConfig {
-          inherit username homeDirectory stateVersion configuration;
+        value = _mkHomeConfig ((builtins.removeAttrs args ["host"]) // {
+          inherit homeDirectory; # To force realiastion?
           system = nixosConfigurations.${host}.pkgs.system;
-        };
+        });
       };
       mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig builders);
     in mkHomeConfigurations [
@@ -92,6 +96,9 @@
         host = "rpinix";
         stateVersion = "22.05";
         configuration = import ./home-manager/nixos/rpinix.host.nix;
+        extraSpecialArgs = {
+          vscode-srv = inputs.vscode-server-patch
+        };
       }
     ];
 
