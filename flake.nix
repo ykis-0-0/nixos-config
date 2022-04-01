@@ -16,7 +16,7 @@
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { self, ... }@inputs : {
+  outputs = { self, ... }@inputs : rec {
     nixosConfigurations = {
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
@@ -76,7 +76,7 @@
         name = profileName;
         value = {
           inherit username homeDirectory stateVersion configuration;
-          system = outputs.nixosConfigurations.${host}.system;
+          system = nixosConfigurations.${host}.system;
         };
       };
       mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig builders);
