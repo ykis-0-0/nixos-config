@@ -10,10 +10,8 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      # inputs = {
-      #   nixpkgs.follows = "nixos";
-      # };
-      flake = false;
+      inputs.nixpkgs.follows = "nixos";
+      # flake = false;
     };
     impermanence.url = "github:nix-community/impermanence";
   };
@@ -67,6 +65,35 @@
     in forAllSystems (system: {
       hm-install = (import "${inputs.home-manager}" (callArg system)).install;
     });
-  };
 
+
+    homeConfigurations = /* let
+      # Modified from https://github.com/nix-community/home-manager/blob/master/flake.nix#L44
+      homeManagerConfiguration' = {
+        system, username, homeDirectory,
+        modules, extraSpecialArgs ? {},
+        pkgs ? builtins.getAttr system inputs.nixos.legacyPackages,
+        check ? true, stateVersion ? "20.09"
+      }@args:
+      assert inputs.nixos.lib.versionAtLeast sateVersion "20.09";
+      import "${inputs.home-manager}/modules" {
+        inherit pkgs check extraSpecialArgs;
+        configuration = { ... }: {
+          imports = modules;
+          home = { inherit homeDirectory stateVersion username; };
+          nixpkgs = { inherit (pkgs) config overlays; };
+        };
+      };
+    in */ {
+      "nixos@vbox" = inputs.home-manager.lib.homeManagerConfiguration {
+        system = "x86_64-linux";
+        username = "nixos";
+        homeDirectory = "/home/nixos";
+        stateVersion = "22.05";
+
+        configuration = import ./home-manager/nixos/vbox.host.nix
+      };
+    };
+
+  };
 }
