@@ -26,6 +26,7 @@
         modules = [
           ./expectations/flakes.nix
           ./raspberrypi/configuration.nix
+          ./expectations/passwdmgr/default.nix
           ./raspberrypi/hardware.nix
           ./raspberrypi/storage.nix
           # ./argononed.nix
