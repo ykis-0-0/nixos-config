@@ -76,7 +76,7 @@
         name = profileName;
         value = {
           inherit username homeDirectory stateVersion configuration;
-          system = nixosConfigurations.${host}.system;
+          system = nixosConfigurations.${host}.pkgs.system;
         };
       };
       mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig builders);
