@@ -53,7 +53,7 @@
       # Copied from https://github.com/nix-community/home-manager/blob/master/flake.nix#L6
       #
       # List of systems supported by home-manager binary (NixOS only in our case)
-      supportedSystems = inputs.nixos.lib.platforms.linux;
+      supportedSystems = builtins.attrNames inputs.nixos.legacyPackages; # inputs.nixos.lib.platforms.linux;
 
       # Function to generate a set based on supported systems
       forAllSystems = f:
