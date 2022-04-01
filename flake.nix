@@ -67,33 +67,27 @@
     });
 
 
-    homeConfigurations = /* let
-      # Modified from https://github.com/nix-community/home-manager/blob/master/flake.nix#L44
-      homeManagerConfiguration' = {
-        system, username, homeDirectory,
-        modules, extraSpecialArgs ? {},
-        pkgs ? builtins.getAttr system inputs.nixos.legacyPackages,
-        check ? true, stateVersion ? "20.09"
-      }@args:
-      assert inputs.nixos.lib.versionAtLeast sateVersion "20.09";
-      import "${inputs.home-manager}/modules" {
-        inherit pkgs check extraSpecialArgs;
-        configuration = { ... }: {
-          imports = modules;
-          home = { inherit homeDirectory stateVersion username; };
-          nixpkgs = { inherit (pkgs) config overlays; };
+    homeConfigurations = let
+      mkHomeConfig = {
+        username, host,
+        profileName ? "${username}@${host}", homeDirectory ? "/home/${username}",
+        stateVersion ? "20.09", configuration
+      }: {
+        name = profileName;
+        value = {
+          inherit username homeDirectory stateVersion configuration;
+          system = outputs.nixosConfigurations.${host}.system;
         };
       };
-    in */ {
-      "nixos@vbox" = inputs.home-manager.lib.homeManagerConfiguration {
-        system = "x86_64-linux";
+      mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig builders);
+    in mkHomeConfigurations [
+      {
         username = "nixos";
-        homeDirectory = "/home/nixos";
+        host = "vbox";
         stateVersion = "22.05";
-
-        configuration = import ./home-manager/nixos/vbox.host.nix
-      };
-    };
+        configuration = import ./home-manager/nixos/vbox.host.nix;
+      }
+    ];
 
   };
 }
