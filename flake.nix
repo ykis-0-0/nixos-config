@@ -68,13 +68,14 @@
 
 
     homeConfigurations = let
+      _mkHomeConfig = inputs.home-manager.lib.homeManagerConfiguration;
       mkHomeConfig = {
         username, host,
         profileName ? "${username}@${host}", homeDirectory ? "/home/${username}",
         stateVersion ? "20.09", configuration
       }: {
         name = profileName;
-        value = {
+        value = _mkHomeConfig {
           inherit username homeDirectory stateVersion configuration;
           system = nixosConfigurations.${host}.pkgs.system;
         };
