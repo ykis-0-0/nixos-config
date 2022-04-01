@@ -87,6 +87,12 @@
         stateVersion = "22.05";
         configuration = import ./home-manager/nixos/vbox.host.nix;
       }
+      {
+        username = "nixos";
+        host = "rpinix";
+        stateVersion = "22.05";
+        configuration = import ./home-manager/nixos/rpinix.host.nix;
+      }
     ];
 
   };
