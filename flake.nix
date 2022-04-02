@@ -20,7 +20,7 @@
     };
   };
 
-  outputs = { self, ... }@inputs : rec {
+  outputs = { self, ... }@inputs: {
     nixosConfigurations = {
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
@@ -80,7 +80,7 @@
         name = profileName;
         value = _mkHomeConfig ((builtins.removeAttrs args ["host"]) // {
           inherit homeDirectory; # To force realiastion?
-          system = nixosConfigurations.${host}.pkgs.system;
+          system = self.nixosConfigurations.${host}.pkgs.system;
         });
       };
       mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig builders);
