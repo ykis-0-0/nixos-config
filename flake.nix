@@ -97,7 +97,7 @@
         stateVersion = "22.05";
         configuration = import ./home-manager/nixos/rpinix.host.nix;
         extraSpecialArgs = {
-          vscode-srv = inputs.vscode-server-patch
+          vscode-srv = inputs.vscode-server-patch;
         };
       }
     ];

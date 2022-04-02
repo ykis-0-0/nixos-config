@@ -9,4 +9,6 @@
       nvd nix-diff nix-tree nix-index
     ];
   };
+
+  programs.home-manager.enable = true;
 }
