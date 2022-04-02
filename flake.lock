@@ -1,0 +1,96 @@
+{
+  "nodes": {
+    "argononed": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1646514322,
+        "narHash": "sha256-5oaMspvv5dT7LlhOFQEmFh7Ja9BzEjw74eN2f3F/okY=",
+        "owner": "ykis-0-0",
+        "repo": "argononed",
+        "rev": "13858dd244e05fb7549b6af0dbd0e4b9ffe9cebc",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "ykis-0-0",
+        "ref": "feat/nixos",
+        "repo": "argononed",
+        "type": "gitlab"
+      }
+    },
+    "home-manager": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1648366999,
+        "narHash": "sha256-Sdm0lI2ZBc70EnMMmvfDVY7gIM3M4c2L86EdQ9tKRE4=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "888eac32bd657bfe0d024c8770130d80d1c02cd3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "impermanence": {
+      "locked": {
+        "lastModified": 1646131459,
+        "narHash": "sha256-GPmgxvUFvQ1GmsGfWHy9+rcxWrczeDhS9XnAIPHi9XQ=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "2f39baeb7d039fda5fc8225111bb79474138e6f4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "type": "github"
+      }
+    },
+    "nixos": {
+      "locked": {
+        "lastModified": 1648390671,
+        "narHash": "sha256-u69opCeHUx3CsdIerD0wVSR+DjfDQjnztObqfk9Trqc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ce8cbe3c01fd8ee2de526ccd84bbf9b82397a510",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1648141026,
+        "narHash": "sha256-h8e3+5EZFbYHTMb0DN2ACuQTJBNHpqigvmEV1w2WIuE=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "feceb4d24f582817d8f6e737cd40af9e162dee05",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "argononed": "argononed",
+        "home-manager": "home-manager",
+        "impermanence": "impermanence",
+        "nixos": "nixos",
+        "nixos-hardware": "nixos-hardware"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
