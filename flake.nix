@@ -24,9 +24,7 @@
     nixosConfigurations = {
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = {
-          inherit (inputs) nixos home-manager impermanence nixos-hardware argononed;
-        };
+        specialArgs = builtins.removeAttrs inputs [ "self" ];
         modules = [
           ./expectations/flakes.nix
           ./raspberrypi/configuration.nix
@@ -39,9 +37,7 @@
 
       vbox = inputs.nixos.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          inherit (inputs) nixos home-manager impermanence;
-        };
+        specialArgs = builtins removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
         modules = [
           ./expectations/flakes.nix
           ./virtualbox/configuration.nix
