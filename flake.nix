@@ -4,18 +4,18 @@
   inputs = {
     nixos.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    argononed = {
-      url = "gitlab:ykis-0-0/argononed/feat/nixos";
-      flake = false;
-    };
+    impermanence.url = "github:nix-community/impermanence";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixos";
       # flake = false;
     };
-    impermanence.url = "github:nix-community/impermanence";
     vscode-server-patch = {
       url = "github:msteen/nixos-vscode-server/master";
+      flake = false;
+    };
+    argononed = {
+      url = "gitlab:ykis-0-0/argononed/feat/nixos";
       flake = false;
     };
   };
