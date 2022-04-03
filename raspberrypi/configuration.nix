@@ -1,7 +1,4 @@
-{ config, pkgs, lib, ... }:
-let
-  secrets = import ../secrets.nix;
-in
+{ config, pkgs, lib, secrets, ... }:
 {
   imports = [ ../expectations/avahi.nix ../expectations/sshd.nix ];
 

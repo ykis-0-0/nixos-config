@@ -18,9 +18,10 @@
       url = "gitlab:ykis-0-0/argononed/feat/nixos";
       flake = false;
     };
+    # secrets: to be supplied on target hosts
   };
 
-  outputs = { self, ... }@inputs: {
+  outputs = { self, secrets, ... }@inputs: {
     nixosConfigurations = {
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
