@@ -64,7 +64,7 @@ in maybePersistenceSetup // {
       "/" = {
         device = "none";
         fsType = "tmpfs";
-        options = [ "size=1G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
+        options = [ "noatime" "size=1G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
       };
     } // builtins.listToAttrs (map mkPersist earlyBinds)
   );
