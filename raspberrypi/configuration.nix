@@ -1,5 +1,7 @@
-{ config, pkgs, lib, secrets, ... }:
-{
+{ config, pkgs, lib, secret-wrapper, ... }:
+let
+  secrets = import "${secret-wrapper}/secrets.nix";
+in {
   imports = [ ../expectations/avahi.nix ../expectations/sshd.nix ];
 
   system.stateVersion = "21.11";

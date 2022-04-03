@@ -18,7 +18,7 @@
       url = "gitlab:ykis-0-0/argononed/feat/nixos";
       flake = false;
     };
-    # secrets: to be supplied on target hosts
+    # secret-wrapper: to be supplied on target hosts
   };
 
   outputs = { self, secrets, ... }@inputs: {
