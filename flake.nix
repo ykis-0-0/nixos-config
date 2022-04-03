@@ -21,7 +21,7 @@
     # secret-wrapper: to be supplied on target hosts
   };
 
-  outputs = { self, ... }@inputs: {
+  outputs = { self, secret-wrapper ? null, ... }@inputs: {
     nixosConfigurations = {
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
@@ -32,7 +32,7 @@
           ./expectations/passwdmgr/default.nix
           ./raspberrypi/hardware.nix
           ./raspberrypi/storage.nix
-          # ./argononed.nix
+          ./expectations/argononed.nix
         ];
       };
 
