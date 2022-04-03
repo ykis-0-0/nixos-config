@@ -21,7 +21,7 @@
     # secret-wrapper: to be supplied on target hosts
   };
 
-  outputs = { self, secrets, ... }@inputs: {
+  outputs = { self, secret-wrapper, ... }@inputs: {
     nixosConfigurations = {
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
