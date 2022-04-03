@@ -8,4 +8,9 @@
     xfce.thunar gnome.gedit
     gcc9 # For MATLAB
   ];
+
+  xresources.extraConfig = ''
+    XTerm*background: black
+    XTerm*foreground: lightgray
+  '';
 }

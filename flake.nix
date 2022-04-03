@@ -44,7 +44,7 @@
           ./virtualbox/configuration.nix
           ./virtualbox/hardware.nix
           ./virtualbox/storage.nix
-          ./expectations/gui/fluxbox.nix
+          ./expectations/gui/awesome.nix
         ];
       };
     };
