@@ -5,7 +5,7 @@
   nixpkgs.overlays = [ nix-matlab.overlay ];
 
   home.packages = with pkgs; [
-    helvum
+    qpwgraph
     zoom-us firefox
     xfce.thunar gnome.gedit
     vscode
