@@ -14,7 +14,10 @@
       url = "github:msteen/nixos-vscode-server/master";
       flake = false;
     };
-    nix-matlab.url = "gitlab:doronbehar/nix-matlab/master";
+    nix-matlab = {
+      url = "gitlab:doronbehar/nix-matlab/master";
+      inputs.nixpkgs.follows = "nixos";
+    };
     argononed = {
       url = "gitlab:ykis-0-0/argononed/feat/nixos";
       flake = false;
