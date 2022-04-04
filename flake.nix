@@ -49,7 +49,6 @@
           ./virtualbox/hardware.nix
           ./virtualbox/storage.nix
           ./expectations/gui/awesome.nix
-          ./expectations/matlab.nix
         ];
       };
     };
@@ -92,6 +91,9 @@
         host = "vbox";
         stateVersion = "22.05";
         configuration = import ./home-manager/nixos/vbox.host.nix;
+        extraSpecialArgs = {
+          inherit (inputs) nix-matlab;
+        };
       }
       {
         username = "nixos";

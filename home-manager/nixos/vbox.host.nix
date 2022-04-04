@@ -2,10 +2,13 @@
 {
   imports = [ ./base.nix ];
 
+  nixpkgs.overlays = [ nix-matlab.overlay ];
+
   home.packages = with pkgs; [
     zoom-us firefox
     vscode
     xfce.thunar gnome.gedit
+    matlab matlab-mlint
     gcc9 # For MATLAB
   ];
 
