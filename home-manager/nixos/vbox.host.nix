@@ -5,9 +5,10 @@
   nixpkgs.overlays = [ nix-matlab.overlay ];
 
   home.packages = with pkgs; [
+    helvum
     zoom-us firefox
-    vscode
     xfce.thunar gnome.gedit
+    vscode
     matlab matlab-mlint
     gcc9 # For MATLAB
   ];
