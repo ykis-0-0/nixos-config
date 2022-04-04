@@ -21,6 +21,11 @@
     interfaces.enp0s3.useDHCP = true;
   };
 
+  services.xserver.displayManager.autoLogin = {
+    enable = true;
+    user = "nixos";
+  };
+
   users = {
     mutableUsers = false;
     users = {
