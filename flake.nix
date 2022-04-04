@@ -48,7 +48,7 @@
           ./virtualbox/configuration.nix
           ./virtualbox/hardware.nix
           ./virtualbox/storage.nix
-          ./expectations/pipewire.nix
+          # ./expectations/pipewire.nix
           ./expectations/gui/awesome.nix
         ];
       };
