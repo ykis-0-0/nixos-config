@@ -17,4 +17,7 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs; [ pulseaudio ]; # for the `pactl`
+  systemd.user.services.pipewire-pulse.path = [ pkgs.pulseaudio ]; # Temporary fix?
 }
