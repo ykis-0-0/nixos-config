@@ -14,6 +14,7 @@
       url = "github:msteen/nixos-vscode-server/master";
       flake = false;
     };
+    nix-matlab.url = "gitlab:doronbehar/nix-matlab/master";
     argononed = {
       url = "gitlab:ykis-0-0/argononed/feat/nixos";
       flake = false;
@@ -25,7 +26,7 @@
     nixosConfigurations = {
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = builtins.removeAttrs inputs [ "self" ];
+        specialArgs = builtins.removeAttrs inputs [ "self" "nix-matlab" ];
         modules = [
           ./expectations/flakes.nix
           ./raspberrypi/configuration.nix
@@ -45,6 +46,7 @@
           ./virtualbox/hardware.nix
           ./virtualbox/storage.nix
           ./expectations/gui/awesome.nix
+          ./expectations/matlab.nix
         ];
       };
     };
