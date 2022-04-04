@@ -4,6 +4,7 @@
 
   home.packages = with pkgs; [
     asciinema deno
+    rnix-lsp # For syntax checking in VSCode Remote SSH?
     # taskwarrior
     # broot eww
     # dogdns
