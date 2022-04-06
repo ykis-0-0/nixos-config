@@ -58,6 +58,7 @@
         specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
         modules = [
           ./expectations/flakes.nix
+          ./vbox-test/overrides.nix
           ./virtualbox/configuration.nix
           ./virtualbox/hardware.nix
           ./virtualbox/storage.nix
