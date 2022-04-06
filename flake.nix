@@ -117,6 +117,13 @@
           vscode-srv = inputs.vscode-server-patch;
         };
       }
+      {
+        username = "nixos";
+        host = "vbox-test";
+        stateVersion = "22.05";
+        configuration = import ./home-manager/nixos/vbox-test.host.nix;
+        extraSpecialArgs = {};
+      }
     ];
 
   };
