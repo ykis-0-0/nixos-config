@@ -49,7 +49,7 @@ let
       neededForBoot = true;
     };
 
-    "/boot/FIRMWARE" = {
+    "/boot" = {
       device = "/dev/sda1";
       fsType = "vfat";
       options = [ "noatime" ];
