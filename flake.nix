@@ -52,6 +52,17 @@
           ./expectations/gui/awesome.nix
         ];
       };
+
+      vbox-test = inputs.nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
+        modules = [
+          ./expectations/flakes.nix
+          ./virtualbox/configuration.nix
+          ./virtualbox/hardware.nix
+          ./virtualbox/storage.nix
+        ];
+      };
     };
 
     devShells = let
