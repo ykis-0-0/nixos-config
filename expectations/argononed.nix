@@ -6,9 +6,9 @@
     enable = true;
     logLevel = 4;
     settings = {
-      fanTemp0 = 36; fanSpeed0 = 10;
-      fanTemp1 = 41; fanSpeed1 = 50;
-      fanTemp2 = 46; fanSpeed2 = 80;
+      fanTemp0 = 41; fanSpeed0 = 20;
+      fanTemp1 = 46; fanSpeed1 = 50;
+      fanTemp2 = 51; fanSpeed2 = 80;
       hysteresis = 4;
     };
   };
