@@ -40,7 +40,7 @@
         ];
       };
 
-      vbox = inputs.nixos.lib.nixosSystem {
+      vbox-proxy = inputs.nixos.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
         modules = [
@@ -50,6 +50,7 @@
           ./expectations/flakes.nix
           # ./expectations/pipewire.nix
           ./expectations/gui/awesome.nix
+          ./vbox-proxy/overrides.nix
         ];
       };
 
@@ -101,20 +102,20 @@
     in mkHomeConfigurations [
       {
         username = "nixos";
-        host = "vbox";
-        stateVersion = "22.05";
-        configuration = import ./home-manager/nixos/vbox.host.nix;
-        extraSpecialArgs = {
-          inherit (inputs) nix-matlab;
-        };
-      }
-      {
-        username = "nixos";
         host = "rpinix";
         stateVersion = "22.05";
         configuration = import ./home-manager/nixos/rpinix.host.nix;
         extraSpecialArgs = {
           vscode-srv = inputs.vscode-server-patch;
+        };
+      }
+      {
+        username = "nixos";
+        host = "vbox-proxy";
+        stateVersion = "22.05";
+        configuration = import ./home-manager/nixos/vbox-proxy.host.nix;
+        extraSpecialArgs = {
+          inherit (inputs) nix-matlab;
         };
       }
       {
