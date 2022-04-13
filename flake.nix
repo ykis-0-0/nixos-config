@@ -31,11 +31,11 @@
         system = "aarch64-linux";
         specialArgs = builtins.removeAttrs inputs [ "self" "nix-matlab" ];
         modules = [
-          ./expectations/flakes.nix
           ./raspberrypi/configuration.nix
-          ./expectations/passwdmgr/default.nix
           ./raspberrypi/hardware.nix
           ./raspberrypi/storage.nix
+          ./expectations/passwdmgr/default.nix
+          ./expectations/flakes.nix
           ./expectations/argononed.nix
         ];
       };
