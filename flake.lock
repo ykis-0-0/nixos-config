@@ -1,0 +1,158 @@
+{
+  "nodes": {
+    "argononed": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1649533830,
+        "narHash": "sha256-aII3LgCUr+KqDW99RwXEOuLEH+8FQKDpLAlJ9NW0iLQ=",
+        "owner": "ykis-0-0",
+        "repo": "argononed",
+        "rev": "638b4edb30db60b9c93601a7556bb24fbbf33297",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "ykis-0-0",
+        "ref": "feat/nixos",
+        "repo": "argononed",
+        "type": "gitlab"
+      }
+    },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1648199409,
+        "narHash": "sha256-JwPKdC2PoVBkG6E+eWw3j6BMR6sL3COpYWfif7RVb8Y=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "64a525ee38886ab9028e6f61790de0832aa3ef03",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1649642044,
+        "narHash": "sha256-V9ZjTJcbDPgWG+H3rIC6XuPHZAPK1VupBbSsuDbptkQ=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "e39a9d0103e3b2e42059c986a8c633824b96c193",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "impermanence": {
+      "locked": {
+        "lastModified": 1646131459,
+        "narHash": "sha256-GPmgxvUFvQ1GmsGfWHy9+rcxWrczeDhS9XnAIPHi9XQ=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "2f39baeb7d039fda5fc8225111bb79474138e6f4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "type": "github"
+      }
+    },
+    "nix-matlab": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1648880730,
+        "narHash": "sha256-07uwSPYJp4RMffwgdLV/SgOze2dYMPP8YhzE2a4hMOw=",
+        "owner": "doronbehar",
+        "repo": "nix-matlab",
+        "rev": "27343e2e62e0261fd83167fe1e85e8b4e7f69ace",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "doronbehar",
+        "ref": "master",
+        "repo": "nix-matlab",
+        "type": "gitlab"
+      }
+    },
+    "nixos": {
+      "locked": {
+        "lastModified": 1649673231,
+        "narHash": "sha256-1T3AFscfS7s9pkFA+UIDrHH3/RLVjRdYs5ImuLYpOlE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "33772708c6d0e33f697426ba386aa0149cbcbecb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1649660850,
+        "narHash": "sha256-x8ZE4B+EuA9dCEJKNzT59yQjzotVMnGYU5GMoqMLk3A=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "f4160a629bac3538939a3005c8b5c7fb320bcf59",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "argononed": "argononed",
+        "home-manager": "home-manager",
+        "impermanence": "impermanence",
+        "nix-matlab": "nix-matlab",
+        "nixos": "nixos",
+        "nixos-hardware": "nixos-hardware",
+        "secret-wrapper": [],
+        "vscode-server-patch": "vscode-server-patch"
+      }
+    },
+    "vscode-server-patch": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1648830510,
+        "narHash": "sha256-U+UGKbZajc2NqDvBL7hCYshAiaXgiBv5rNFIqLl0X7M=",
+        "owner": "msteen",
+        "repo": "nixos-vscode-server",
+        "rev": "d2343b5eb47b811856085f3eff4d899a32b2c136",
+        "type": "github"
+      },
+      "original": {
+        "owner": "msteen",
+        "ref": "master",
+        "repo": "nixos-vscode-server",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
