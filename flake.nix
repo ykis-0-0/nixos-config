@@ -23,6 +23,7 @@
       flake = false;
     };
     # secret-wrapper: to be supplied on target hosts
+    secret-wrapper.follows = "";
   };
 
   outputs = { self, secret-wrapper ? null, ... }@inputs: {
