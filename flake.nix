@@ -44,10 +44,10 @@
         system = "x86_64-linux";
         specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
         modules = [
+          ./vbox-base/configuration.nix
+          ./vbox-base/hardware.nix
+          ./vbox-base/storage.nix
           ./expectations/flakes.nix
-          ./virtualbox/configuration.nix
-          ./virtualbox/hardware.nix
-          ./virtualbox/storage.nix
           # ./expectations/pipewire.nix
           ./expectations/gui/awesome.nix
         ];
@@ -57,11 +57,11 @@
         system = "x86_64-linux";
         specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
         modules = [
+          ./vbox-base/configuration.nix
+          ./vbox-base/hardware.nix
+          ./vbox-base/storage.nix
           ./expectations/flakes.nix
           ./vbox-test/overrides.nix
-          ./virtualbox/configuration.nix
-          ./virtualbox/hardware.nix
-          ./virtualbox/storage.nix
         ];
       };
     };

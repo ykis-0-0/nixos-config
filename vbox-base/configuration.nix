@@ -22,8 +22,8 @@
   };
 
   services.xserver.displayManager.autoLogin = {
-    enable = true;
-    user = "nixos";
+    enable = lib.mkDefault true;
+    user = lib.mkDefault "nixos";
   };
 
   users = {
