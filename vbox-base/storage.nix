@@ -1,15 +1,35 @@
-{ lib, impermanence, ... }:
+{ impermanence, ... }:
 let
   doImpermanence = false; # Set to true to enable impermanence
-  persistRoot = {
-    mountpoint = "/persist";
-    device = "/dev/sda2";
-  };
-  earlyBinds = [ "/boot" "/nix" ];
-  maybePersistenceSetup = if doImpermanence then {
-    imports = [ impermanence.nixosModule ];
+in {
+  imports = if doImpermanence then [ impermanence.nixosModule ] else [];
 
-    environment.persistence.${persistRoot.mountpoint} = {
+  maybePersistence = {
+    persistPlane = {
+      junction = "/persist";
+      fstabOptions = {
+        device = "/dev/sda2";
+        fsType = "ext4";
+        options = [ "noatime" ];
+      };
+    };
+
+    elevatedPlane = {
+      enable = doImpermanence;
+      mountOptions = [ "noatime" "size=1G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
+    };
+
+    earlyBinds = [ "/nix" ];
+
+    extraMounts = {
+      "/boot" = {
+        device = "/dev/sda1";
+        fsType = "vfat";
+        options = [ "noatime" ];
+      };
+    };
+
+    junctions = {
       directories = [
         {
           directory = "/etc/nixos";
@@ -26,42 +46,5 @@ let
         "/etc/machine-id"
       ];
     };
-  } else {};
-  #region Miscellaneous Functions
-
-  _mkPersist = onInitrd: mountPoint: source: {
-    name = mountPoint;
-    value = {
-      device = source;
-      options = [ "bind" ];
-      neededForBoot = onInitrd;
-    };
   };
-  mkPersist = mountPoint: _mkPersist true mountPoint (persistRoot.mountpoint + mountPoint);
-
-  #endregion End Miscellaneous Functions
-  in maybePersistenceSetup // {
-  fileSystems = {
-    ${if doImpermanence then persistRoot.mountpoint else "/"} = {
-      device = persistRoot.device;
-      fsType = "ext4";
-      options = [ "noatime" ];
-      neededForBoot = true;
-    };
-
-    "/boot" = {
-      device = "/dev/sda1";
-      fsType = "vfat";
-      options = [ "noatime" ];
-    };
-  } // (
-    if !doImpermanence then {}
-    else {
-      "/" = {
-        device = "none";
-        fsType = "tmpfs";
-        options = [ "size=1G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
-      };
-    } // builtins.listToAttrs (map mkPersist earlyBinds)
-  );
 }

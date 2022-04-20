@@ -35,6 +35,7 @@
           ./raspberrypi/configuration.nix
           ./raspberrypi/hardware.nix
           ./raspberrypi/storage.nix
+          ./expectations/switch_persistence.nix
           ./expectations/passwdmgr/default.nix
           ./expectations/flakes.nix
           ./expectations/argononed.nix
@@ -48,6 +49,7 @@
           ./vbox-base/configuration.nix
           ./vbox-base/hardware.nix
           ./vbox-base/storage.nix
+          ./expectations/switch_persistence.nix
           ./expectations/flakes.nix
           # ./expectations/pipewire.nix
           ./expectations/gui/awesome.nix
@@ -62,6 +64,7 @@
           ./vbox-base/configuration.nix
           ./vbox-base/hardware.nix
           ./vbox-base/storage.nix
+          ./expectations/switch_persistence.nix
           ./expectations/flakes.nix
           ./vbox-test/overrides.nix
         ];
