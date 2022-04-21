@@ -15,7 +15,10 @@
       #   version = 2;
       #   device = "/dev/sda";
       # };
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        netbootxyz.enable = true;
+      };
     };
   };
 
