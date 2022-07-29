@@ -92,7 +92,6 @@
         specialArgs = builtins.removeAttrs inputs [ "self" "nixos-hardware" "impermanence" "nix-matlab" "argononed" ];
         modules = [
           ./platform/wsl/base/configuration.nix
-          "${inputs.nixos}/nixos/modules/profiles/minimal.nix"
           inputs.nixos-wsl.nixosModules.wsl
           ./expectations/flakes.nix
         ];
