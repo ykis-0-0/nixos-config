@@ -69,6 +69,19 @@
           ./platform/vbox/test/overrides.nix
         ];
       };
+
+      hyperv-test = inputs.nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
+        modules = [
+          ./platform/hyperv/base/configuration.nix
+          ./platform/hyperv/base/hardware.nix
+          ./platform/hyperv/base/storage.nix
+          ./expectations/switch_persistence.nix
+          ./expectations/flakes.nix
+          ./platform/hyperv/test/overrides.nix
+        ];
+      };
     };
 
     devShells = let
