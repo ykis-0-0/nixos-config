@@ -30,11 +30,11 @@
     nixosConfigurations = {
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = builtins.removeAttrs inputs [ "self" "nix-matlab" ];
+        specialArgs = builtins.removeAttrs inputs [ "nix-matlab" ];
         modules = [
-          ./raspberrypi/configuration.nix
-          ./raspberrypi/hardware.nix
-          ./raspberrypi/storage.nix
+          ./platform/raspberrypi/rpinix/configuration.nix
+          ./platform/raspberrypi/rpinix/hardware.nix
+          ./platform/raspberrypi/rpinix/storage.nix
           ./expectations/switch_persistence.nix
           ./expectations/passwdmgr/default.nix
           ./expectations/flakes.nix
@@ -46,14 +46,14 @@
         system = "x86_64-linux";
         specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
         modules = [
-          ./vbox-base/configuration.nix
-          ./vbox-base/hardware.nix
-          ./vbox-base/storage.nix
+          ./platform/vbox/base/configuration.nix
+          ./platform/vbox/base/hardware.nix
+          ./platform/vbox/base/storage.nix
           ./expectations/switch_persistence.nix
           ./expectations/flakes.nix
           # ./expectations/pipewire.nix
           ./expectations/gui/awesome.nix
-          ./vbox-proxy/overrides.nix
+          ./platform/vbox/proxy/overrides.nix
         ];
       };
 
@@ -61,12 +61,12 @@
         system = "x86_64-linux";
         specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
         modules = [
-          ./vbox-base/configuration.nix
-          ./vbox-base/hardware.nix
-          ./vbox-base/storage.nix
+          ./platform/vbox/base/configuration.nix
+          ./platform/vbox/base/hardware.nix
+          ./platform/vbox/base/storage.nix
           ./expectations/switch_persistence.nix
           ./expectations/flakes.nix
-          ./vbox-test/overrides.nix
+          ./platform/vbox/test/overrides.nix
         ];
       };
     };
