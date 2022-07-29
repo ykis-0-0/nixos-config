@@ -156,6 +156,13 @@
         configuration = import ./home-manager/nixos/vbox-test.host.nix;
         extraSpecialArgs = {};
       }
+      {
+        username = "nixos";
+        host = "wslnix";
+        stateVersion = "22.05";
+        configuration = import ./home-manager/nixos/wslnix.host.nix;
+        extraSpecialArgs = {};
+      }
     ];
 
   };
