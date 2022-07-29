@@ -74,12 +74,12 @@
         system = "x86_64-linux";
         specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
         modules = [
-          ./hyperv-base/configuration.nix
-          ./hyperv-base/hardware.nix
-          ./hyperv-base/storage.nix
+          ./platform/hyperv/base/configuration.nix
+          ./platform/hyperv/base/hardware.nix
+          ./platform/hyperv/base/storage.nix
           ./expectations/switch_persistence.nix
           ./expectations/flakes.nix
-          ./hyperv-test/overrides.nix
+          ./platform/hyperv/test/overrides.nix
         ];
       };
     };
