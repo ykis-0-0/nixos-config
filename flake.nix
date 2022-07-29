@@ -19,7 +19,7 @@
       inputs.nixpkgs.follows = "nixos";
     };
     argononed = {
-      url = "gitlab:ykis-0-0/argononed/feat/nixos";
+      url = "gitlab:DarkElvenAngel/argononed/master";
       flake = false;
     };
     # secret-wrapper: to be supplied on target hosts

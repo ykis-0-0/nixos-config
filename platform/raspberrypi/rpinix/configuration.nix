@@ -2,7 +2,7 @@
 let
   secrets = import "${secret-wrapper}/secrets.nix";
 in {
-  imports = [ ${self}/expectations/avahi.nix ${self}/expectations/sshd.nix ];
+  imports = [ "${self}/expectations/avahi.nix" "${self}/expectations/sshd.nix" ];
 
   system.stateVersion = "21.11";
 
