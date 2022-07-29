@@ -10,6 +10,10 @@
       inputs.nixpkgs.follows = "nixos";
       # flake = false;
     };
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixos";
+    };
     vscode-server-patch = {
       url = "github:msteen/nixos-vscode-server/master";
       flake = false;
@@ -30,7 +34,7 @@
     nixosConfigurations = {
       rpinix = inputs.nixos.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = builtins.removeAttrs inputs [ "nix-matlab" ];
+        specialArgs = builtins.removeAttrs inputs [ "nixos-wsl" "nix-matlab" ];
         modules = [
           ./platform/raspberrypi/rpinix/configuration.nix
           ./platform/raspberrypi/rpinix/hardware.nix
@@ -44,7 +48,7 @@
 
       vbox-proxy = inputs.nixos.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
+        specialArgs = builtins.removeAttrs inputs [ "self" "nixos-wsl" "vscode-server-patch" "argononed" ];
         modules = [
           ./platform/vbox/base/configuration.nix
           ./platform/vbox/base/hardware.nix
@@ -59,7 +63,7 @@
 
       vbox-test = inputs.nixos.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = builtins.removeAttrs inputs [ "self" "vscode-server-patch" "argononed" ];
+        specialArgs = builtins.removeAttrs inputs [ "self" "nixos-wsl" "vscode-server-patch" "argononed" ];
         modules = [
           ./platform/vbox/base/configuration.nix
           ./platform/vbox/base/hardware.nix
@@ -80,6 +84,17 @@
           ./expectations/switch_persistence.nix
           ./expectations/flakes.nix
           ./platform/hyperv/test/overrides.nix
+        ];
+      };
+
+      wslnix = inputs.nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = builtins.removeAttrs inputs [ "self" "nixos-hardware" "impermanence" "nix-matlab" "argononed" ];
+        modules = [
+          ./platform/wsl/base/configuration.nix
+          "${inputs.nixos}/nixos/modules/profiles/minimal.nix"
+          inputs.nixos-wsl.nixosModules.wsl
+          ./expectations/flakes.nix
         ];
       };
     };
