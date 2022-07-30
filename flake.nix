@@ -143,7 +143,7 @@
         modules = [
           ./home-manager/base.nix
           ./home-manager/nixos/base.nix
-          ./home-manager/nixos/rpinix.host.nix
+          ./home-manager/nixos/hosts/rpinix.nix
           "${inputs.vscode-server-patch}/modules/vscode-server/home.nix"
         ];
         extraSpecialArgs = {
@@ -156,7 +156,7 @@
         modules = [
           ./home-manager/base.nix
           ./home-manager/nixos/base.nix
-          ./home-manager/nixos/vbox-proxy.host.nix
+          ./home-manager/nixos/hosts/vbox-proxy.nix
         ];
         extraSpecialArgs = {
           inherit (inputs) nix-matlab;
@@ -168,7 +168,7 @@
         modules = [
           ./home-manager/base.nix
           ./home-manager/nixos/base.nix
-          ./home-manager/nixos/vbox-test.host.nix
+          ./home-manager/nixos/hosts/vbox-test.nix
         ];
         extraSpecialArgs = {};
       }
@@ -178,7 +178,7 @@
         modules = [
           ./home-manager/base.nix
           ./home-manager/nixos/base.nix
-          ./home-manager/nixos/wslnix.host.nix
+          ./home-manager/nixos/hosts/wslnix.nix
         ];
         extraSpecialArgs = {};
       }
