@@ -1,7 +1,5 @@
 { pkgs, nix-matlab, ... }:
 {
-  imports = [ ./base.nix ];
-
   nixpkgs.overlays = [ nix-matlab.overlay ];
 
   home.packages = with pkgs; [

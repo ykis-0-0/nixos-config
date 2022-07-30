@@ -1,7 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [ ./base.nix ];
-
   home.packages = with pkgs; [
     # Empty as of now
   ];

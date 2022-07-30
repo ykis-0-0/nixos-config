@@ -117,25 +117,35 @@
 
 
     homeConfigurations = let
-      _mkHomeConfig = inputs.home-manager.lib.homeManagerConfiguration;
-      mkHomeConfig = {
+      mkHomeConfig_ = inputs.home-manager.lib.homeManagerConfiguration;
+      mkHomeConfig' = {
         username, host,
         profileName ? "${username}@${host}", homeDirectory ? "/home/${username}",
-        ...
+        # Upstream args
+        modules, extraSpecialArgs
       }@args: {
         name = profileName;
-        value = _mkHomeConfig ((builtins.removeAttrs args ["host"]) // {
-          inherit homeDirectory; # To force realiastion?
-          system = self.nixosConfigurations.${host}.pkgs.system;
-        });
+        value = mkHomeConfig_ {
+          pkgs = self.nixosConfigurations.${host}.pkgs;
+          modules = [{
+            home = {
+              inherit username homeDirectory;
+            };
+          }] ++ modules;
+          inherit extraSpecialArgs;
+        };
       };
-      mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig builders);
+      mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig' builders);
     in mkHomeConfigurations [
       {
         username = "nixos";
         host = "rpinix";
-        stateVersion = "22.05";
-        configuration = import ./home-manager/nixos/rpinix.host.nix;
+        modules = [
+          ./home-manager/base.nix
+          ./home-manager/nixos/base.nix
+          ./home-manager/nixos/rpinix.host.nix
+          "${inputs.vscode-server-patch}/modules/vscode-server/home.nix"
+        ];
         extraSpecialArgs = {
           vscode-srv = inputs.vscode-server-patch;
         };
@@ -143,8 +153,11 @@
       {
         username = "nixos";
         host = "vbox-proxy";
-        stateVersion = "22.05";
-        configuration = import ./home-manager/nixos/vbox-proxy.host.nix;
+        modules = [
+          ./home-manager/base.nix
+          ./home-manager/nixos/base.nix
+          ./home-manager/nixos/vbox-proxy.host.nix
+        ];
         extraSpecialArgs = {
           inherit (inputs) nix-matlab;
         };
@@ -152,15 +165,21 @@
       {
         username = "nixos";
         host = "vbox-test";
-        stateVersion = "22.05";
-        configuration = import ./home-manager/nixos/vbox-test.host.nix;
+        modules = [
+          ./home-manager/base.nix
+          ./home-manager/nixos/base.nix
+          ./home-manager/nixos/vbox-test.host.nix
+        ];
         extraSpecialArgs = {};
       }
       {
         username = "nixos";
         host = "wslnix";
-        stateVersion = "22.05";
-        configuration = import ./home-manager/nixos/wslnix.host.nix;
+        modules = [
+          ./home-manager/base.nix
+          ./home-manager/nixos/base.nix
+          ./home-manager/nixos/wslnix.host.nix
+        ];
         extraSpecialArgs = {};
       }
     ];
