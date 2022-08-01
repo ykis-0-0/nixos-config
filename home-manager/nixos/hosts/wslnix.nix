@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    rnix-lsp
+    git
     wget
+    rnix-lsp
   ];
 }
