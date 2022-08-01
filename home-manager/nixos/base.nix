@@ -1,8 +1,14 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    jq yq-go
-  ];
+  home = {
+    packages = with pkgs; [
+      jq yq-go
+    ];
+
+    shellAliases = {
+      la = "la -lhAF";
+    };
+  };
 
   programs.git = {
     enable = true;
