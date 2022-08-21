@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-  networking.hostName = lib.mkForce "vbox-test";
+  networking.hostName = "vbox-test";
 
   services.xserver = {
     enable = true;

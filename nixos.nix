@@ -29,6 +29,7 @@ inputs: {
       ./platform/soft/avahi.nix
       ./assignments/sshd.nix
       ./assignments/ddclient.nix
+      ./netflix-adaptations/rpinix/overrides.nix
     ];
   };
 
@@ -49,7 +50,7 @@ inputs: {
       ./platform/soft/flakes.nix
       # ./expectations/pipewire.nix
       ./assignments/gui/awesome.nix
-      ./platform/vbox/proxy/overrides.nix
+      ./netflix-adaptations/vbox-proxy/overrides.nix
     ];
   };
 
@@ -68,7 +69,7 @@ inputs: {
       ./platform/5soft/impermanence/wrapper.nix
       ./platform/5soft/impermanence/switcher.nix
       ./platform/soft/flakes.nix
-      ./platform/vbox/test/overrides.nix
+      ./netflix-adaptations/vbox-test/overrides.nix
     ];
   };
 
@@ -87,7 +88,7 @@ inputs: {
       ./platform/5soft/impermanence/wrapper.nix
       ./platform/5soft/impermanence/switcher.nix
       ./platform/soft/flakes.nix
-      ./platform/hyperv/test/overrides.nix
+      ./netflix-adaptations/hyperv-test/overrides.nix
     ];
   };
 
