@@ -178,4 +178,32 @@ inputs: {
       ./netflix-adaptations/wslnix/overrides.nix
     ];
   };
+
+  oci-master = {
+    system = "aarch64-linux";
+    includeInputs = [
+      "nixos" "nixos-hardware"
+      "impermanence"
+    ];
+    modules = [
+      # Common Base Configs
+      ./platform/basic.nix
+
+      # Hardware Platform
+      ./platform/0soft/oracle-cloud/configuration.nix
+      ./platform/0soft/oracle-cloud/hardware.nix
+      # Firmware Choices
+
+      # OS Configurations
+
+      # Roles Assignment
+      ./assignments/sshd.nix
+
+      # Allowed Users
+      ././id-10t.5/opc.nix
+
+      # Instance-specific Overrides
+      ./netflix-adaptations/oci-master/overrides.nix
+    ];
+  };
 }
