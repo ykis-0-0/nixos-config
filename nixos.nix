@@ -22,10 +22,10 @@ inputs: {
       ./platform/raspberrypi/rpinix/hardware.nix
       ./platform/raspberrypi/rpinix/storage.nix
       ./expectations/switch_persistence.nix
-      ./expectations/passwdmgr/default.nix
-      ./expectations/flakes.nix
+      ./platform/soft/passwdmgr/default.nix
+      ./platform/soft/flakes.nix
       ./expectations/argononed.nix
-      ./expectations/avahi.nix
+      ./platform/soft/avahi.nix
       ./assignments/sshd.nix
       ./assignments/ddclient.nix
     ];
@@ -44,7 +44,7 @@ inputs: {
       ./platform/vbox/base/hardware.nix
       ./platform/vbox/base/storage.nix
       ./expectations/switch_persistence.nix
-      ./expectations/flakes.nix
+      ./platform/soft/flakes.nix
       # ./expectations/pipewire.nix
       ./assignments/gui/awesome.nix
       ./platform/vbox/proxy/overrides.nix
@@ -64,7 +64,7 @@ inputs: {
       ./platform/vbox/base/hardware.nix
       ./platform/vbox/base/storage.nix
       ./expectations/switch_persistence.nix
-      ./expectations/flakes.nix
+      ./platform/soft/flakes.nix
       ./platform/vbox/test/overrides.nix
     ];
   };
@@ -82,7 +82,7 @@ inputs: {
       ./platform/hyperv/base/hardware.nix
       ./platform/hyperv/base/storage.nix
       ./expectations/switch_persistence.nix
-      ./expectations/flakes.nix
+      ./platform/soft/flakes.nix
       ./platform/hyperv/test/overrides.nix
     ];
   };
@@ -98,7 +98,7 @@ inputs: {
       ./platform/basic.nix
       ./platform/wsl/base/configuration.nix
       inputs.nixos-wsl.nixosModules.wsl
-      ./expectations/flakes.nix
+      ./platform/soft/flakes.nix
     ];
   };
 }
