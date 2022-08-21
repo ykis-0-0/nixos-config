@@ -21,7 +21,8 @@ inputs: {
       inputs.nixos-hardware.nixosModules.raspberry-pi-4
       ./platform/raspberrypi/rpinix/hardware.nix
       ./platform/raspberrypi/rpinix/storage.nix
-      ./expectations/switch_persistence.nix
+      ./platform/5soft/impermanence/wrapper.nix
+      ./platform/5soft/impermanence/switcher.nix
       ./platform/soft/passwdmgr/default.nix
       ./platform/soft/flakes.nix
       ./expectations/argononed.nix
@@ -43,7 +44,8 @@ inputs: {
       ./platform/0soft/virtualbox/configuration.nix
       ./platform/0soft/virtualbox/hardware.nix
       ./platform/0soft/virtualbox/storage.nix
-      ./expectations/switch_persistence.nix
+      ./platform/5soft/impermanence/wrapper.nix
+      ./platform/5soft/impermanence/switcher.nix
       ./platform/soft/flakes.nix
       # ./expectations/pipewire.nix
       ./assignments/gui/awesome.nix
@@ -63,7 +65,8 @@ inputs: {
       ./platform/0soft/virtualbox/configuration.nix
       ./platform/0soft/virtualbox/hardware.nix
       ./platform/0soft/virtualbox/storage.nix
-      ./expectations/switch_persistence.nix
+      ./platform/5soft/impermanence/wrapper.nix
+      ./platform/5soft/impermanence/switcher.nix
       ./platform/soft/flakes.nix
       ./platform/vbox/test/overrides.nix
     ];
@@ -81,7 +84,8 @@ inputs: {
       ./platform/0soft/hyperv/configuration.nix
       ./platform/0soft/hyperv/hardware.nix
       ./platform/0soft/hyperv/storage.nix
-      ./expectations/switch_persistence.nix
+      ./platform/5soft/impermanence/wrapper.nix
+      ./platform/5soft/impermanence/switcher.nix
       ./platform/soft/flakes.nix
       ./platform/hyperv/test/overrides.nix
     ];

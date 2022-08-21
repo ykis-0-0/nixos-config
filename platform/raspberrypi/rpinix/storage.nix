@@ -2,8 +2,6 @@
 let
   doImpermanence = true;
 in {
-  imports = if doImpermanence then [ impermanence.nixosModule ] else [];
-
   maybePersistence = {
     persistPlane = {
       junction = "/persist";
