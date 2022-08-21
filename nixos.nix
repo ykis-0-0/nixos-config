@@ -173,9 +173,9 @@ inputs: {
       # Roles Assignment
 
       # Allowed Users
-      ./id-10t.5/nixos.nix
 
       # Instance-specific Overrides
+      ./netflix-adaptations/wslnix/overrides.nix
     ];
   };
 }
