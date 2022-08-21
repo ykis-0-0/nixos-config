@@ -44,24 +44,6 @@
       };
     in builtins.mapAttrs mapper nixosConfigurations';
 
-    devShells = let
-      # Copied from https://github.com/nix-community/home-manager/blob/master/flake.nix#L6
-      #
-      # List of systems supported by home-manager binary (NixOS only in our case)
-      supportedSystems = builtins.attrNames inputs.nixos.legacyPackages; # inputs.nixos.lib.platforms.linux;
-
-      # Function to generate a set based on supported systems
-      forAllSystems = f:
-        inputs.nixos.lib.genAttrs supportedSystems (system: f system);
-
-      callArg = system: {
-        pkgs = inputs.nixos.legacyPackages.${system};
-      };
-    in forAllSystems (system: {
-      hm-install = (import "${inputs.home-manager}" (callArg system)).install;
-    });
-
-
     homeConfigurations = let
       mkHomeConfig_ = inputs.home-manager.lib.homeManagerConfiguration;
       mkHomeConfig' = {
