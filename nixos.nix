@@ -17,14 +17,15 @@ inputs: {
     ];
     modules = [
       ./platform/basic.nix
-      ./platform/raspberrypi/rpinix/configuration.nix
+      ./platform/0soft/raspberrypi/configuration.nix
       inputs.nixos-hardware.nixosModules.raspberry-pi-4
-      ./platform/raspberrypi/rpinix/hardware.nix
-      ./platform/raspberrypi/rpinix/storage.nix
+      ./platform/0soft/raspberrypi/hardware.nix
+      ./platform/0soft/raspberrypi/storage.nix
       ./platform/5soft/impermanence/wrapper.nix
       ./platform/5soft/impermanence/switcher.nix
       ./platform/soft/passwdmgr/default.nix
       ./platform/soft/flakes.nix
+      "${inputs.argononed}/OS/nixos/default.nix"
       ./expectations/argononed.nix
       ./platform/soft/avahi.nix
       ./assignments/sshd.nix
@@ -48,7 +49,7 @@ inputs: {
       ./platform/5soft/impermanence/wrapper.nix
       ./platform/5soft/impermanence/switcher.nix
       ./platform/soft/flakes.nix
-      # ./expectations/pipewire.nix
+      # ./platform/5soft/pipewire.nix
       ./assignments/gui/awesome.nix
       ./netflix-adaptations/vbox-proxy/overrides.nix
     ];
