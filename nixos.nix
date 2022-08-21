@@ -96,7 +96,7 @@ inputs: {
     ];
     modules = [
       ./platform/basic.nix
-      ./platform/wsl/base/configuration.nix
+      ./platform/0soft/wsl/configuration.nix
       inputs.nixos-wsl.nixosModules.wsl
       ./platform/soft/flakes.nix
     ];

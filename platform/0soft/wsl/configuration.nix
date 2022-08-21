@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, pkgs, ... }: {
+  networking.hostName = "wslnix";
+
   wsl = {
     enable = true;
     automountPath = "/mnt";
