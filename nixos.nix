@@ -40,9 +40,9 @@ inputs: {
     ];
     modules = [
       ./platform/basic.nix
-      ./platform/vbox/base/configuration.nix
-      ./platform/vbox/base/hardware.nix
-      ./platform/vbox/base/storage.nix
+      ./platform/0soft/virtualbox/configuration.nix
+      ./platform/0soft/virtualbox/hardware.nix
+      ./platform/0soft/virtualbox/storage.nix
       ./expectations/switch_persistence.nix
       ./platform/soft/flakes.nix
       # ./expectations/pipewire.nix
@@ -60,9 +60,9 @@ inputs: {
     ];
     modules = [
       ./platform/basic.nix
-      ./platform/vbox/base/configuration.nix
-      ./platform/vbox/base/hardware.nix
-      ./platform/vbox/base/storage.nix
+      ./platform/0soft/virtualbox/configuration.nix
+      ./platform/0soft/virtualbox/hardware.nix
+      ./platform/0soft/virtualbox/storage.nix
       ./expectations/switch_persistence.nix
       ./platform/soft/flakes.nix
       ./platform/vbox/test/overrides.nix
@@ -78,9 +78,9 @@ inputs: {
     ];
     modules = [
       ./platform/basic.nix
-      ./platform/hyperv/base/configuration.nix
-      ./platform/hyperv/base/hardware.nix
-      ./platform/hyperv/base/storage.nix
+      ./platform/0soft/hyperv/configuration.nix
+      ./platform/0soft/hyperv/hardware.nix
+      ./platform/0soft/hyperv/storage.nix
       ./expectations/switch_persistence.nix
       ./platform/soft/flakes.nix
       ./platform/hyperv/test/overrides.nix
