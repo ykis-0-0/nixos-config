@@ -13,21 +13,4 @@
     enable = lib.mkDefault true;
     user = lib.mkDefault "nixos";
   };
-
-  users = {
-    users = {
-      nixos = {
-        isNormalUser = true;
-        /* auto-set:
-          group = "users";
-          home = "/home/<username>";
-          createHome = true;
-          useDefaultShell = true;
-          isSystemUser = false;
-        */
-        extraGroups = [ "wheel" "vboxsf" ];
-        password = "nixos";
-      };
-    };
-  };
 }
