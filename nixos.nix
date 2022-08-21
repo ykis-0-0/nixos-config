@@ -26,7 +26,8 @@ inputs: {
       ./expectations/flakes.nix
       ./expectations/argononed.nix
       ./expectations/avahi.nix
-      ./expectations/sshd.nix
+      ./assignments/sshd.nix
+      ./assignments/ddclient.nix
     ];
   };
 
@@ -45,7 +46,7 @@ inputs: {
       ./expectations/switch_persistence.nix
       ./expectations/flakes.nix
       # ./expectations/pipewire.nix
-      ./expectations/gui/awesome.nix
+      ./assignments/gui/awesome.nix
       ./platform/vbox/proxy/overrides.nix
     ];
   };
