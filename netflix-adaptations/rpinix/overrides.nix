@@ -1,5 +1,4 @@
-{ config, pkgs, lib, self, secret-wrapper, ... }:
-let
+{ config, lib, pkgs, secret-wrapper, ... }: let
   secrets = import "${secret-wrapper}/secrets.nix";
 in {
   networking = {

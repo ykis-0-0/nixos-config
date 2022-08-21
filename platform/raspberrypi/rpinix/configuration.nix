@@ -1,7 +1,5 @@
-{ config, pkgs, lib, self, secret-wrapper, ... }:
-let
-  secrets = import "${secret-wrapper}/secrets.nix";
-in {
+{ config, lib, pkgs, ... }: {
+
   networking.wireless = {
     enable = true; # Enables wireless support via wpa_supplicant.
     # interfaces = []; # A shared instance is enough for Pi
