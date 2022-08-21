@@ -15,7 +15,7 @@
     */
 
     extraGroups = [ "wheel" ]
-      ++ lib.list.optionals virtualisation.virtualbox.guest.enable [ "vboxsf" ];
+      ++ lib.lists.optionals config.virtualisation.virtualbox.guest.enable [ "vboxsf" ];
 
     password = "nixos";
 

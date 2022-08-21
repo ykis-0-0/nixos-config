@@ -40,6 +40,10 @@ inputs: {
       ./assignments/sshd.nix
       ./assignments/ddclient.nix
 
+      # Allowed Users
+      ./id-10t.5/nixos.nix
+      ./id-10t.5/ykis.nix
+
       # Instance-specific Overrides
       ./netflix-adaptations/rpinix/overrides.nix
     ];
@@ -72,6 +76,9 @@ inputs: {
       # Roles Assignment
       ./assignments/gui/awesome.nix
 
+      # Allowed Users
+      ./id-10t.5/nixos.nix
+
       # Instance-specific Overrides
       ./netflix-adaptations/vbox-proxy/overrides.nix
     ];
@@ -101,6 +108,9 @@ inputs: {
       ./platform/soft/flakes.nix
 
       # Roles Assignment
+
+      # Allowed Users
+      ./id-10t.5/nixos.nix
 
       # Instance-specific Overrides
       ./netflix-adaptations/vbox-test/overrides.nix
@@ -132,6 +142,9 @@ inputs: {
 
       # Roles Assignment
 
+      # Allowed Users
+      ./id-10t.5/nixos.nix
+
       # Instance-specific Overrides
       ./netflix-adaptations/hyperv-test/overrides.nix
     ];
@@ -158,6 +171,9 @@ inputs: {
       ./platform/soft/flakes.nix
 
       # Roles Assignment
+
+      # Allowed Users
+      ./id-10t.5/nixos.nix
 
       # Instance-specific Overrides
     ];
