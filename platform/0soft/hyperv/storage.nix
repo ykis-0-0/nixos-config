@@ -1,8 +1,4 @@
-{ impermanence, ... }:
-let
-  doImpermanence = false;
-in {
-  imports = if doImpermanence then [ impermanence.nixosModule ] else [];
+{ impermanence, ... }: {
 
   maybePersistence = {
     persistPlane = {
@@ -15,7 +11,7 @@ in {
     };
 
     elevatedPlane = {
-      enable = doImpermanence;
+      enable = false;
       mountOptions = [ "noatime" "size=1G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
     };
 

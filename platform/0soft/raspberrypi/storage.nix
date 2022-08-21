@@ -1,7 +1,5 @@
-{ impermanence, ... }:
-let
-  doImpermanence = true;
-in {
+{ impermanence, ... }: {
+
   maybePersistence = {
     persistPlane = {
       junction = "/persist";
@@ -13,7 +11,7 @@ in {
     };
 
     elevatedPlane = {
-      enable = doImpermanence;
+      enable = true;
       mountOptions = [ "noatime" "size=1G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
     };
 
