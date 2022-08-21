@@ -1,7 +1,5 @@
 { argononed, ...}:
 {
-  imports = [ "${argononed}/OS/nixos" ];
-
   services.argonone = {
     enable = true;
     logLevel = 4;

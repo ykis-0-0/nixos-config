@@ -1,7 +1,5 @@
 { nixos-hardware, ... }:
 {
-  imports = [ nixos-hardware.nixosModules.raspberry-pi-4 ];
-
   boot = {
     # kernelPackages = pkgs.linuxPackages_rpi4; # done in <nixos-hardware>
     initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" "uas" "vc4" ];
