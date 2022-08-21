@@ -16,6 +16,7 @@ inputs: {
       "secret-wrapper"
     ];
     modules = [
+      ./platform/basic.nix
       ./platform/raspberrypi/rpinix/configuration.nix
       inputs.nixos-hardware.nixosModules.raspberry-pi-4
       ./platform/raspberrypi/rpinix/hardware.nix
@@ -37,6 +38,7 @@ inputs: {
       "secret-wrapper"
     ];
     modules = [
+      ./platform/basic.nix
       ./platform/vbox/base/configuration.nix
       ./platform/vbox/base/hardware.nix
       ./platform/vbox/base/storage.nix
@@ -56,6 +58,7 @@ inputs: {
       "secret-wrapper"
     ];
     modules = [
+      ./platform/basic.nix
       ./platform/vbox/base/configuration.nix
       ./platform/vbox/base/hardware.nix
       ./platform/vbox/base/storage.nix
@@ -73,6 +76,7 @@ inputs: {
       "secret-wrapper"
     ];
     modules = [
+      ./platform/basic.nix
       ./platform/hyperv/base/configuration.nix
       ./platform/hyperv/base/hardware.nix
       ./platform/hyperv/base/storage.nix
@@ -90,6 +94,7 @@ inputs: {
       "secret-wrapper"
     ];
     modules = [
+      ./platform/basic.nix
       ./platform/wsl/base/configuration.nix
       inputs.nixos-wsl.nixosModules.wsl
       ./expectations/flakes.nix

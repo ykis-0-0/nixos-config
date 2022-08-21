@@ -2,10 +2,6 @@
 let
   secrets = import "${secret-wrapper}/secrets.nix";
 in {
-  system.stateVersion = "21.11";
-
-  time.timeZone = "Asia/Hong_Kong";
-
   services = {
     ddclient = {
       enable = true;
@@ -36,7 +32,6 @@ in {
   };
 
   users = {
-    mutableUsers = false;
     users = {
       nixos = {
         isNormalUser = true;
