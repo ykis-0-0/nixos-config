@@ -200,7 +200,7 @@ inputs: {
       ./assignments/sshd.nix
 
       # Allowed Users
-      ././id-10t.5/opc.nix
+      ./id-10t.5/opc.nix
 
       # Instance-specific Overrides
       ./netflix-adaptations/oci-master/overrides.nix
