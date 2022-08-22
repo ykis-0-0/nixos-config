@@ -30,7 +30,7 @@
     secret-wrapper.follows = "";
   };
 
-  outputs = { self, secret-wrapper ? null, ... }@inputs: {
+  outputs = { self, secret-wrapper ? null, ... }@inputs: let
     nixosConfigurations = let
       nixosConfigurations' = import ./nixos.nix inputs;
       createSystem = inputs.nixos.lib.nixosSystem;
@@ -43,6 +43,11 @@
           removeAttrs inputs (filter (input: ! elem input includeInputs) (attrNames inputs));
       };
     in builtins.mapAttrs mapper nixosConfigurations';
+
+    packages = let
+    in {
+      x86_64-linux.wslnix = nixosConfigurations.wslnix.config.system.build.tarball;
+    };
 
     homeConfigurations = let
       mkHomeConfig_ = inputs.home-manager.lib.homeManagerConfiguration;
@@ -66,6 +71,7 @@
       mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig' builders);
       homeConfigurations' = import ./homes.nix inputs;
     in mkHomeConfigurations homeConfigurations';
-
+  in {
+    inherit nixosConfigurations packages homeConfigurations;
   };
 }
