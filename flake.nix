@@ -46,7 +46,43 @@
 
     packages = let
     in {
-      x86_64-linux.wslnix = nixosConfigurations.wslnix.config.system.build.tarball;
+      x86_64-linux = {
+        wslnix = nixosConfigurations.wslnix.config.system.build.tarball;
+
+        hyperv-test = let
+          system = nixosConfigurations.hyperv-test;
+          mkImage = import "${inputs.nixos}/nixos/lib/make-disk-image.nix";
+          builderModule = { config, lib, pkgs, ... }: let
+            cfg = {
+              vmDerivationName = "nixos-hyperv-${config.system.nixos.label}-${pkgs.stdenv.hostPlatform.system}";
+              vmFileName = "nixos-${config.system.nixos.label}-${pkgs.stdenv.hostPlatform.system}.vhdx";
+            };
+          in {
+            # Extracted from:
+            # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/virtualisation/hyperv-image.nix#L37
+            system.build.hypervImage = mkImage {
+              name = cfg.vmDerivationName;
+              postVM = ''
+                ${pkgs.vmTools.qemu}/bin/qemu-img convert -f raw -o subformat=dynamic -O vhdx $diskImage $out/${cfg.vmFileName}
+                rm $diskImage
+              '';
+
+              format = "raw";
+              diskSize = "auto";
+              partitionTableType = "efi";
+
+              inherit config lib pkgs;
+            };
+          };
+        systemExtended = system.extendModules {
+          modules = [ builderModule ];
+        };
+        in systemExtended.config.system.build.hypervImage;
+      };
+
+      aarch64-linux = {
+        # TODO add RasPi image here
+      };
     };
 
     homeConfigurations = let
