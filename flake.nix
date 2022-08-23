@@ -22,6 +22,7 @@
       url = "gitlab:doronbehar/nix-matlab/master";
       inputs.nixpkgs.follows = "nixos";
     };
+    deploy-rs.url = "github:serokell/deploy-rs";
     argononed = {
       url = "gitlab:DarkElvenAngel/argononed/master";
       flake = false;
