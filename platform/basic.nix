@@ -12,4 +12,12 @@
   nixpkgs.config.allowUnfree = true;
 
   users.mutableUsers = false;
+
+  documentation = {
+    enable = true;
+    man.enable = true;
+    doc.enable = true;
+    info.enable = true;
+    nixos.enable = true;
+  };
 }
