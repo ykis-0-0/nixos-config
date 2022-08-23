@@ -66,8 +66,6 @@ inputs: {
       ./platform/0soft/virtualbox/storage.nix
 
       # Firmware Choices
-      ./platform/5soft/impermanence/wrapper.nix
-      ./platform/5soft/impermanence/switcher.nix
       # ./platform/5soft/pipewire.nix
 
       # OS Configurations
@@ -101,8 +99,6 @@ inputs: {
       ./platform/0soft/virtualbox/storage.nix
 
       # Firmware Choices
-      ./platform/5soft/impermanence/wrapper.nix
-      ./platform/5soft/impermanence/switcher.nix
 
       # OS Configurations
       ./platform/soft/flakes.nix
@@ -134,8 +130,6 @@ inputs: {
       ./platform/0soft/hyperv/storage.nix
 
       # Firmware Choices
-      ./platform/5soft/impermanence/wrapper.nix
-      ./platform/5soft/impermanence/switcher.nix
 
       # OS Configurations
       ./platform/soft/flakes.nix
