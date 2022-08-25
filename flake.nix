@@ -34,7 +34,7 @@
     secret-wrapper.follows = "";
   };
 
-  outputs = { self, secret-wrapper ? null, ... }@inputs: let
+  outputs = { self, secret-wrapper ? null, ... }@inputs: {
     nixosConfigurations = let
       nixosConfigurations' = import ./nixos.nix inputs;
       createSystem = inputs.nixos.lib.nixosSystem;
@@ -48,13 +48,12 @@
       };
     in builtins.mapAttrs mapper nixosConfigurations';
 
-    packages = let
-    in {
+    packages = {
       x86_64-linux = {
-        wslnix = nixosConfigurations.wslnix.config.system.build.tarball;
+        wslnix = self.nixosConfigurations.wslnix.config.system.build.tarball;
 
         hyperv-test = let
-          system = nixosConfigurations.hyperv-test;
+          system = self.nixosConfigurations.hyperv-test;
           mkImage = import "${inputs.nixos}/nixos/lib/make-disk-image.nix";
           builderModule = { config, lib, pkgs, ... }: let
             cfg = {
@@ -111,7 +110,5 @@
       mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig' builders);
       homeConfigurations' = import ./homes.nix inputs;
     in mkHomeConfigurations homeConfigurations';
-  in {
-    inherit nixosConfigurations packages homeConfigurations;
   };
 }
