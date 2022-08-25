@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+# Usage: curl https://github.com/ykis-0-0/nixos-config/raw/infect-oci.sh | sudo FLAKE_URL="<Your flake_ref here>" NIXOS_CONFIG_NAME="<flake output to use>" bash -x
+
 set -e -o pipefail
 
 # region Swap related
