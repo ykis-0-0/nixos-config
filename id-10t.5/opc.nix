@@ -2,7 +2,7 @@
   /*
     The non-root user for Oracle Cloud
   */
-  users.users.ocinix = {
+  users.users.opc = {
     isNormalUser = true;
     /* auto-set:
       group = "users";
