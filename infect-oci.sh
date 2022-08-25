@@ -66,6 +66,13 @@ prepareEnv() {
   fi
 
   # REST OMITTED
+
+  # DigitalOcean doesn't seem to set USER while running user data
+  # Also the case for Oracle
+  export USER="root"
+  export HOME="/root"
+
+  # REST OMITTED
 }
 
 fakeCurlUsingWget() {
