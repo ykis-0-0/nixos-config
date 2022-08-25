@@ -56,7 +56,15 @@ findESP() {
 # region Prerequisite checks <MODIFIED>
 # From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L241-L269
 
-# prepareEnv() OMITTED
+prepareEnv() {
+  if isEFI; then
+    esp="$(findESP)"
+  else
+    for grubdev in /dev/vda /dev/sda /dev/xvda /dev/nvme0n1 ; do [[ -e $grubdev ]] && break; done
+  fi
+
+  # REST OMITTED
+}
 
 fakeCurlUsingWget() {
   # Too lazy to even copy this shit
@@ -113,9 +121,10 @@ infect() { # HEAVILY MODIFIED
   build \
     --profile /nix/var/nix/profiles/system \
     "${FLAKE_URL}#nixosConfigurations.${NIXOS_CONFIG_NAME}.config.system.build.toplevel"
+  ; # Code folding half-sucks
 
+  # region Activate everything
   # From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L300-L323
-  # Activate everything
 
   # Remove nix installed with curl | bash
   rm -fv /nix/var/nix/profiles/default*
@@ -144,25 +153,29 @@ infect() { # HEAVILY MODIFIED
   # endregion
 }
 
+# region Main Infect Flow <MODIFIED>
+# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L330-L333
 if [[ -z "${FLAKE_URL:=$1}" ]]; then
   echo "Flake URL required!"
-  return 1
+  exit 1
 fi
 if [[ -z "${NIXOS_CONFIG_NAME:=$2}" ]]; then
   echo "Desired NixOS Configuration Name required"
-  return 1
+  exit 1
 fi
-# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L330-L333
+
+checkEnv
+prepareEnv
 checkExistingSwap
 if [[ -z "$NO_SWAP" ]]; then
     makeSwap # smallest (512MB) droplet needs extra memory!
 fi
 # makeConf
 infect
-# From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L336-L342
 if [[ -z "$NO_SWAP" ]]; then
     removeSwap
 fi
 if [[ -z "$NO_REBOOT" ]]; then
   reboot
 fi
+#endregion
