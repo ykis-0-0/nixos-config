@@ -7,20 +7,10 @@
     };
 
     initrd = {
-      availableKernelModules = [ "ata_piix" "uhci_hcd" "xen_blkfront" ];
-      kernelModules = [ "nvme" ];
-    };
-  };
-
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/cloudimg-rootfs";
-      fsType = "ext4";
-    };
-
-    "/boot" = {
-      device = "/dev/disk/by-label/UEFI";
-      fsType = "vfat";
+      availableKernelModules =
+        [ "ata_piix" "uhci_hcd" "xen_blkfront" ] ++ # From nixos-infect
+        [ "xfs" "button" "virtio_gpu" "qemu_fw_cfg" "nvme_tcp" "dm_multipath" ]; # Manually added
+      kernelModules = [ "nvme" ]; # From nixos-infect
     };
   };
 }

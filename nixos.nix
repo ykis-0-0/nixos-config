@@ -186,6 +186,9 @@ inputs: {
       # Hardware Platform
       ./platform/0soft/oracle-cloud/configuration.nix
       ./platform/0soft/oracle-cloud/hardware.nix
+      "${inputs.nixos}/nixos/modules/profiles/qemu-guest.nix"
+      ./platform/0soft/oracle-cloud/storage.nix
+
       # Firmware Choices
 
       # OS Configurations
