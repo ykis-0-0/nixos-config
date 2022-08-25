@@ -121,7 +121,7 @@ infect() { # HEAVILY MODIFIED
   build \
     --profile /nix/var/nix/profiles/system \
     "${FLAKE_URL}#nixosConfigurations.${NIXOS_CONFIG_NAME}.config.system.build.toplevel"
-  ; # Code folding half-sucks
+  : # Code folding really suck
 
   # region Activate everything
   # From https://github.com/elitak/nixos-infect/blob/master/nixos-infect#L300-L323
