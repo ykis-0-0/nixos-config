@@ -43,6 +43,7 @@ inputs: {
       # Allowed Users
       ./id-10t.5/nixos.nix
       ./id-10t.5/ykis.nix
+      ./id-10t.5/deploy-rs.nix
 
       # Instance-specific Overrides
       ./netflix-adaptations/rpinix/overrides.nix
@@ -198,6 +199,7 @@ inputs: {
 
       # Allowed Users
       ./id-10t.5/opc.nix
+      ./id-10t.5/deploy-rs.nix
 
       # Instance-specific Overrides
       ./netflix-adaptations/oci-master/overrides.nix
