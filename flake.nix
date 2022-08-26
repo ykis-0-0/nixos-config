@@ -42,7 +42,7 @@
 
   outputs = { self, secret-wrapper ? null, ... }@inputs: {
     nixosConfigurations = let
-      nixosConfigurations' = import ./nixos/systems.nix inputs;
+      nixosConfigurations' = import ./systems.nix inputs;
       createSystem = inputs.nixos.lib.nixosSystem;
       mapper = host: config: createSystem {
         inherit (config) system modules;
@@ -114,7 +114,7 @@
         };
       };
       mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig' builders);
-      homeConfigurations' = import ./nixos/homes.nix inputs;
+      homeConfigurations' = import ./homes.nix inputs;
     in mkHomeConfigurations homeConfigurations';
   };
 }
