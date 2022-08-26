@@ -2,6 +2,7 @@
   description = "System Configuration(s)";
 
   inputs = {
+    # region (Semi-)Endorsed Modules
     nixos.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-wsl = {
@@ -14,6 +15,8 @@
       inputs.nixpkgs.follows = "nixos";
       # flake = false;
     };
+    # endregion
+    # region Thrid-party Modules
     vscode-server-patch = {
       url = "github:msteen/nixos-vscode-server/master";
       flake = false;
@@ -26,12 +29,15 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixos";
     };
+    # endregion
+    # region Homebrew
     argononed = {
       url = "gitlab:DarkElvenAngel/argononed/master";
       flake = false;
     };
     # secret-wrapper: to be supplied on target hosts
     secret-wrapper.follows = "";
+    # endregion
   };
 
   outputs = { self, secret-wrapper ? null, ... }@inputs: {
