@@ -32,7 +32,7 @@ inputs: {
       ./platform/5soft/argononed.nix
 
       # OS Configurations
-      ./platform/soft/passwdmgr/default.nix
+      # ./platform/soft/passwdmgr/default.nix
       ./platform/soft/flakes.nix
       ./platform/soft/avahi.nix
 

@@ -6,6 +6,7 @@
   */
   users.users.deploy-rs = {
     isSystemUser = true;
+
     # isNormalUser = true;
     /* auto-set:
       group = "users";
@@ -16,6 +17,7 @@
     */
 
     description = "";
+    group = "nogroup";
 
     hashedPassword = null;
 

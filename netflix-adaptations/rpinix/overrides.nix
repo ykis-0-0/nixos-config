@@ -5,9 +5,4 @@ in {
     hostName = "rpinix";
     wireless.networks = secrets.wifi;
   };
-
-  pwdHashMgr = {
-    enable = true;
-    inherit (secrets) passwords;
-  };
 }
