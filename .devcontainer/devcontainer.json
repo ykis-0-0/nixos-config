@@ -1,23 +1,41 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/alpine
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.224.2/containers/alpine
 {
-	"name": "Nix on Debian",
+	"name": "Terraform / Nix",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Alpine version: 3.12, 3.13, 3.14, 3.15
+		// Update 'VARIANT' to pick an Debian version: bullseye, buster
+		// Use bullseye on local arm64/Apple Silicon.
 		"args": {
-			"USER_UID": "1000",
-			"USER_GID": "1000"
+			"USER_UID": "${localEnv:USER_UID}",
+			"USER_GID": "${localEnv:USER_GID}"
 		}
 	},
 
+	// disable command overriding and updating remote user ID
+	"overrideCommand": false,
+	"updateRemoteUserUID": false,
+
+	"containerEnv": {
+		// extensions to preload before other extensions
+	 "PRELOAD_EXTENSIONS": "arrterian.nix-env-selector",
+	 "NIXPKGS_ALLOW_UNFREE": "1"
+ 	},
+
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
+	"settings": {
+		// "terraform-ls.terraformExecPath": "/usr/bin/terraform",
+		"terminal.integrated.inheritEnv": true
+	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	// Note that some extensions may not work in Alpine Linux. See https://aka.ms/vscode-remote/linux.
 	"extensions": [
-		"jnoortheen.nix-ide"
+		"hashicorp.terraform",
+		"eamodio.gitlens",
+		"gitkraken.gitkraken-authentication",
+		"arrterian.nix-env-selector",
+		"jnoortheen.nix-ide",
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -26,11 +44,12 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
 
+	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
+
 	// Replace when using a ptrace-based debugger like C++, Go, and Rust
 	// "runArgs": [ "--init", "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
 
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
-	"overrideCommand": false,
-	"updateRemoteUserUID": false
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode",
 }
