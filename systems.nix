@@ -25,11 +25,12 @@ inputs: {
       ./platform/0soft/raspberrypi/hardware.nix
       ./platform/0soft/raspberrypi/storage.nix
 
-      # Firmware Choices
+      # Firmware & Peripheral Choices
       ./platform/5soft/impermanence/wrapper.nix
       ./platform/5soft/impermanence/switcher.nix
       "${inputs.argononed}/OS/nixos/default.nix"
       ./platform/5soft/argononed.nix
+      ./platform/5soft/yubikey.nix
 
       # OS Configurations
       # ./platform/soft/passwdmgr/default.nix
@@ -66,7 +67,7 @@ inputs: {
       ./platform/0soft/virtualbox/hardware.nix
       ./platform/0soft/virtualbox/storage.nix
 
-      # Firmware Choices
+      # Firmware & Peripheral Choices
       # ./platform/5soft/pipewire.nix
 
       # OS Configurations
@@ -99,7 +100,7 @@ inputs: {
       ./platform/0soft/virtualbox/hardware.nix
       ./platform/0soft/virtualbox/storage.nix
 
-      # Firmware Choices
+      # Firmware & Peripheral Choices
 
       # OS Configurations
       ./platform/soft/flakes.nix
@@ -130,7 +131,7 @@ inputs: {
       ./platform/0soft/hyperv/hardware.nix
       ./platform/0soft/hyperv/storage.nix
 
-      # Firmware Choices
+      # Firmware & Peripheral Choices
 
       # OS Configurations
       ./platform/soft/flakes.nix
@@ -160,7 +161,7 @@ inputs: {
       inputs.nixos-wsl.nixosModules.wsl
       ./platform/0soft/wsl/configuration.nix
 
-      # Firmware Choices
+      # Firmware & Peripheral Choices
 
       # OS Configurations
       ./platform/soft/flakes.nix
@@ -191,7 +192,7 @@ inputs: {
       ./platform/0soft/oracle-cloud/storage-ol86.nix
       # ./platform/0soft/oracle-cloud/storage-ubuntu2204.nix
 
-      # Firmware Choices
+      # Firmware & Peripheral Choices
 
       # OS Configurations
 
