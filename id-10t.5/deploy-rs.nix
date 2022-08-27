@@ -33,10 +33,12 @@
   security.sudo.extraRules = [
     {
       users = [ "deploy-rs" ];
-      commands = {
-        command = "ALL";
-        options = [ "NOPASSWD" ];
-      };
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
     }
   ];
 }
