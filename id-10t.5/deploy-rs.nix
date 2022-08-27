@@ -35,7 +35,7 @@
       users = [ "deploy-rs" ];
       commands = {
         command = "ALL";
-        option = [ "NOPASSWD" ];
+        options = [ "NOPASSWD" ];
       };
     }
   ];
