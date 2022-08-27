@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, lib, pkgs, ... }: {
   /*
     This shall be the default user for local isolated machines
     which does not open itself to the internet,
@@ -18,7 +18,10 @@
 
     description = "";
     group = "nogroup";
+
+    # I don't want to do these, but I have run out of ideas...
     extraGroups = [ "wheel" ];
+    shell = pkgs.bash;
 
     hashedPassword = null;
 
