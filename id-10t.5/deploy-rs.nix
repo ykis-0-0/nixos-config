@@ -18,7 +18,7 @@
 
     description = "";
     group = "nogroup";
-    extraGroups = "wheel";
+    extraGroups = [ "wheel" ];
 
     hashedPassword = null;
 
