@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }: {
   /*
-    This shall be the default user for local isolated machines
-    which does not open itself to the internet,
-    e.g. Hyper-V / VirtualBox Machines; WSL distros, etc.
+    The user used to deploy changes in NixOS Infrastructral Configurations
   */
   users.users.deploy-rs = {
     isSystemUser = true;
@@ -31,4 +29,14 @@
   };
 
   nix.settings.trusted-users = [ "deploy-rs" ];
+
+  security.sudo.extraRules = [
+    {
+      users = [ "deploy-rs" ];
+      commands = {
+        command = "ALL";
+        option = [ "NOPASSWD" ];
+      };
+    }
+  ];
 }
