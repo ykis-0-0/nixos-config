@@ -17,4 +17,7 @@
   environment.noXlibs = true;
 
   users.users.root.hashedPassword = null;
+
+  programs.ssh.startAgent = true;
+
 }
