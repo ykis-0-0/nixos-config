@@ -20,4 +20,8 @@
     info.enable = true;
     nixos.enable = true;
   };
+
+  environment.shellAliases = {
+    sudo = "sudo "; # Space required to trigger alias substitution of following tokens
+  };
 }
