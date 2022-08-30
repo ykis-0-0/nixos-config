@@ -41,6 +41,7 @@ inputs: [
       ./home-manager/base.nix
       ./home-manager/nixos/base.nix
       ./home-manager/nixos/hosts/wslnix.nix
+      "${inputs.vscode-server-patch}/modules/vscode-server/home.nix"
     ];
     extraSpecialArgs = {};
   }
