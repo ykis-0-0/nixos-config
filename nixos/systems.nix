@@ -37,17 +37,22 @@ inputs: {
       ./platform/soft/flakes.nix
       ./platform/soft/avahi.nix
 
-      # Roles Assignment
-      ./assignments/sshd.nix
-      ./assignments/ddclient.nix
+      # Instance-specific Overrides
+      ./netflix-adaptations/rpinix/overrides.nix
+
+      # Modules
+      ./modules/papermc/default.nix
+      ./modules/sched-reboot/default.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
       ./id-10t.5/ykis.nix
       ./id-10t.5/deploy-rs.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/rpinix/overrides.nix
+      # Roles Assignment
+      ./assignments/sshd.nix
+      ./assignments/ddclient.nix
+      ./assignments/minecraft-server/papermc.nix
     ];
   };
 
