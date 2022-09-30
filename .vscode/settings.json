@@ -1,4 +1,8 @@
 {
   "nix.enableLanguageServer": true,
-  "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix"
+  "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
+  "todo-tree.tree.showBadges": true,
+  "todo-tree.tree.showCountsInTree": false,
+  "todo-tree.tree.disableCompactFolders": false,
+  "todo-tree.tree.scanMode": "workspace"
 }
