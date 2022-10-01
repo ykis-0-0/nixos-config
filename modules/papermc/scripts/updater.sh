@@ -50,9 +50,10 @@ base_url="https://papermc.io/api/v2/projects/paper/versions/${MINECRAFT_VERSION}
 newest_build=$(check_build)
 
 echo "[Updater] Newest PaperMC build for ${MINECRAFT_VERSION} is ${newest_build}"
-using_build=${PAPER_BUILD-$newest_build}
+using_build=${PAPER_BUILD:-$newest_build} # fallback to newest if (null || unset)
 (
-  build_type="${PAPER_BUILD+pinned}"
+  unset build_type # to prevent outside contamination
+  build_type="${PAPER_BUILD:+pinned}" # null iff (set && !null)
   build_type="${build_type:-newest}"
   echo "[Updater] Using PaperMC for Minecraft ${MINECRAFT_VERSION}, on the ${build_type} build ${newest_build}"
 )

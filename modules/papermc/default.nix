@@ -73,11 +73,12 @@
           description = "PaperMC Minecraft dedicated server Instance";
 
           path = with pkgs; [
-            wget jq # HACK required by ./update_check.sh
+            wget jq # required by ./update_check.sh
           ];
           environment = {
             MINECRAFT_VERSION = selfCfg.packages.papermc.version;
-            PAPER_BUILD = builtins.toString selfCfg.packages.papermc.build; # toString will map null to empty string
+            PAPER_BUILD = toString selfCfg.packages.papermc.build; # builtins.toString will map null to ""
+            BIN_DIR = toString selfCfg.storages.bin;
 
             TZ = config.time.timeZone;
           };
@@ -86,7 +87,7 @@
             folders = builtins.mapAttrs (_: builtins.toString) selfCfg.storages;
             memory = builtins.mapAttrs (_: builtins.toString) selfCfg.memory;
           in let
-            RuntimeDirectory = "ykis/papermc/";
+            RuntimeDirectory = "ykis/papermc";
           in{
             Type = "forking";
             Restart = "no";
