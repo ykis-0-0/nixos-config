@@ -26,7 +26,7 @@
 
       papermc = {
         version = mkOption {
-          type = types.string;
+          type = types.str;
           description = "Minecraft version to run PaperMC on";
         };
         build = mkOption {
@@ -83,7 +83,8 @@
           };
 
           serviceConfig = let
-            folders = selfCfg.storage;
+            folders = builtins.mapAttrs (_: builtins.toString) selfCfg.storages;
+            memory = builtins.mapAttrs (_: builtins.toString) selfCfg.memory;
           in let
             RuntimeDirectory = "ykis/papermc/";
           in{
@@ -105,8 +106,8 @@
             ExecStartPre = importShellScript "papermc-startpre-update-check" ./scripts/updater.sh;
             ExecStart = let
               argsFile = pkgs.writeText "papermc-jvm-args" ''
-                -Xms${selfCfg.memory.min}M
-                -Xmx${selfCfg.memory.max}M
+                -Xms${memory.min}M
+                -Xmx${memory.max}M
 
                 -jar ${folders.bin}/paper.jar
                 --nogui
