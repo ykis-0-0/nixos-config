@@ -41,8 +41,8 @@ inputs: {
       ./netflix-adaptations/rpinix/overrides.nix
 
       # Modules
-      ./modules/papermc/default.nix
-      ./modules/sched-reboot/default.nix
+      "${inputs.self}/modules/papermc/default.nix"
+      "${inputs.self}/modules/sched-reboot/default.nix"
 
       # Allowed Users
       ./id-10t.5/nixos.nix
