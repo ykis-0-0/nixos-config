@@ -1,14 +1,16 @@
 { config, lib, pkgs, ... }: {
-  option.services.sched-reboot = {
+  options.services.sched-reboot = let
+    inherit (lib) mkOption mkEnableOption types;
+  in {
     enabled = mkEnableOption "periodically scheduled reboot";
 
     happenOn = mkOption {
-      type = lib.types.string;
+      type = types.string;
       description = "When would the reboot happen";
     };
 
     gracePeriod = mkOption {
-      type = lib.types.string;
+      type = types.string;
       description = "Length of grace period before services stop and reboot";
     };
   };
