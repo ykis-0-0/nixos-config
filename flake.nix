@@ -120,5 +120,7 @@
       mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig' builders);
       homeConfigurations' = import ./nixos/homes.nix inputs;
     in mkHomeConfigurations homeConfigurations';
+
+    deploy.nodes = import ./nixos/deployments.nix inputs;
   };
 }
