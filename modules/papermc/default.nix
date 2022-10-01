@@ -70,7 +70,6 @@
       services = {
         papermc = {
           enable = true;
-          type = "forking";
           description = "PaperMC Minecraft dedicated server Instance";
 
           path = with pkgs; [
@@ -88,6 +87,9 @@
           in let
             RuntimeDirectory = "ykis/papermc/";
           in{
+            Type = "forking";
+            Restart = "no";
+
             inherit RuntimeDirectory;
             BindPaths = [
               # "${folders.srv-root}/:/run/${RuntimeDirectory}/" # FIXME Do we really need to bind the server root? Aren't we inside a docker, are we?
