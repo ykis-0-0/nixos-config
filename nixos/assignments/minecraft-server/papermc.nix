@@ -8,7 +8,7 @@
     };
 
     packages = {
-      jre = pkgs.jre_minimal;
+      # jre = pkgs.temurin-jre-bin; # Just use DEFAULT!!!
       papermc = {
         version = "1.18.2";
         build = null;

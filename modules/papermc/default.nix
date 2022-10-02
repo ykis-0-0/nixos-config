@@ -22,7 +22,7 @@
     };
 
     packages = {
-      jre = mkPackageOption pkgs "JRE" { default = [ "jre_minimal" ]; };
+      jre = mkPackageOption pkgs "JRE" { default = [ "temurin-jre-bin" ]; };
 
       papermc = {
         version = mkOption {
