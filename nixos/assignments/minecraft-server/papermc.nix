@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }: {
   services.papermc = {
-    enable = false;
+    enable = true;
+    # TODO startOnBoot = false; <- maybe something like this?
+
     port = 25565;
     memory = {
       min = 1024;

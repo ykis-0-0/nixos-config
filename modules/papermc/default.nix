@@ -52,6 +52,8 @@
       plugins = "plugins";
       cache = "binary cache";
     };
+
+    # TODO extraArgs for both JVM and PaperMC?
   };
 
   config = let
