@@ -3,6 +3,7 @@
     inherit (lib) types mkOption mkEnableOption mkPackageOption;
   in {
     enable = mkEnableOption "the PaperMC Minecraft dedicated server";
+    systemd-verbose = mkEnableOption "logging PaperMC console output to Systemd Journal (for debugging purposes only)";
 
     port = mkOption {
       type = types.ints.port;
@@ -65,7 +66,7 @@
         '';
       };
     in (pkgs.writeScript drvName scriptContent).overrideAttrs patcher;
-  in {
+  in lib.mkIf selfCfg.enable {
     systemd = {
       services = {
         papermc = {
@@ -89,7 +90,7 @@
           in let
             RuntimeDirectory = "ykis/papermc";
           in{
-            Type = "forking";
+            Type = if selfCfg.systemd-verbose then "simple" else "forking";
             Restart = "no";
 
             inherit RuntimeDirectory;
@@ -116,7 +117,7 @@
                 --plugins /run/${RuntimeDirectory}/plugins/
               '';
             in
-              "${pkgs.abduco}/bin/abduco -r -c /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
+              "${pkgs.abduco}/bin/abduco -r ${if selfCfg.systemd-verbose then "-c" else "-n"} /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
           };
         };
 
