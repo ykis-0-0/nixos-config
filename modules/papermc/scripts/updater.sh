@@ -75,7 +75,7 @@ else
   echo "[Updater] ... and Saving to ${BIN_DIR}"
   echo
 
-  wget -P "$BIN_DIR" "$download_url"
+  wget --progress=dot:mega -P "$BIN_DIR" "$download_url"
 fi
 # endregion
 
@@ -92,4 +92,6 @@ fi
     ln -vfs "$JAR_NAME" "${BIN_DIR}/paper.jar"
   fi
 )
+
+echo "[Updater] Completed, handing back to systemd"
 # endregion

@@ -110,13 +110,13 @@
                 -Xms${memory.min}M
                 -Xmx${memory.max}M
 
-                -jar ${folders.bin}/paper.jar
+                -jar /run/${RuntimeDirectory}/bin/paper.jar
                 --nogui
                 --world-container /run/${RuntimeDirectory}/worlds
                 --plugins /run/${RuntimeDirectory}/plugins/
               '';
             in
-              "${pkgs.abduco}/bin/abduco -n /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java ${argsFile}";
+              "${pkgs.abduco}/bin/abduco -r -c /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
           };
         };
 
