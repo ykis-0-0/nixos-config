@@ -53,7 +53,26 @@
       cache = "binary cache";
     };
 
-    # TODO extraArgs for both JVM and PaperMC?
+    cliArgs = {
+      jvm = mkOption {
+        type = types.lines;
+        default = "";
+        description = ''
+          Extra arguments to specify for the JVM when launching the server.\
+          `-Xmx` and `-Xms` should be set via `services.papermc.memory`.\
+          Multiple definitions will be merged in an unknown order.
+        '';
+      };
+
+      papermc = mkOption {
+        type = types.lines;
+        default = "";
+        description = ''
+          Extra arguments to specify for PaperMC itself when launching the server.\
+          Multiple definitions will be merged in an unknown order.
+        '';
+      };
+    };
   };
 
   config = let
@@ -113,11 +132,19 @@
                 -Xms${memory.min}M
                 -Xmx${memory.max}M
 
+                # Extra JVM Options
+                ${selfCfg.cliArgs.jvm}
+                # End JVM Extra Options
+
                 -jar /run/${RuntimeDirectory}/bin/paper.jar
                 --nogui
                 --world-container /run/${RuntimeDirectory}/worlds
                 --plugins /run/${RuntimeDirectory}/plugins/
                 --port ${toString selfCfg.port}
+
+                # Extra PaperMC Options
+                ${selfCfg.cliArgs.papermc}
+                # End PaperMC Extra Options
               '';
             in
               "${pkgs.abduco}/bin/abduco -r ${if selfCfg.systemd-verbose then "-c" else "-n"} /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
