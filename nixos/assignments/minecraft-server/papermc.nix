@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: {
   services.papermc = {
     enable = true;
+    systemd-verbose = false;
     # TODO startOnBoot = false; <- maybe something like this?
 
     port = 25565;

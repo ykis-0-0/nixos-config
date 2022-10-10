@@ -6,7 +6,7 @@
     systemd-verbose = mkEnableOption "logging PaperMC console output to Systemd Journal (for debugging purposes only)";
 
     port = mkOption {
-      type = types.ints.port;
+      type = types.port;
       default = 25565;
       description = "TCP & UDP port for PaperMC to bind against";
     };
@@ -117,6 +117,7 @@
                 --nogui
                 --world-container /run/${RuntimeDirectory}/worlds
                 --plugins /run/${RuntimeDirectory}/plugins/
+                --port ${toString selfCfg.port}
               '';
             in
               "${pkgs.abduco}/bin/abduco -r ${if selfCfg.systemd-verbose then "-c" else "-n"} /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
