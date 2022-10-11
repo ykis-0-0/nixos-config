@@ -100,7 +100,9 @@
           environment = {
             MINECRAFT_VERSION = selfCfg.packages.papermc.version;
             PAPER_BUILD = toString selfCfg.packages.papermc.build; # builtins.toString will map null to ""
-            BIN_DIR = toString selfCfg.storages.bin;
+            BIN_DIR = let
+              inherit (config.systemd.services.papermc.serviceConfig) RuntimeDirectory;
+            in "/run/${RuntimeDirectory}/bin/"; # toString selfCfg.storages.bin;
 
             TZ = config.time.timeZone;
           };
@@ -138,7 +140,7 @@
 
                 -jar /run/${RuntimeDirectory}/bin/paper.jar
                 --nogui
-                --world-container /run/${RuntimeDirectory}/worlds
+                --world-container /run/${RuntimeDirectory}/worlds/
                 --plugins /run/${RuntimeDirectory}/plugins/
                 --port ${toString selfCfg.port}
 
