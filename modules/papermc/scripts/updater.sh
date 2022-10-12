@@ -12,7 +12,7 @@ set -uo pipefail # Should we include -e as well...?
 
 # shellcheck disable=SC2034
 # Bash specific, for better appear within systemd journal
-BASH_ARGV0="papermc-update-check"
+# BASH_ARGV0="papermc-update-check"
 
 # region Version Info fetchers
 check_version () (

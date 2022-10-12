@@ -16,7 +16,7 @@ USAGE
 
 # shellcheck disable=SC2034
 # Bash specific, for better appear within systemd journal
-BASH_ARGV0="papermc-bootstrap"
+# BASH_ARGV0="papermc-bootstrap"
 
 # RUNTIME_DIRECTORY set by systemd
 subcommand=$1
