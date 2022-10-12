@@ -118,8 +118,8 @@
             Restart = "no";
 
             inherit RuntimeDirectory;
+            RuntimeDirectoryPreserve = "restart";
             BindPaths = [
-              # "${folders.srv-root}/:/run/${RuntimeDirectory}/" # FIXME Do we really need to bind the server root? Aren't we inside a docker, are we?
               "${folders.bin}/:/run/${RuntimeDirectory}/bin/"
               "${folders.plugins}/:/run/${RuntimeDirectory}/plugins/"
               "${folders.worlds}/:/run/${RuntimeDirectory}/worlds/"
