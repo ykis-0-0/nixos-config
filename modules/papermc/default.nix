@@ -96,6 +96,7 @@
 
           path = with pkgs; [
             wget jq # required by ./update_check.sh
+            abduco selfCfg.packages.jre # required by ./bootstrap.sh
           ];
           environment = {
             MINECRAFT_VERSION = selfCfg.packages.papermc.version;
@@ -148,8 +149,9 @@
                 ${selfCfg.cliArgs.papermc}
                 # End PaperMC Extra Options
               '';
+              bootstrapper = importShellScript "papermc-start-bootstrapper" ./scripts/bootstrap.sh;
             in
-              "${pkgs.abduco}/bin/abduco -r ${if selfCfg.systemd-verbose then "-c" else "-n"} /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
+              "${bootstrapper} ${if selfCfg.systemd-verbose then "relay" else "launch"} /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
           };
         };
 
