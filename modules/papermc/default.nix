@@ -77,16 +77,21 @@
 
   config = let
     selfCfg = config.services.papermc;
-    importShellScript = drvName: path: let
-      scriptContent = builtins.readFile path;
-      patcher = final: prev: {
-        buildCommand = ''
-          ${prev.buildCommand}
+    papermc-scripts = pkgs.stdenvNoCC.mkDerivation {
+      name = "systemd-papermc-utils";
+      src = ./scripts;
 
-          patchShebangs $out
-        '';
-      };
-    in (pkgs.writeScript drvName scriptContent).overrideAttrs patcher;
+      # dontUnpack = true;
+      dontPatch = true;
+      dontConfigure = true;
+      dontBuild = true;
+      # dontInstall = true;
+      installPhase = ''
+        mkdir "$out"
+        install -m 0755 -t "$out" ./*
+      '';
+      # dontFixup = true;
+    };
   in lib.mkIf selfCfg.enable {
     systemd = {
       services = {
@@ -129,7 +134,7 @@
             ];
             WorkingDirectory = "/run/${RuntimeDirectory}/etc";
 
-            ExecStartPre = importShellScript "papermc-startpre-update-check" ./scripts/updater.sh;
+            ExecStartPre = "${papermc-scripts}/updater.sh";
             ExecStart = let
               argsFile = pkgs.writeText "papermc-jvm-args" ''
                 -Xms${memory.min}M
@@ -149,9 +154,8 @@
                 ${selfCfg.cliArgs.papermc}
                 # End PaperMC Extra Options
               '';
-              bootstrapper = importShellScript "papermc-start-bootstrapper" ./scripts/bootstrap.sh;
             in
-              "${bootstrapper} ${if selfCfg.systemd-verbose then "relay" else "launch"} /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
+              "${papermc-scripts}/bootstrapper.sh ${if selfCfg.systemd-verbose then "relay" else "launch"} /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
           };
         };
 

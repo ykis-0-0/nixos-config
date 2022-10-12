@@ -10,10 +10,6 @@ EOC
 # shellcheck disable=SC3040
 set -uo pipefail # Should we include -e as well...?
 
-# shellcheck disable=SC2034
-# Bash specific, for better appear within systemd journal
-# BASH_ARGV0="papermc-update-check"
-
 # region Version Info fetchers
 check_version () (
   wget -qO- "https://papermc.io/api/v2/projects/paper" | jq -r '.versions[-1]'
