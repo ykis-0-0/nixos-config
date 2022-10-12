@@ -46,10 +46,11 @@ case "$subcommand" in
     exec "$@"
   ;;
 
-  "call" )
-    echo '[Bootstrapper] Dropping into"'"$(basename "$2")"'"'
-    "$@"
-  ;;
+  # BUG Invocation makes retrieval of PaperMC PID virtually impossible
+  # "call" )
+  #   echo '[Bootstrapper] Dropping into"'"$(basename "$2")"'"'
+  #   "$@"
+  # ;;
 
   * )
     exit 64
