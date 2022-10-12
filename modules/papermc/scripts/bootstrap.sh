@@ -14,6 +14,10 @@ set -uo pipefail # Should we include -e as well...?
   ./bootstrap.sh <subcommand> <ABDUCO_SOCKFILE> <cmdline...>
 USAGE
 
+# shellcheck disable=SC2034
+# Bash specific, for better appear within systemd journal
+BASH_ARGV0="papermc-bootstrap"
+
 # RUNTIME_DIRECTORY set by systemd
 subcommand=$1
 shift
