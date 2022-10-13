@@ -3,7 +3,10 @@
     inherit (lib) types mkOption mkEnableOption mkPackageOption;
   in {
     enable = mkEnableOption "the PaperMC Minecraft dedicated server";
-    systemd-verbose = mkEnableOption "logging PaperMC console output to Systemd Journal (for debugging purposes only)";
+
+    # BUG unable to pipe outputs to systemd journal
+    # SEE ./scripts/bootstrap.sh
+    # systemd-verbose = mkEnableOption "logging PaperMC console output to Systemd Journal (for debugging purposes only)";
 
     port = mkOption {
       type = types.port;
@@ -119,7 +122,7 @@
           in let
             RuntimeDirectory = "ykis/papermc";
           in{
-            Type = if selfCfg.systemd-verbose then "simple" else "forking";
+            Type = "forking";
             Restart = "no";
 
             inherit RuntimeDirectory;
@@ -155,7 +158,7 @@
                 # End PaperMC Extra Options
               '';
             in
-              "${papermc-scripts}/bootstrapper.sh ${if selfCfg.systemd-verbose then "relay" else "launch"} /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
+              "${papermc-scripts}/bootstrapper.sh launch /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
           };
         };
 

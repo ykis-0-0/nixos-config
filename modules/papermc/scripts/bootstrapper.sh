@@ -26,19 +26,22 @@ case "$subcommand" in
     abduco -rn "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
   ;;
 
-  "relay" )
-    ABDUCO_SOCKFILE="$1"
-    shift
-    echo '[Bootstrapper] Starting abduco session and relaying stdout'
-    abduco -rc "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
-  ;;
+  # BUG unable to pipe outputs to systemd journal
+  # region Affected portions
+  # "relay" )
+  #   ABDUCO_SOCKFILE="$1"
+  #   shift
+  #   echo '[Bootstrapper] Starting abduco session and relaying stdout'
+  #   abduco -rc "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
+  # ;;
 
-  "incept" )
-    ABDUCO_SOCKFILE="$1"
-    shift
-    echo '[Bootstrapper] Execing into abduco client'
-    exec abduco -rc "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
-  ;;
+  # "incept" )
+  #   ABDUCO_SOCKFILE="$1"
+  #   shift
+  #   echo '[Bootstrapper] Execing into abduco client'
+  #   exec abduco -rc "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
+  # ;;
+  # endregion
 
   "goto" )
     echo '[Bootstrapper] Exec and handing over control to "'"$(basename "$2")"'"'
