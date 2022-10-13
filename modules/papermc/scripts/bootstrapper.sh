@@ -44,7 +44,13 @@ case "$subcommand" in
   # endregion
 
   "goto" )
-    echo '[Bootstrapper] Exec and handing over control to "'"$(basename "$2")"'"'
+    logger --journald \
+<<JOURNAL
+IDENTIFIER=$(basename "$0")
+PID=${PPID}
+PRIORITY=6
+MESSAGE=[Bootstrapper] Exec and handing over control to "$(basename "$1")"
+JOURNAL
     systemd-notify --pid=$$
     exec "$@"
   ;;
