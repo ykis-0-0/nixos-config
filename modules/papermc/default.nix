@@ -106,6 +106,7 @@
             wget jq # required by updater.sh
             abduco selfCfg.packages.jre # required by bootstrapper.sh
           ];
+
           environment = {
             MINECRAFT_VERSION = selfCfg.packages.papermc.version;
             PAPER_BUILD = toString selfCfg.packages.papermc.build; # builtins.toString will map null to ""
@@ -121,6 +122,25 @@
 
             folders = builtins.mapAttrs (_: builtins.toString) selfCfg.storages;
             memory = builtins.mapAttrs (_: builtins.toString) selfCfg.memory;
+
+            argsFile = pkgs.writeText "papermc-jvm-args" ''
+              -Xms${memory.min}M
+              -Xmx${memory.max}M
+
+              # Extra JVM Options
+              ${selfCfg.cliArgs.jvm}
+              # End JVM Extra Options
+
+              -jar /run/${RuntimeDirectory}/bin/paper.jar
+              --nogui
+              --world-container /run/${RuntimeDirectory}/worlds/
+              --plugins /run/${RuntimeDirectory}/plugins/
+              --port ${toString selfCfg.port}
+
+              # Extra PaperMC Options
+              ${selfCfg.cliArgs.papermc}
+              # End PaperMC Extra Options
+            '';
           in {
             Type = "forking";
             Restart = "no";
@@ -138,27 +158,7 @@
             WorkingDirectory = "/run/${RuntimeDirectory}/etc";
 
             ExecStartPre = "${papermc-scripts}/updater.sh";
-            ExecStart = let
-              argsFile = pkgs.writeText "papermc-jvm-args" ''
-                -Xms${memory.min}M
-                -Xmx${memory.max}M
-
-                # Extra JVM Options
-                ${selfCfg.cliArgs.jvm}
-                # End JVM Extra Options
-
-                -jar /run/${RuntimeDirectory}/bin/paper.jar
-                --nogui
-                --world-container /run/${RuntimeDirectory}/worlds/
-                --plugins /run/${RuntimeDirectory}/plugins/
-                --port ${toString selfCfg.port}
-
-                # Extra PaperMC Options
-                ${selfCfg.cliArgs.papermc}
-                # End PaperMC Extra Options
-              '';
-            in
-              "${papermc-scripts}/bootstrapper.sh launch /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
+            ExecStart = "${papermc-scripts}/bootstrapper.sh launch /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
           };
         };
 
