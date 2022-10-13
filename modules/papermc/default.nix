@@ -5,7 +5,7 @@
     enable = mkEnableOption "the PaperMC Minecraft dedicated server";
 
     # BUG unable to pipe outputs to systemd journal
-    # SEE ./scripts/bootstrap.sh
+    # SEE ./scripts/bootstrapper.sh
     # systemd-verbose = mkEnableOption "logging PaperMC console output to Systemd Journal (for debugging purposes only)";
 
     port = mkOption {
@@ -103,8 +103,8 @@
           description = "PaperMC Minecraft dedicated server Instance";
 
           path = with pkgs; [
-            wget jq # required by ./update_check.sh
-            abduco selfCfg.packages.jre # required by ./bootstrap.sh
+            wget jq # required by updater.sh
+            abduco selfCfg.packages.jre # required by bootstrapper.sh
           ];
           environment = {
             MINECRAFT_VERSION = selfCfg.packages.papermc.version;
@@ -117,11 +117,11 @@
           };
 
           serviceConfig = let
+            RuntimeDirectory = "ykis/papermc";
+
             folders = builtins.mapAttrs (_: builtins.toString) selfCfg.storages;
             memory = builtins.mapAttrs (_: builtins.toString) selfCfg.memory;
-          in let
-            RuntimeDirectory = "ykis/papermc";
-          in{
+          in {
             Type = "forking";
             Restart = "no";
 
