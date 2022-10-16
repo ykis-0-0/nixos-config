@@ -1,19 +1,35 @@
 { config, lib, pkgs, ... }:{
   config = let
     selfCfg = config.services.papermc;
-    papermc-scripts = pkgs.stdenvNoCC.mkDerivation {
+    papermc-scripts = let
+      dependencies = builtins.toJSON (builtins.mapAttrs (_: builtins.toString) {
+        inherit (pkgs)
+          # updater.sh
+          wget jq
+          # bootstrapper.sh
+          abduco
+        ;
+      });
+    in pkgs.stdenvNoCC.mkDerivation {
       name = "systemd-papermc-utils";
       src = ./scripts;
+
+      nativeBuildInputs = with pkgs; [ mustache-go ];
+      passAsFile = [ "dependencies" ];
+      inherit dependencies;
 
       # dontUnpack = true;
       dontPatch = true;
       dontConfigure = true;
-      dontBuild = true;
-      # dontInstall = true;
-      installPhase = ''
+      #dontBuild = true;
+      buildPhase = ''
         mkdir "$out"
-        install -m 0755 -t "$out" ./*
+        for object in ./*.mustache.*; do
+          echo "$object"
+          mustache "$dependenciesPath" "$object" | install -m 0755 /dev/stdin "$out/''${object%.mustache.sh}.sh"
+        done
       '';
+      dontInstall = true;
       # dontFixup = true;
     };
   in lib.mkIf selfCfg.enable {

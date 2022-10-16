@@ -14,6 +14,8 @@ set -uo pipefail # Should we include -e as well...?
   ./bootstrap.sh <subcommand> <ABDUCO_SOCKFILE> <cmdline...>
 USAGE
 
+ABDUCO_EXE="{{abduco}}/bin/abduco"
+
 # RUNTIME_DIRECTORY set by systemd
 subcommand=$1
 shift
@@ -23,7 +25,7 @@ case "$subcommand" in
     ABDUCO_SOCKFILE="$1"
     shift
     echo '[Bootstrapper] Starting abduco session'
-    abduco -rn "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
+    "$ABDUCO_EXE" -rn "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
   ;;
 
   # BUG unable to pipe outputs to systemd journal
@@ -32,14 +34,14 @@ case "$subcommand" in
   #   ABDUCO_SOCKFILE="$1"
   #   shift
   #   echo '[Bootstrapper] Starting abduco session and relaying stdout'
-  #   abduco -rc "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
+  #   "$ABDUCO_EXE" -rc "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
   # ;;
 
   # "incept" )
   #   ABDUCO_SOCKFILE="$1"
   #   shift
   #   echo '[Bootstrapper] Execing into abduco client'
-  #   exec abduco -rc "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
+  #   exec "$ABDUCO_EXE" -rc "$ABDUCO_SOCKFILE" "$0" "goto" "$@"
   # ;;
   # endregion
 
