@@ -7,4 +7,7 @@
     ./discord.nix
   ];
 
+  config = {
+    users.groups.papermc.name = "Minecraft PaperMC server administrators";
+  };
 }

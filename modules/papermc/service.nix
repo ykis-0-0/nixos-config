@@ -82,9 +82,16 @@
             # End PaperMC Extra Options
           '';
         in {
+          # Startup modes
           Type = "forking";
           Restart = "no";
 
+          # Access control
+          DynamicUser = "yes";
+          User = "papermc";
+          Group = "papermc";
+
+          # Paths
           inherit RuntimeDirectory;
           RuntimeDirectoryPreserve = "restart";
           BindPaths = [
@@ -96,7 +103,9 @@
             "${folders.cache}/:/run/${RuntimeDirectory}/etc/cache/"
           ];
           WorkingDirectory = "/run/${RuntimeDirectory}/etc";
+          UMask = "007";
 
+          # Lifecycle workers
           ExecStartPre = "${papermc-scripts}/updater.sh";
           ExecStart = "${papermc-scripts}/bootstrapper.sh launch /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
         };
