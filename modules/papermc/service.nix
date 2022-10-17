@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:{
   config = let
     selfCfg = config.services.papermc;
+
     papermc-scripts = let
       dependencies = builtins.toJSON (builtins.mapAttrs (_: builtins.toString) {
         inherit (pkgs)
@@ -36,6 +37,28 @@
       dontInstall = true;
       # dontFixup = true;
     };
+
+    argsFile = let
+      inherit (config.systemd.services.papermc.serviceConfig) RuntimeDirectory;
+      memory = builtins.mapAttrs (_: builtins.toString) selfCfg.memory;
+    in pkgs.writeText "papermc-jvm-args" ''
+      -Xms${memory.min}M
+      -Xmx${memory.max}M
+
+      # Extra JVM Options
+      ${selfCfg.cliArgs.jvm}
+      # End JVM Extra Options
+
+      -jar /run/${RuntimeDirectory}/bin/paper.jar
+      --nogui
+      --world-container /run/${RuntimeDirectory}/worlds/
+      --plugins /run/${RuntimeDirectory}/plugins/
+      --port ${toString selfCfg.port}
+
+      # Extra PaperMC Options
+      ${selfCfg.cliArgs.papermc}
+      # End PaperMC Extra Options
+    '';
   in lib.mkIf selfCfg.enable {
     systemd = {
       timers.sched-reboot.conflicts = [ "papermc.service" ];
@@ -62,26 +85,6 @@
           RuntimeDirectory = "ykis/papermc";
 
           folders = builtins.mapAttrs (_: builtins.toString) selfCfg.storages;
-          memory = builtins.mapAttrs (_: builtins.toString) selfCfg.memory;
-
-          argsFile = pkgs.writeText "papermc-jvm-args" ''
-            -Xms${memory.min}M
-            -Xmx${memory.max}M
-
-            # Extra JVM Options
-            ${selfCfg.cliArgs.jvm}
-            # End JVM Extra Options
-
-            -jar /run/${RuntimeDirectory}/bin/paper.jar
-            --nogui
-            --world-container /run/${RuntimeDirectory}/worlds/
-            --plugins /run/${RuntimeDirectory}/plugins/
-            --port ${toString selfCfg.port}
-
-            # Extra PaperMC Options
-            ${selfCfg.cliArgs.papermc}
-            # End PaperMC Extra Options
-          '';
         in {
           # Startup modes
           Type = "forking";
