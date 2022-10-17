@@ -1,6 +1,11 @@
 { config, lib, pkgs, ... }: let
   selfCfg = config.services.papermc;
 
+  # The RuntimeDirectory directive is used in various places in this component,
+  # therefore it is extracted here to maintain some flexibility in case we fucked up
+  # on this particular place
+  RuntimeDirectory = "ykis/papermc";
+
   papermc-scripts = let
     dependencies = builtins.toJSON (builtins.mapAttrs (_: builtins.toString) {
       inherit (pkgs)
@@ -38,7 +43,6 @@
   };
 
   argsFile = let
-    inherit (config.systemd.services.papermc.serviceConfig) RuntimeDirectory;
     memory = builtins.mapAttrs (_: builtins.toString) selfCfg.memory;
   in pkgs.writeText "papermc-jvm-args" ''
     -Xms${memory.min}M
@@ -82,8 +86,6 @@ in lib.mkIf selfCfg.enable {
       };
 
       serviceConfig = let
-        RuntimeDirectory = "ykis/papermc";
-
         folders = builtins.mapAttrs (_: builtins.toString) selfCfg.storages;
       in {
         # Startup modes
