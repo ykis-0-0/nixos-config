@@ -8,6 +8,8 @@
           wget jq
           # bootstrapper.sh
           abduco
+          # ban_hammer.sh
+          extrace
         ;
       });
     in pkgs.stdenvNoCC.mkDerivation {
@@ -43,8 +45,7 @@
         description = "PaperMC Minecraft dedicated server Instance";
 
         path = with pkgs; [
-          wget jq # required by updater.sh
-          abduco selfCfg.packages.jre # required by bootstrapper.sh
+          selfCfg.packages.jre # required by bootstrapper.sh
         ];
 
         environment = {
@@ -86,6 +87,10 @@
           Type = "forking";
           Restart = "no";
 
+          # Deactivation strategy
+          TimeoutStopSec = "3 min";
+          AmbientCapabilities = "CAP_NET_ADMIN";
+
           # Access control
           DynamicUser = "yes";
           User = "papermc";
@@ -108,6 +113,7 @@
           # Lifecycle workers
           ExecStartPre = "${papermc-scripts}/updater.sh";
           ExecStart = "${papermc-scripts}/bootstrapper.sh launch /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
+          ExecStop = "${papermc-scripts}/ban_hammer.sh";
         };
       };
     };

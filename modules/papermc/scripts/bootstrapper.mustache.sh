@@ -46,7 +46,7 @@ case "$subcommand" in
   # endregion
 
   "goto" )
-    systemd-notify --pid=$$
+    echo "$$" > "${RUNTIME_DIRECTORY}/jvm.pid"
     exec "$@"
   ;;
 
