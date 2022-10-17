@@ -22,6 +22,8 @@
       dontPatch = true;
       dontConfigure = true;
       #dontBuild = true;
+      # HACK /dev/stdin isn't in POSIX,
+      #      but since this is already NixOS we could tolerate it
       buildPhase = ''
         mkdir "$out"
         for object in ./*.mustache.*; do
