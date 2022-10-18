@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:{
+{ config, lib, pkgs, ... }: {
   options.services.papermc = let
     inherit (lib) types mkOption mkEnableOption mkPackageOption;
   in {
@@ -47,7 +47,6 @@
         description = "Location of ${type} for PaperMC";
       };
     in builtins.mapAttrs mkStorageOpt {
-      # srv-root = "Server root directory"; # FIXME think again of whether really include it
       bin = "binaries";
       etc = "configuration files";
       worlds = "world saves";
