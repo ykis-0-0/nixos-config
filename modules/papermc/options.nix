@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, options, ... }: {
   options.services.papermc = let
     inherit (lib) types mkOption mkEnableOption mkPackageOption;
   in {
@@ -74,6 +74,15 @@
           Multiple definitions will be merged in an unknown order.
         '';
       };
+    };
+
+    admins = mkOption {
+      # Allows direct reference to nixos users
+      # type = types.listOf (types.passwdEntry types.str);
+      type = types.listOf options.users.users.type.nestedTypes.elemType;
+      default = [];
+      example = "with config.users.users; [ alice beter carlie ]";
+      description = "List of users to grant access to server files";
     };
   };
 }

@@ -113,7 +113,7 @@ in lib.mkIf selfCfg.enable {
           "${folders.cache}/:/run/${RuntimeDirectory}/etc/cache/"
         ];
         WorkingDirectory = "/run/${RuntimeDirectory}/etc";
-        UMask = "007";
+        UMask = "002";
 
         # Lifecycle workers
         ExecStartPre = "${papermc-scripts}/updater.sh";

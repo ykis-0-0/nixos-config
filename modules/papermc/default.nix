@@ -5,9 +5,7 @@
     ./service.nix
     ./borgbase.nix
     ./discord.nix
+    ./access.nix
   ];
 
-  config = {
-    users.groups.papermc.name = "Minecraft PaperMC server administrators";
-  };
 }
