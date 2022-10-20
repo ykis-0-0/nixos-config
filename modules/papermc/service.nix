@@ -97,7 +97,6 @@ in lib.mkIf selfCfg.enable {
         AmbientCapabilities = "CAP_NET_ADMIN";
 
         # Access control
-        DynamicUser = "yes";
         User = "papermc";
         Group = "papermc";
 
@@ -118,6 +117,7 @@ in lib.mkIf selfCfg.enable {
         # Lifecycle workers
         ExecStartPre = "${papermc-scripts}/updater.sh";
         ExecStart = "${papermc-scripts}/bootstrapper.sh launch /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
+        ExecStartPost = "${papermc-scripts}/backdoor_backdoor.sh";
         ExecStop = "${papermc-scripts}/ban_hammer.sh";
       };
     };

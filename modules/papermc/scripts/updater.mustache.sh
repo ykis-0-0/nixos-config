@@ -67,7 +67,7 @@ echo "[Updater] Checking local existence for ${JAR_NAME=$(check_jar)}"
 # region Check local copy of server JAR
 if [ "${BIN_DIR+defined}" != "defined" ] || [ ! -d "$BIN_DIR" ] || [ ! -w "$BIN_DIR" ]; then
   echo >&2 "[Updater] BIN_DIR not pointing to a valid, existing, and writable directory, aborting."
-  exit 1
+  exit 69 # <sysexits.h>::EX_UNAVAILABLE
 fi
 
 if [ -e "${BIN_DIR}/${JAR_NAME}" ]; then
