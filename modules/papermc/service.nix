@@ -6,6 +6,10 @@
   # on this particular place
   RuntimeDirectory = "ykis/papermc";
 
+  # MountTargetName is the conglomerate of various mount points required to build a
+  # transient filesystem tree for PaperMC to run on without exposing too much
+  MountTargetName = "papermc-mounts";
+
   papermc-scripts = let
     dependencies = builtins.toJSON (builtins.mapAttrs (_: builtins.toString) {
       inherit (pkgs)
@@ -63,6 +67,17 @@
     # End PaperMC Extra Options
   '';
 
+  bindPoints = let
+    folders = builtins.mapAttrs (_: builtins.toString) selfCfg.storages;
+  in [
+    [ "bin" folders.bin ]
+    [ "plugins" folders.plugins ]
+    [ "worlds" folders.worlds ]
+    [ "etc" folders.etc ]
+    [ "etc/logs" folders.log ]
+    [ "etc/cache" folders.cache ]
+  ];
+
 in lib.mkIf selfCfg.enable {
   systemd = {
     timers.sched-reboot.conflicts = [ "papermc.service" ];
@@ -70,6 +85,9 @@ in lib.mkIf selfCfg.enable {
     services.papermc = {
       enable = true;
       description = "PaperMC Minecraft dedicated server Instance";
+
+      requires = [ "${MountTargetName}.target" ];
+      after = [ "${MountTargetName}.target" ];
 
       path = with pkgs; [
         selfCfg.packages.jre # required by bootstrapper.sh
@@ -85,9 +103,7 @@ in lib.mkIf selfCfg.enable {
         TZ = config.time.timeZone;
       };
 
-      serviceConfig = let
-        folders = builtins.mapAttrs (_: builtins.toString) selfCfg.storages;
-      in {
+      serviceConfig = {
         # Startup modes
         Type = "forking";
         Restart = "no";
@@ -103,14 +119,6 @@ in lib.mkIf selfCfg.enable {
         # Paths
         inherit RuntimeDirectory;
         RuntimeDirectoryPreserve = "restart";
-        BindPaths = [
-          "${folders.bin}/:/run/${RuntimeDirectory}/bin/"
-          "${folders.plugins}/:/run/${RuntimeDirectory}/plugins/"
-          "${folders.worlds}/:/run/${RuntimeDirectory}/worlds/"
-          "${folders.etc}/:/run/${RuntimeDirectory}/etc/"
-          "${folders.log}/:/run/${RuntimeDirectory}/etc/logs/"
-          "${folders.cache}/:/run/${RuntimeDirectory}/etc/cache/"
-        ];
         WorkingDirectory = "/run/${RuntimeDirectory}/etc";
         UMask = "002";
 
@@ -121,5 +129,37 @@ in lib.mkIf selfCfg.enable {
         ExecStop = "${papermc-scripts}/ban_hammer.sh";
       };
     };
+
+    targets.${MountTargetName} = let
+      escapeSystemdPath = s:
+        lib.replaceChars ["/" "-" " "] ["-" "\\x2d" "\\x20"]
+        (lib.removePrefix "/" s);
+      mountUnitNames = map (point: escapeSystemdPath "/run/${RuntimeDirectory}/${builtins.head point}" + ".mount" ) bindPoints;
+    in {
+      enable = true;
+      description = "PaperMC Runtime File System Tree";
+      requires = mountUnitNames;
+      after = mountUnitNames;
+    };
+
+    mounts = let
+      id = _: _; # I'm lazy
+
+      genMountUnit = type: srcDir: {
+        enable = true;
+        description = "Required Bind Mountpoints [${type}] for PaperMC SystemD service";
+        before = [ "${MountTargetName}.target" ];
+
+        where = "/run/${RuntimeDirectory}/${type}";
+        what = toString srcDir;
+        type = "none";
+        options = "bind";
+
+        unitConfig = {
+          StopPropagatedFrom = "papermc.service";
+        };
+      };
+
+    in map (builtins.foldl' id genMountUnit) bindPoints;
   };
 }
