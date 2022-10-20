@@ -9,6 +9,11 @@ do_pwait() {
   echo "[Ban Hammer] ${1} has quitted"
 }
 
+if [ "${MAINPID:-quitted}" = "quitted" ]; then
+  echo "[Ban Hammer] Service spontaneously terminated, not issuing stop commands"
+  exit 0
+fi
+
 echo "[Ban Hammer] Commanding PaperMC to /stop"
 echo 'stop' | "$ABDUCO_EXE" -p "${RUNTIME_DIRECTORY}/abduco.sock"
 
