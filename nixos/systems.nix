@@ -20,14 +20,11 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/raspberrypi/configuration.nix
-      inputs.nixos-hardware.nixosModules.raspberry-pi-4
-      ./platform/0soft/raspberrypi/hardware.nix
+      ./platform/0soft/raspberrypi/default.nix
       ./platform/0soft/raspberrypi/storage.nix
 
       # Firmware & Peripheral Choices
-      ./platform/5soft/impermanence/wrapper.nix
-      ./platform/5soft/impermanence/switcher.nix
+      ./platform/5soft/impermanence/default.nix
       "${inputs.argononed}/OS/nixos/default.nix"
       ./platform/5soft/argononed.nix
       ./platform/5soft/yubikey.nix
@@ -63,8 +60,7 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/virtualbox/configuration.nix
-      ./platform/0soft/virtualbox/hardware.nix
+      ./platform/0soft/virtualbox/default.nix
       ./platform/0soft/virtualbox/storage.nix
 
       # Firmware & Peripheral Choices
@@ -96,8 +92,7 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/virtualbox/configuration.nix
-      ./platform/0soft/virtualbox/hardware.nix
+      ./platform/0soft/virtualbox/default.nix
       ./platform/0soft/virtualbox/storage.nix
 
       # Firmware & Peripheral Choices
@@ -127,8 +122,7 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/hyperv/configuration.nix
-      ./platform/0soft/hyperv/hardware.nix
+      ./platform/0soft/hyperv/default.nix
       ./platform/0soft/hyperv/storage.nix
 
       # Firmware & Peripheral Choices
@@ -158,8 +152,7 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      inputs.nixos-wsl.nixosModules.wsl
-      ./platform/0soft/wsl/configuration.nix
+      ./platform/0soft/wsl/default.nix
 
       # Firmware & Peripheral Choices
 
@@ -186,9 +179,7 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/oracle-cloud/configuration.nix
-      ./platform/0soft/oracle-cloud/hardware.nix
-      "${inputs.nixos}/nixos/modules/profiles/qemu-guest.nix"
+      ./platform/0soft/oracle-cloud/default.nix
       ./platform/0soft/oracle-cloud/storage-ol86.nix
       # ./platform/0soft/oracle-cloud/storage-ubuntu2204.nix
 
