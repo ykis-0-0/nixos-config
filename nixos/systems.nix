@@ -33,17 +33,17 @@ inputs: {
       ./platform/soft/flakes.nix
       ./platform/soft/avahi.nix
 
-      # Roles Assignment
-      ./assignments/sshd.nix
-      ./assignments/ddclient.nix
+      # Instance-specific system Overrides
+      ./netflix-adaptations/rpinix/overrides.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
       ./id-10t.5/ykis.nix
       ./id-10t.5/deploy-rs.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/rpinix/overrides.nix
+      # Modules & Role Assignments
+      ./assignments/sshd.nix
+      ./assignments/ddclient.nix
     ];
   };
 
@@ -68,14 +68,14 @@ inputs: {
       # OS Configurations
       ./platform/soft/flakes.nix
 
-      # Roles Assignment
-      ./assignments/gui/awesome.nix
+      # Instance-specific system Overrides
+      ./netflix-adaptations/vbox-proxy/overrides.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/vbox-proxy/overrides.nix
+      # Modules & Role Assignments
+      ./assignments/gui/awesome.nix
     ];
   };
 
@@ -99,13 +99,13 @@ inputs: {
       # OS Configurations
       ./platform/soft/flakes.nix
 
-      # Roles Assignment
+      # Instance-specific system Overrides
+      ./netflix-adaptations/vbox-test/overrides.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/vbox-test/overrides.nix
+      # Modules & Role Assignments
     ];
   };
 
@@ -129,13 +129,13 @@ inputs: {
       # OS Configurations
       ./platform/soft/flakes.nix
 
-      # Roles Assignment
+      # Instance-specific system Overrides
+      ./netflix-adaptations/hyperv-test/overrides.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/hyperv-test/overrides.nix
+      # Modules & Role Assignments
     ];
   };
 
@@ -158,12 +158,12 @@ inputs: {
       # OS Configurations
       ./platform/soft/flakes.nix
 
-      # Roles Assignment
+      # Instance-specific system Overrides
+      ./netflix-adaptations/wslnix/overrides.nix
 
       # Allowed Users
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/wslnix/overrides.nix
+      # Modules & Role Assignments
     ];
   };
 
@@ -187,15 +187,15 @@ inputs: {
       # OS Configurations
       ./platform/soft/flakes.nix
 
-      # Roles Assignment
-      ./assignments/sshd.nix
+      # Instance-specific system Overrides
+      ./netflix-adaptations/oci-master/overrides.nix
 
       # Allowed Users
       ./id-10t.5/opc.nix
       ./id-10t.5/deploy-rs.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/oci-master/overrides.nix
+      # Modules & Role Assignments
+      ./assignments/sshd.nix
     ];
   };
 }
