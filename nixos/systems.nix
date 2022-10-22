@@ -20,15 +20,11 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/raspberrypi/configuration.nix
-      inputs.nixos-hardware.nixosModules.raspberry-pi-4
-      ./platform/0soft/raspberrypi/hardware.nix
+      ./platform/0soft/raspberrypi/default.nix
       ./platform/0soft/raspberrypi/storage.nix
 
       # Firmware & Peripheral Choices
-      ./platform/5soft/impermanence/wrapper.nix
-      ./platform/5soft/impermanence/switcher.nix
-      "${inputs.argononed}/OS/nixos/default.nix"
+      ./platform/5soft/impermanence/default.nix
       ./platform/5soft/argononed.nix
       ./platform/5soft/yubikey.nix
 
@@ -37,17 +33,17 @@ inputs: {
       ./platform/soft/flakes.nix
       ./platform/soft/avahi.nix
 
-      # Roles Assignment
-      ./assignments/sshd.nix
-      ./assignments/ddclient.nix
+      # Instance-specific system Overrides
+      ./netflix-adaptations/rpinix/overrides.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
       ./id-10t.5/ykis.nix
       ./id-10t.5/deploy-rs.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/rpinix/overrides.nix
+      # Modules & Role Assignments
+      ./assignments/sshd.nix
+      ./assignments/ddclient.nix
     ];
   };
 
@@ -63,8 +59,7 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/virtualbox/configuration.nix
-      ./platform/0soft/virtualbox/hardware.nix
+      ./platform/0soft/virtualbox/default.nix
       ./platform/0soft/virtualbox/storage.nix
 
       # Firmware & Peripheral Choices
@@ -73,14 +68,14 @@ inputs: {
       # OS Configurations
       ./platform/soft/flakes.nix
 
-      # Roles Assignment
-      ./assignments/gui/awesome.nix
+      # Instance-specific system Overrides
+      ./netflix-adaptations/vbox-proxy/overrides.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/vbox-proxy/overrides.nix
+      # Modules & Role Assignments
+      ./assignments/gui/awesome.nix
     ];
   };
 
@@ -96,8 +91,7 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/virtualbox/configuration.nix
-      ./platform/0soft/virtualbox/hardware.nix
+      ./platform/0soft/virtualbox/default.nix
       ./platform/0soft/virtualbox/storage.nix
 
       # Firmware & Peripheral Choices
@@ -105,13 +99,13 @@ inputs: {
       # OS Configurations
       ./platform/soft/flakes.nix
 
-      # Roles Assignment
+      # Instance-specific system Overrides
+      ./netflix-adaptations/vbox-test/overrides.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/vbox-test/overrides.nix
+      # Modules & Role Assignments
     ];
   };
 
@@ -127,8 +121,7 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/hyperv/configuration.nix
-      ./platform/0soft/hyperv/hardware.nix
+      ./platform/0soft/hyperv/default.nix
       ./platform/0soft/hyperv/storage.nix
 
       # Firmware & Peripheral Choices
@@ -136,13 +129,13 @@ inputs: {
       # OS Configurations
       ./platform/soft/flakes.nix
 
-      # Roles Assignment
+      # Instance-specific system Overrides
+      ./netflix-adaptations/hyperv-test/overrides.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/hyperv-test/overrides.nix
+      # Modules & Role Assignments
     ];
   };
 
@@ -158,20 +151,19 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      inputs.nixos-wsl.nixosModules.wsl
-      ./platform/0soft/wsl/configuration.nix
+      ./platform/0soft/wsl/default.nix
 
       # Firmware & Peripheral Choices
 
       # OS Configurations
       ./platform/soft/flakes.nix
 
-      # Roles Assignment
+      # Instance-specific system Overrides
+      ./netflix-adaptations/wslnix/overrides.nix
 
       # Allowed Users
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/wslnix/overrides.nix
+      # Modules & Role Assignments
     ];
   };
 
@@ -186,25 +178,24 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/oracle-cloud/configuration.nix
-      ./platform/0soft/oracle-cloud/hardware.nix
-      "${inputs.nixos}/nixos/modules/profiles/qemu-guest.nix"
+      ./platform/0soft/oracle-cloud/default.nix
       ./platform/0soft/oracle-cloud/storage-ol86.nix
       # ./platform/0soft/oracle-cloud/storage-ubuntu2204.nix
 
       # Firmware & Peripheral Choices
 
       # OS Configurations
+      ./platform/soft/flakes.nix
 
-      # Roles Assignment
-      ./assignments/sshd.nix
+      # Instance-specific system Overrides
+      ./netflix-adaptations/oci-master/overrides.nix
 
       # Allowed Users
       ./id-10t.5/opc.nix
       ./id-10t.5/deploy-rs.nix
 
-      # Instance-specific Overrides
-      ./netflix-adaptations/oci-master/overrides.nix
+      # Modules & Role Assignments
+      ./assignments/sshd.nix
     ];
   };
 }
