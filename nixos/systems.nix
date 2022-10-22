@@ -185,6 +185,7 @@ inputs: {
       # Firmware & Peripheral Choices
 
       # OS Configurations
+      ./platform/soft/flakes.nix
 
       # Roles Assignment
       ./assignments/sshd.nix
