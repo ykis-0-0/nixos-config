@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # shellcheck shell=sh
 
+# shellcheck disable=SC3040
+set -uo pipefail # Should we include -e as well...?
+
 PWAIT_EXE="{{extrace}}/bin/pwait"
 ABDUCO_EXE="{{abduco}}/bin/abduco"
 
