@@ -80,14 +80,13 @@
 
 in lib.mkIf selfCfg.enable {
   systemd = {
-    timers.sched-reboot.conflicts = [ "papermc.service" ];
-
     services.papermc = {
       enable = true;
       description = "PaperMC Minecraft dedicated server Instance";
 
       requires = [ "${MountTargetName}.target" ];
       after = [ "${MountTargetName}.target" ];
+      conflicts = [ "sched-reboot.timer" ];
 
       path = with pkgs; [
         selfCfg.packages.jre # required by bootstrapper.sh

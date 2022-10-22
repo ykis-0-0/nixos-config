@@ -5,13 +5,15 @@
     enabled = mkEnableOption "periodically scheduled reboot";
 
     happenOn = mkOption {
-      type = types.string;
+      type = types.str;
       description = "When would the reboot happen";
+      example = "*-*-* 04:00:00";
     };
 
     gracePeriod = mkOption {
-      type = types.string;
+      type = types.str;
       description = "Length of grace period before services stop and reboot";
+      example = "3min";
     };
   };
   config = let
