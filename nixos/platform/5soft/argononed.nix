@@ -1,5 +1,9 @@
-{ argononed, ...}:
+{ config, lib, pkgs, argononed, ...}:
 {
+  imports = [
+    "${argononed}/OS/nixos/default.nix"
+  ];
+
   services.argonone = {
     enable = true;
     logLevel = 4;

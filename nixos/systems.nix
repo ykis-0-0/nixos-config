@@ -25,7 +25,6 @@ inputs: {
 
       # Firmware & Peripheral Choices
       ./platform/5soft/impermanence/default.nix
-      "${inputs.argononed}/OS/nixos/default.nix"
       ./platform/5soft/argononed.nix
       ./platform/5soft/yubikey.nix
 
