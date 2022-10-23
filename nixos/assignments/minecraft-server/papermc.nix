@@ -2,7 +2,7 @@
   services.papermc = {
     enable = true;
     # systemd-verbose = true;
-    # TODO startOnBoot = false; <- maybe something like this?
+    # IDEA startOnBoot = false; <- maybe something like this?
 
     port = 25565;
     memory = {
