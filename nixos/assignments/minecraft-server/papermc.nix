@@ -6,9 +6,15 @@
 
     port = 25565;
     memory = {
-      min = 1024;
-      max = 2560;
-    };
+      "rpinix" = {
+        min = 1024;
+        max = 2560;
+      };
+      "oci-master" = {
+        min = 1024;
+        max = 10240;
+      };
+    }.${config.networking.hostName};
 
     packages = {
       # jre = pkgs.temurin-jre-bin; # Just use DEFAULT!!!
