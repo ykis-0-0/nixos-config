@@ -8,6 +8,8 @@
     # Blame and revert me to recover progress
     # systemd-verbose = mkEnableOption "logging PaperMC console output to Systemd Journal (for debugging purposes only)";
 
+    startOnBoot = mkEnableOption "Make PaperMC start when the machine boots";
+
     port = mkOption {
       type = types.port;
       default = 25565;
