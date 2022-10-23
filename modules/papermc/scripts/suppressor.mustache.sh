@@ -13,14 +13,20 @@ readonly LOCATION
 readonly FILENAME="obelisk-of-doom"
 readonly CHECK_PATH="${LOCATION}/${FILENAME}"
 
+# BUG This shit capturing exit code of abduco, not PaperMC!!!
+
 case "$subcommand" in
   "act" )
-    if [ "${SERVICE_RESULT:-unknown}" = "success" ] ; then
+    if [ "${SERVICE_RESULT:-unknown}" = "success" ] && [ "${EXIT_CODE:-unknown}" = "exited" ] ; then
       echo "[Suppressor] Service exited cleanly, cleaning up own artifacts"
       rm "$CHECK_PATH"
       exit 0
     fi
 
+    if [ -f "$CHECK_PATH" ] ; then
+      echo >&2 "[Suppressor] He who could not pass, shall also not pass again"
+      exit 0
+    fi
     echo >&2 "[Suppressor] Service had abnormal exit, I will remember that."
     echo "downed" > "$CHECK_PATH"
     date --iso-8601=seconds > "$CHECK_PATH"
