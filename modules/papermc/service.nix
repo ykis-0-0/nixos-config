@@ -84,8 +84,9 @@ in lib.mkIf selfCfg.enable {
       enable = true;
       description = "PaperMC Minecraft dedicated server Instance";
 
+      wants = lib.optional selfCfg.startOnBoot "network-online.target";
       requires = [ "${MountTargetName}.target" ];
-      after = [ "${MountTargetName}.target" ];
+      after = [ "${MountTargetName}.target" ] ++ lib.optional selfCfg.startOnBoot "network-online.target";
       conflicts = [ "sched-reboot.timer" ];
 
       path = with pkgs; [

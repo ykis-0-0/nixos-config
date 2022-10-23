@@ -2,7 +2,7 @@
   services.papermc = {
     enable = true;
     # systemd-verbose = true;
-    # IDEA startOnBoot = false; <- maybe something like this?
+    startOnBoot = true;
 
     port = 25565;
     memory = {
@@ -21,22 +21,20 @@
     storages = (base': let
       base = toString base';
     in {
-      bin = "${base}/papermc/bin";
-      etc = "${base}/papermc/etc";
-      worlds = "${base}/papermc/worlds";
-      log = "${base}/papermc/logs";
-      plugins = "${base}/papermc/plugins";
-      cache = "${base}/papermc/bin-cache";
+      bin = "${base}/bin";
+      etc = "${base}/etc";
+      worlds = "${base}/worlds";
+      log = "${base}/logs";
+      plugins = "${base}/plugins";
+      cache = "${base}/bin-cache";
     })({
-      "rpinix" = /home/nixos;
-      "oci-master" = /src/papermc;
+      "rpinix" = /home/nixos/papermc;
+      "oci-master" = /srv/papermc;
     }.${config.networking.hostName});
 
-    admins = builtins.getAttr config.networking.hostName (
-      with config.users.users;{
-        "rpinix" = [ nixos ];
-        "oci-master" = [ opc ];
-      }
-    );
+    admins = with config.users.users; {
+      "rpinix" = [ nixos ];
+      "oci-master" = [ opc ];
+    }.${config.networking.hostName};
   };
 }
