@@ -39,6 +39,22 @@
         "type": "github"
       }
     },
+    "dtach": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1611720373,
+        "narHash": "sha256-khcvQQct5Q7bZvvr8FkaULlQDj3SaVIAVMnHl9smt0Q=",
+        "owner": "xPMo",
+        "repo": "dtach",
+        "rev": "2c08b6ae83b0a9834191c0d7cc9cc17aa270269d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xPMo",
+        "repo": "dtach",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -220,6 +236,7 @@
       "inputs": {
         "argononed": "argononed",
         "deploy-rs": "deploy-rs",
+        "dtach": "dtach",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nix-matlab": "nix-matlab",

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: let
+{ config, lib, pkgs, dtach, ... }: let
   selfCfg = config.services.papermc;
 
   # The RuntimeDirectory directive is used in various places in this component,
@@ -16,10 +16,14 @@
         # updater.sh
         wget jq
         # bootstrapper.sh
-        abduco
+        # abduco
         # ban_hammer.sh
         extrace
       ;
+      dtach = pkgs.dtach.overrideAttrs (prev: {
+        # IDEA In the worst case we even need to write a replacement ourselves...
+        src = dtach;
+      });
     });
   in pkgs.stdenvNoCC.mkDerivation {
     name = "systemd-papermc-utils";
@@ -124,7 +128,7 @@ in lib.mkIf selfCfg.enable {
 
         # Lifecycle workers
         ExecStartPre = "${papermc-scripts}/updater.sh";
-        ExecStart = "${papermc-scripts}/bootstrapper.sh launch /run/${RuntimeDirectory}/abduco.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
+        ExecStart = "${papermc-scripts}/bootstrapper.sh launch /run/${RuntimeDirectory}/dtach.sock ${selfCfg.packages.jre}/bin/java @${argsFile}";
         ExecStartPost = "${papermc-scripts}/backdoor_backdoor.sh";
         ExecStop = "${papermc-scripts}/ban_hammer.sh";
       };

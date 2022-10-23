@@ -11,7 +11,7 @@ CAVEAT
 set -uo pipefail # Should we include -e as well...?
 
 PWAIT_EXE="{{extrace}}/bin/pwait"
-ABDUCO_EXE="{{abduco}}/bin/abduco"
+DTACH_EXE="{{dtach}}/bin/dtach"
 
 do_pwait() {
   "$PWAIT_EXE" "$2"
@@ -24,11 +24,11 @@ if [ "${MAINPID:-quitted}" = "quitted" ]; then
 fi
 
 echo "[Ban Hammer] Commanding PaperMC to /stop"
-echo 'stop' | "$ABDUCO_EXE" -p "${RUNTIME_DIRECTORY}/abduco.sock"
+echo 'stop' | "$DTACH_EXE" -p "${RUNTIME_DIRECTORY}/dtach.sock"
 
 echo "[Ban Hammer] Waiting for server processes to exit"
 do_pwait "PaperMC" "$(cat "${RUNTIME_DIRECTORY}/jvm.pid")"&
-do_pwait "Abduco" "$MAINPID"&
+do_pwait "dtach" "$MAINPID"&
 
 wait # for all `pwait`s above to stop
 echo "[Ban Hammer] All unit processes has been stopped"
