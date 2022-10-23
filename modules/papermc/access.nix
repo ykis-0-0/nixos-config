@@ -11,4 +11,9 @@ in lib.mkIf selfCfg.enable {
     groups.papermc.members = map (el: el.name) selfCfg.admins;
   };
 
+  networking.firewall = {
+    allowedTCPPorts = [ selfCfg.port ];
+    allowedUDPPorts = [ selfCfg.port ];
+  };
+
 }

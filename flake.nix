@@ -29,6 +29,10 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixos";
     };
+    dtach = {
+      url = "github:xPMo/dtach";
+      flake = false;
+    };
     # endregion
     # region Homebrew
     argononed = {
