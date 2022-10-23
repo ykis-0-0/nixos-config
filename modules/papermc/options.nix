@@ -4,8 +4,8 @@
   in {
     enable = mkEnableOption "the PaperMC Minecraft dedicated server";
 
-    # BUG unable to pipe outputs to systemd journal
-    # SEE ./scripts/bootstrapper.sh
+    # IDEA pipe outputs to systemd journal
+    # Blame and revert me to recover progress
     # systemd-verbose = mkEnableOption "logging PaperMC console output to Systemd Journal (for debugging purposes only)";
 
     port = mkOption {
