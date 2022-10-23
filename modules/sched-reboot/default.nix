@@ -30,7 +30,8 @@
       timers = {
         curfew-warden = {
           enable = true;
-          description = "Daily Maintainence Reboot";
+          description = "Periodical Maintainence Reboot";
+          wantedBy = [ "multi-user.target" ];
 
           timerConfig = {
             OnCalendar = self.happenOn; #"*-*-* 04:00:00";
@@ -39,7 +40,7 @@
         };
 
         sched-reboot = {
-          enable = false;
+          enable = true;
           description = "Daily Maintainence Reboot Notice Period";
 
           timerConfig = {
