@@ -2,9 +2,9 @@
 # shellcheck shell=sh
 
 : <<CAVEAT
-  This piece of script is linted as POSIX Shell script is maximized compatibility.
-  However, since Nix defaults to bash anyways, and 'set -o pipefail' is required,
-  We'll need to deliberately ignore SC3040 in the next line.
+  For maximal compatability, POSIX sh is assumed.
+  Since we want 'pipefail', and Nix uses bash anyways,
+  SC3040 is ignored next line.
 CAVEAT
 
 # shellcheck disable=SC3040
