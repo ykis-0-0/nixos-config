@@ -11,7 +11,8 @@ CAVEAT
 set -uo pipefail # Should we include -e as well...?
 
 : <<USAGE
-  ./bootstrap.sh <subcommand> <ABDUCO_SOCKFILE> <cmdline...>
+  ./bootstrap.sh launch <ABDUCO_SOCKFILE> <cmdline...>
+  ./bootstrap.sh goto <cmdline...>
 USAGE
 
 ABDUCO_EXE="{{abduco}}/bin/abduco"
