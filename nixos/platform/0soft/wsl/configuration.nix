@@ -4,13 +4,19 @@
 
   wsl = {
     enable = true;
-    automountPath = "/mnt";
+    nativeSystemd = true;
     defaultUser = "nixos";
+
     wslConf = {
+      automount.root = "/mnt";
       network.hostname = "wslnix";
+      interop.appendWindowsPath = false;
     };
 
-    interop.register = true;
+    interop = {
+      register = true;
+      includePath = false;
+    };
 
     docker-desktop.enable = true;
   };
