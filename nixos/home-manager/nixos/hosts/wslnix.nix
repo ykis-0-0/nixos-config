@@ -7,6 +7,7 @@ in {
       git
       wget
       rnix-lsp
+      nil
     ];
 
     file = {

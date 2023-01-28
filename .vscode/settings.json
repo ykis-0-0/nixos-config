@@ -1,5 +1,6 @@
 {
   "nix.enableLanguageServer": true,
+  "nix.serverPath": "nil",
   "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
   "todo-tree.tree.showBadges": true,
   "todo-tree.tree.showCountsInTree": false,
