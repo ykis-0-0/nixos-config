@@ -6,4 +6,5 @@
     pcscd.enable = true;
   };
 
+  # TODO find ways to incorporate YubiKey into infrastructure
 }
