@@ -60,7 +60,7 @@
 
     packages = {
       x86_64-linux = {
-        wslnix = self.nixosConfigurations.wslnix.config.system.build.tarball;
+        wslnix = self.nixosConfigurations.wslnix.config.system.build.installer;
 
         hyperv-test = let
           system = self.nixosConfigurations.hyperv-test;
