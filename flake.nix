@@ -66,9 +66,12 @@
           system = self.nixosConfigurations.hyperv-test;
           mkImage = import "${inputs.nixos}/nixos/lib/make-disk-image.nix";
           builderModule = { config, lib, pkgs, ... }: let
-            cfg = {
-              vmDerivationName = "nixos-hyperv-${config.system.nixos.label}-${pkgs.stdenv.hostPlatform.system}";
-              vmFileName = "nixos-${config.system.nixos.label}-${pkgs.stdenv.hostPlatform.system}.vhdx";
+            cfg = let
+              inherit (config.system.nixos) label;
+              inherit (pkgs.stdenv.hostPlatform) system;
+            in {
+              vmDerivationName = "nixos-hyperv-${label}-${system}";
+              vmFileName = "nixos-${label}-${system}.vhdx";
             };
           in {
             # Extracted from:
