@@ -39,7 +39,10 @@
       url = "gitlab:DarkElvenAngel/argononed/master";
       flake = false;
     };
-    npiperelay.url = "github:ykis-0-0/npiperelay.nix";
+    npiperelay = {
+      url = "github:ykis-0-0/npiperelay.nix";
+      inputs.nixpkgs.follows = "nixos";
+    };
     # secret-wrapper: to be supplied on target hosts
     secret-wrapper.follows = "";
     # endregion
