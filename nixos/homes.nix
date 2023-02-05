@@ -43,6 +43,8 @@ inputs: [
       ./home-manager/nixos/hosts/wslnix.nix
       "${inputs.vscode-server-patch}/modules/vscode-server/home.nix"
     ];
-    extraSpecialArgs = {};
+    extraSpecialArgs = {
+      npiperelay = inputs.npiperelay.packages.${inputs.systems'.wslnix}.default;
+    };
   }
 ]

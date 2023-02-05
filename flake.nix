@@ -39,6 +39,7 @@
       url = "gitlab:DarkElvenAngel/argononed/master";
       flake = false;
     };
+    npiperelay.url = "github:ykis-0-0/npiperelay.nix";
     # secret-wrapper: to be supplied on target hosts
     secret-wrapper.follows = "";
     # endregion
@@ -121,7 +122,12 @@
         };
       };
       mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig' builders);
-      homeConfigurations' = import ./nixos/homes.nix inputs;
+      homeConfigurations' = import ./nixos/homes.nix (let
+          getSystem = name: conf: conf.pkgs.stdenv.hostPlatform.system;
+        in inputs // {
+          systems' = builtins.mapAttrs getSystem self.nixosConfigurations;
+        }
+      );
     in mkHomeConfigurations homeConfigurations';
 
     deploy.nodes = import ./nixos/deployments.nix inputs;

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, npiperelay, ... }:
 let
   hmlib = config.lib;
 in {
@@ -20,5 +20,22 @@ in {
 
   services = {
     vscode-server.enable = true;
+  };
+
+  # KeeAgent NPipeRelay runner
+  systemd.user.services.keeagent-relay = {
+    Unit = {
+      Description = "KeeAgent SSH_AUTH_SOCK relay using npiperelay.exe";
+      After = [ "default.target" ];
+      # WantedBy = [ "default.target" ];
+    };
+
+    Install.WantedBy = [ "default.target" ];
+
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.socat}/bin/socat UNIX-LISTEN:%t/ssh-agent,fork,umask=007 EXEC:\"${npiperelay}/bin/npiperelay.exe -ep -s //./pipe/openssh-ssh-agent\",nofork";
+      Restart = "always";
+    };
   };
 }
