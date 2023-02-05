@@ -62,48 +62,8 @@
       };
     in builtins.mapAttrs mapper nixosConfigurations';
 
-    packages = {
-      x86_64-linux = {
-        wslnix = self.nixosConfigurations.wslnix.config.system.build.installer;
-
-        hyperv-test = let
-          system = self.nixosConfigurations.hyperv-test;
-          mkImage = import "${inputs.nixos}/nixos/lib/make-disk-image.nix";
-          builderModule = { config, lib, pkgs, ... }: let
-            cfg = let
-              inherit (config.system.nixos) label;
-              inherit (pkgs.stdenv.hostPlatform) system;
-            in {
-              vmDerivationName = "nixos-hyperv-${label}-${system}";
-              vmFileName = "nixos-${label}-${system}.vhdx";
-            };
-          in {
-            # Extracted from:
-            # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/virtualisation/hyperv-image.nix#L37
-            system.build.hypervImage = mkImage {
-              name = cfg.vmDerivationName;
-              postVM = ''
-                ${pkgs.vmTools.qemu}/bin/qemu-img convert -f raw -o subformat=dynamic -O vhdx $diskImage $out/${cfg.vmFileName}
-                rm $diskImage
-              '';
-
-              format = "raw";
-              diskSize = "auto";
-              partitionTableType = "efi";
-
-              inherit config lib pkgs;
-            };
-          };
-        systemExtended = system.extendModules {
-          modules = [ builderModule ];
-        };
-        in systemExtended.config.system.build.hypervImage;
-      };
-
-      aarch64-linux = {
-        # TODO add RasPi image here
-      };
-    };
+    # OS Images are removed as none of them works in their current form
+    # packages = {};
 
     homeConfigurations = let
       mkHomeConfig_ = inputs.home-manager.lib.homeManagerConfiguration;
