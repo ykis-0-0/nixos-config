@@ -126,11 +126,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1674771519,
-        "narHash": "sha256-U0W3S1nX6yEvLh3Vq70EORbmXecAKXfmEfCfaA4A+I8=",
+        "lastModified": 1675592602,
+        "narHash": "sha256-UUjFvvLIG2dkg0SW4ENK4pI5DWZUQ3cAiOYgo/zkoxQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "bb4b25b302dbf0f527f190461b080b5262871756",
+        "rev": "9f4268e6b630497e289b18473775dff9c2d6635d",
         "type": "github"
       },
       "original": {
@@ -142,11 +142,11 @@
     },
     "impermanence": {
       "locked": {
-        "lastModified": 1668668915,
-        "narHash": "sha256-QjY4ZZbs9shwO4LaLpvlU2bO9J1juYhO9NtV3nrbnYQ=",
+        "lastModified": 1675359654,
+        "narHash": "sha256-FPxzuvJkcO49g4zkWLSeuZkln54bLoTtrggZDJBH90I=",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "5df9108b346f8a42021bf99e50de89c9caa251c3",
+        "rev": "6138eb8e737bffabd4c8fc78ae015d4fd6a7e2fd",
         "type": "github"
       },
       "original": {
@@ -163,11 +163,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1674831771,
-        "narHash": "sha256-P3H8Tk+qGm/Q7kj2kJi4yiqcIsM7C3tI2xWWlLl49sA=",
+        "lastModified": 1675522940,
+        "narHash": "sha256-7vzMIbvSadW77Ssh539yj98ElebxEOEs9gnL9SOmXms=",
         "owner": "doronbehar",
         "repo": "nix-matlab",
-        "rev": "f9b6b48a69ba4c371ba182720eeabdf421c25342",
+        "rev": "4424c24ee4dd3f0b48aa791fab81e4c3daa1b0f0",
         "type": "gitlab"
       },
       "original": {
@@ -179,11 +179,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1674641431,
-        "narHash": "sha256-qfo19qVZBP4qn5M5gXc/h1MDgAtPA5VxJm9s8RUAkVk=",
+        "lastModified": 1675545634,
+        "narHash": "sha256-TbQeQcM5TA/wIho6xtzG+inUfiGzUXi8ewwttiQWYJE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9b97ad7b4330aacda9b2343396eb3df8a853b4fc",
+        "rev": "0591d6b57bfeb55dfeec99a671843337bc2c3323",
         "type": "github"
       },
       "original": {
@@ -218,17 +218,55 @@
         ]
       },
       "locked": {
-        "lastModified": 1674887006,
-        "narHash": "sha256-dPHPxrZ6642Y46eqBMNGu61qQqGmwV7liZEyle6v0IU=",
+        "lastModified": 1675351082,
+        "narHash": "sha256-4Oi4k4Qp1vOvKoACHDcz0xiVj7DuMaCL57fP3W77eA0=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "14273c185311868e8525a0af3b5c93503e0f53e8",
+        "rev": "52cadf92e1bfdef235d5cd77b9a4b2ab848baa8a",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "ref": "main",
         "repo": "NixOS-WSL",
+        "type": "github"
+      }
+    },
+    "npiperelay": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos"
+        ],
+        "npiperelay": "npiperelay_2"
+      },
+      "locked": {
+        "lastModified": 1675544194,
+        "narHash": "sha256-fj6d7dK32CcwXSRJNbrgND+TVQ2FQxcUvOUwoptQVM0=",
+        "owner": "ykis-0-0",
+        "repo": "npiperelay.nix",
+        "rev": "01b55395b3539da4f3a2d2048ad7fa3dee708b01",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ykis-0-0",
+        "repo": "npiperelay.nix",
+        "type": "github"
+      }
+    },
+    "npiperelay_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1675421072,
+        "narHash": "sha256-j0Q+tY7N0sftvYebVgycm3SqYqAsQLS4LK9cQxZ381k=",
+        "owner": "albertony",
+        "repo": "npiperelay",
+        "rev": "cb772fa795e17f25fe83bc698a0297d172ea2cf8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "albertony",
+        "ref": "fork",
+        "repo": "npiperelay",
         "type": "github"
       }
     },
@@ -243,6 +281,7 @@
         "nixos": "nixos",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
+        "npiperelay": "npiperelay",
         "secret-wrapper": [],
         "vscode-server-patch": "vscode-server-patch"
       }
