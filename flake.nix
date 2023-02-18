@@ -29,10 +29,6 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixos";
     };
-    dtach = {
-      url = "github:xPMo/dtach";
-      flake = false;
-    };
     # endregion
     # region Homebrew
     argononed = {
@@ -47,6 +43,10 @@
     secret-wrapper.follows = "";
     sched-reboot = {
       url = "./modules/sched-reboot";
+      inputs.nixpkgs.follows = "nixos";
+    };
+    papermc = {
+      url = "./modules/papermc";
       inputs.nixpkgs.follows = "nixos";
     };
     # endregion

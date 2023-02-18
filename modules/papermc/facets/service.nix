@@ -1,4 +1,5 @@
-{ config, lib, pkgs, dtach, ... }: let
+dtach: # For the overlay
+{ config, lib, pkgs, ... }: let
   selfCfg = config.services.papermc;
 
   # The RuntimeDirectory directive is used in various places in this component,
