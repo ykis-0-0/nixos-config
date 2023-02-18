@@ -46,7 +46,7 @@ inputs: {
       "${inputs.self}/modules/papermc/default.nix"
       "${inputs.self}/modules/sched-reboot/default.nix"
       ./assignments/minecraft-server/papermc.nix
-      ./assignments/minecraft-server/reboot.nix
+      ./assignments/reboot.nix
     ];
   };
 
@@ -205,7 +205,7 @@ inputs: {
       "${inputs.self}/modules/papermc/default.nix"
       "${inputs.self}/modules/sched-reboot/default.nix"
       ./assignments/minecraft-server/papermc.nix
-      ./assignments/minecraft-server/reboot.nix
+      ./assignments/reboot.nix
     ];
   };
 }

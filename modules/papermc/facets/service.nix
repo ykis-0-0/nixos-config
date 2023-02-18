@@ -27,7 +27,7 @@
     });
   in pkgs.stdenvNoCC.mkDerivation {
     name = "systemd-papermc-utils";
-    src = ./scripts;
+    src = ../scripts;
 
     nativeBuildInputs = with pkgs; [ mustache-go ];
     passAsFile = [ "dependencies" ];

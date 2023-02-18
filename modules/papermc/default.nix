@@ -5,11 +5,11 @@
   # to handle other variants beyond only PaperMC
 
   imports = [
-    ./options.nix
-    ./service.nix
-    ./borgbase.nix
-    ./discord.nix
-    ./access.nix
+    ./facets/options.nix
+    ./facets/service.nix
+    ./facets/access.nix
+    ./sidecars/borgbase.nix
+    ./sidecars/discord.nix
   ];
 
 }
