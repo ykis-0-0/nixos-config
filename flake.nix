@@ -45,6 +45,10 @@
     };
     # secret-wrapper: to be supplied on target hosts
     secret-wrapper.follows = "";
+    sched-reboot = {
+      url = "./modules/sched-reboot";
+      inputs.nixpkgs.follows = "nixos";
+    };
     # endregion
   };
 
