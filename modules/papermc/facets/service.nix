@@ -137,7 +137,7 @@ in lib.mkIf selfCfg.enable {
 
     targets.${MountTargetName} = let
       escapeSystemdPath = s:
-        lib.replaceChars ["/" "-" " "] ["-" "\\x2d" "\\x20"]
+        lib.replaceStrings ["/" "-" " "] ["-" "\\x2d" "\\x20"]
         (lib.removePrefix "/" s);
       mountUnitNames = map (point: escapeSystemdPath "/run/${RuntimeDirectory}/${builtins.head point}" + ".mount" ) bindPoints;
     in {
