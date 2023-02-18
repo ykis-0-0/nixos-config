@@ -4,7 +4,7 @@
     persistPlane = {
       junction = "/persist";
       fstabOptions = {
-        device = "/dev/sda2";
+        device = "/dev/disk/by-name/NIXOS_SD";
         fsType = "ext4";
         options = [ "noatime" ];
       };
@@ -19,7 +19,7 @@
 
     extraMounts = {
       "/boot/FIRMWARE" = {
-        device = "/dev/sda1";
+        device = "/dev/disk/by-name/FIRMWARE";
         fsType = "vfat";
         options = [ "noatime" ];
       };
