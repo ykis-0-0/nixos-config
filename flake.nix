@@ -45,10 +45,6 @@
       url = "./modules/sched-reboot";
       inputs.nixpkgs.follows = "nixos";
     };
-    papermc = {
-      url = "./modules/papermc";
-      inputs.nixpkgs.follows = "nixos";
-    };
     # endregion
   };
 
