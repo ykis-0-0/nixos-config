@@ -12,7 +12,7 @@ inputs: {
     includeInputs = [
       "nixos" "nixos-hardware"
       "impermanence"
-      "vscode-server-patch" "argononed" "papermc" "sched-reboot"
+      "vscode-server-patch" "argononed" "sched-reboot"
       "secret-wrapper"
     ];
     modules = [
@@ -43,9 +43,7 @@ inputs: {
 
       # Modules & Role Assignments
       ./assignments/sshd.nix
-      inputs.papermc.nixosModules.default
       inputs.sched-reboot.nixosModules.default
-      ./assignments/minecraft-server/papermc.nix
       ./assignments/reboot.nix
     ];
   };
@@ -175,7 +173,7 @@ inputs: {
     includeInputs = [
       "nixos" "nixos-hardware"
       "impermanence"
-      "papermc" "sched-reboot"
+      "sched-reboot"
       "secret-wrapper"
     ];
     modules = [
@@ -202,9 +200,7 @@ inputs: {
       # Modules & Role Assignments
       ./assignments/sshd.nix
       ./assignments/ddclient.nix
-      inputs.papermc.nixosModules.default
       inputs.sched-reboot.nixosModules.default
-      ./assignments/minecraft-server/papermc.nix
       ./assignments/reboot.nix
     ];
   };
