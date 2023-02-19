@@ -41,14 +41,18 @@
     };
     # secret-wrapper: to be supplied on target hosts
     secret-wrapper.follows = "";
-    sched-reboot = {
-      url = "./modules/sched-reboot";
-      inputs.nixpkgs.follows = "nixos";
-    };
     # endregion
   };
 
-  outputs = { self, secret-wrapper ? null, ... }@inputs: {
+  outputs = { self, secret-wrapper ? null, ... }@inputs': let
+    #region sched-reboot injection
+    # HACK revert to normal flake input definition whether possible,
+    # specifically when https://github.com/NixOS/nix/issues/6352 has merged
+    inputs = inputs' // {
+      sched-reboot.nixosModules.default = ./modules/sched-reboot/default.nix;
+    };
+    #endregion
+  in {
     nixosConfigurations = let
       nixosConfigurations' = import ./nixos/systems.nix inputs;
       createSystem = inputs.nixos.lib.nixosSystem;
