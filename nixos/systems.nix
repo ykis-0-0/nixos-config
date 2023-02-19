@@ -44,7 +44,6 @@ inputs: {
       # Modules & Role Assignments
       ./assignments/sshd.nix
       inputs.sched-reboot.nixosModules.default
-      ./assignments/reboot.nix
     ];
   };
 
@@ -201,7 +200,6 @@ inputs: {
       ./assignments/sshd.nix
       ./assignments/ddclient.nix
       inputs.sched-reboot.nixosModules.default
-      ./assignments/reboot.nix
     ];
   };
 }
