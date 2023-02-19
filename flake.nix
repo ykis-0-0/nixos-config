@@ -99,6 +99,7 @@
 
     deploy = {
       nodes = import ./nixos/deployments.nix inputs;
+      remoteBuild = true;
     };
   };
 }
