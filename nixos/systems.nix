@@ -44,6 +44,7 @@ inputs: {
       # Modules & Role Assignments
       ./assignments/sshd.nix
       inputs.sched-reboot.nixosModules.default
+      ./assignments/zerotier.nix
     ];
   };
 
@@ -84,6 +85,7 @@ inputs: {
       # Modules & Role Assignments
       ./assignments/sshd.nix
       inputs.sched-reboot.nixosModules.default
+      ./assignments/zerotier.nix
     ];
   };
 
@@ -240,6 +242,7 @@ inputs: {
       ./assignments/sshd.nix
       ./assignments/ddclient.nix
       inputs.sched-reboot.nixosModules.default
+      ./assignments/zerotier.nix
     ];
   };
 }
