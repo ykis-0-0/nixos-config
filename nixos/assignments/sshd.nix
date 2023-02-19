@@ -1,7 +1,7 @@
 {
   services.openssh = {
     enable = true;
-    forwardX11 = true;
+    settings.X11Forwarding = true;
     extraConfig = ''
       ClientAliveInterval 10
     '';
