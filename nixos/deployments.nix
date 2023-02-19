@@ -45,7 +45,7 @@ in {
   });
 
   oci-master = mkDeploy self.nixosConfigurations.oci-master ({ baseOs, d-lib }: {
-    host = "ykis-host.ddns.net";
+    hostname = "ykis-host.ddns.net";
     sshUser = "deploy-rs";
 
     profilesOrder = [ "system" ];
