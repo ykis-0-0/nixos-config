@@ -97,6 +97,8 @@
       );
     in mkHomeConfigurations homeConfigurations';
 
-    deploy.nodes = import ./nixos/deployments.nix inputs;
+    deploy = {
+      nodes = import ./nixos/deployments.nix inputs;
+    };
   };
 }

@@ -47,6 +47,46 @@ inputs: {
     ];
   };
 
+  rpi = {
+    system = "aarch64-linux";
+    includeInputs = [
+      "nixos" "nixos-hardware"
+      "impermanence"
+      "vscode-server-patch" "argononed" "sched-reboot"
+      "secret-wrapper"
+    ];
+    modules = [
+      # Common Base Configs
+      ./platform/basic.nix
+
+      # Hardware Platform
+      ./platform/0soft/raspberrypi/default.nix
+      ./platform/0soft/raspberrypi/storage.nix
+
+      # Firmware & Peripheral Choices
+      ./platform/5soft/impermanence/default.nix
+      ./platform/5soft/argononed.nix
+      ./platform/5soft/yubikey.nix
+
+      # OS Configurations
+      # ./platform/soft/passwdmgr/default.nix
+      ./platform/soft/flakes.nix
+      ./platform/soft/avahi.nix
+
+      # Instance-specific system Overrides
+      ./netflix-adaptations/rpi/overrides.nix
+
+      # Allowed Users
+      ./id-10t.5/nixos.nix
+      ./id-10t.5/ykis.nix
+      ./id-10t.5/deploy-rs.nix
+
+      # Modules & Role Assignments
+      ./assignments/sshd.nix
+      inputs.sched-reboot.nixosModules.default
+    ];
+  };
+
   vbox-proxy = {
     system = "x86_64-linux";
     includeInputs = [
