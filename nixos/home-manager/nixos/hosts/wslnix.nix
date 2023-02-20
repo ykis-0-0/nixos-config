@@ -38,8 +38,10 @@ in {
 
     Service = {
       Type = "simple";
-      ExecStart = "${pkgs.socat}/bin/socat UNIX-LISTEN:%t/ssh-agent,fork,umask=007 EXEC:\"${npiperelay}/bin/npiperelay.exe -ep -s //./pipe/openssh-ssh-agent\",nofork";
+      ExecStart = "${pkgs.socat}/bin/socat UNIX-LISTEN:%t/ssh-agent,fork,umask=007 EXEC:\"${npiperelay}/bin/npiperelay.exe -ep -ei -s -v //./pipe/openssh-ssh-agent\",nofork";
       Restart = "always";
     };
   };
+
+  programs.bash.enable = true; # HACK Temporary fix, should be replaced by something like fish soon?
 }
