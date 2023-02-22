@@ -7,7 +7,7 @@
   };
 in {
   rpinix = mkDeploy self.nixosConfigurations.rpinix ({ baseOs, d-lib }: {
-    hostname = "rpinix";
+    hostname = "rpinix.local";
     sshUser = "deploy-rs";
 
     profilesOrder = [ "system" /*"nixos"*/ ];
@@ -26,7 +26,7 @@ in {
   });
 
   rpi = mkDeploy self.nixosConfigurations.rpi ({ baseOs, d-lib }: {
-    hostname = "rpi";
+    hostname = "rpi.local";
     sshUser = "deploy-rs";
 
     profilesOrder = [ "system" /*"nixos"*/ ];
