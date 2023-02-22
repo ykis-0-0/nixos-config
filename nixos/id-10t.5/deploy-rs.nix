@@ -14,7 +14,7 @@
       isSystemUser = false;
     */
 
-    description = "";
+    description = "NixOS deployer";
     group = "nogroup";
 
     # I don't want to do these, but I have run out of ideas...
@@ -28,7 +28,7 @@
     ];
   };
 
-  nix.settings.trusted-users = [ "deploy-rs" ];
+  nix.settings.trusted-users = [ "root" "deploy-rs" ];
 
   security.sudo.extraRules = [
     {
