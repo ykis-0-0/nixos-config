@@ -2,7 +2,7 @@
   services.zerotierone = {
     enable = true;
     joinNetworks = [
-      "9bee8941b54fd108"
+      # TODO create a new network later
     ];
   };
 }
