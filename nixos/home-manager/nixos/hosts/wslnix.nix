@@ -51,7 +51,7 @@ in {
         wslSide = "UNIX-LISTEN:%t/ssh-agent,fork,umask=007";
         windowsSide = "EXEC:\"${nprCmdline}\",nofork"; # avoid escaping
       in
-        "${pkgs.socat}/bin/socat ${wslSide} ";
+        "${pkgs.socat}/bin/socat ${wslSide} ${windowsSide}";
       Restart = "always";
     };
   };
