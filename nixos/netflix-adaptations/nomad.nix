@@ -1,31 +1,37 @@
 { config, lib, pkgs, ... }: let
   theMapping = {
     rpinix = {
+      target = "rpinix.local";
       region = "labo";
       server = true;
       client = true;
     };
     rpi = {
+      target = "rpi.local";
       region = "labo";
       server = false;
       client = true;
     };
     bigbox = {
+      target = "bigbox.local";
       region = "labo";
       server = true;
       client = true;
     };
     oci-master = {
+      target = "oci-master.defaultsubnet.defaultvcn.oraclevcn.com";
       region = "icu";
       server = true;
       client = true;
     };
     oci-helper = {
+      target = "oci-helper.defaultsubnet.defaultvcn.oraclevcn.com";
       region = "icu";
       server = true;
       client = true;
     };
     oci-slave = {
+      target = "oci-slave.defaultsubnet.defaultvcn.oraclevcn.com";
       region = "icu";
       server = false;
       client = true;
@@ -49,7 +55,7 @@ in {
       server_join.retry_join = let
         inherit (builtins) map getAttr filter;
         inherit (lib) getAttrFromPath;
-      in map (getAttr "name") (filter (getAttrFromPath ["value" "server"]) nodes);
+      in map (_: _.value.target) (filter (getAttrFromPath ["value" "server"]) nodes);
     };
 
     client = {
@@ -58,9 +64,11 @@ in {
       server_join.retry_join = let
         inherit (builtins) map getAttr filter;
         inherit (lib) getAttrFromPath;
-      in map (getAttr "name") (filter (el: el.value.server && el.value.region == cfg.region) nodes);
+      in map (_: _.value.target) (filter (el: el.value.server && el.value.region == cfg.region) nodes);
     };
 
     ui.label.text = "Nomad Aggregate - Node ${thisHost}";
   };
+
+  virtualisation.podman.enable = true;
 }
