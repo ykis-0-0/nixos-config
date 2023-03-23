@@ -35,7 +35,6 @@ inputs: {
 
       # Instance-specific system Overrides
       ./netflix-adaptations/rpinix/overrides.nix
-      ./netflix-adaptations/nomad.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
@@ -45,7 +44,6 @@ inputs: {
       # Modules & Role Assignments
       ./assignments/sshd.nix
       inputs.sched-reboot.nixosModules.default
-      ./assignments/hashicorp/nomad.nix
       ./assignments/zerotier.nix
     ];
   };
@@ -78,7 +76,6 @@ inputs: {
 
       # Instance-specific system Overrides
       ./netflix-adaptations/rpi/overrides.nix
-      ./netflix-adaptations/nomad.nix
 
       # Allowed Users
       ./id-10t.5/nixos.nix
@@ -88,7 +85,6 @@ inputs: {
       # Modules & Role Assignments
       ./assignments/sshd.nix
       inputs.sched-reboot.nixosModules.default
-      ./assignments/hashicorp/nomad.nix
       ./assignments/zerotier.nix
     ];
   };
@@ -237,7 +233,6 @@ inputs: {
 
       # Instance-specific system Overrides
       ./netflix-adaptations/oci-master/overrides.nix
-      ./netflix-adaptations/nomad.nix
 
       # Allowed Users
       ./id-10t.5/opc.nix
@@ -247,7 +242,6 @@ inputs: {
       ./assignments/sshd.nix
       ./assignments/ddclient.nix
       inputs.sched-reboot.nixosModules.default
-      ./assignments/hashicorp/nomad.nix
       ./assignments/zerotier.nix
     ];
   };
