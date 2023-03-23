@@ -17,4 +17,10 @@
       credential.helper = "store";
     };
   };
+
+  /* Choose one among these WMs:
+    - Awesome
+    - Bspwm
+    - XMonad
+  */
 }
