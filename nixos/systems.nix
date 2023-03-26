@@ -8,7 +8,6 @@ inputs: {
   ];*/
 
   rpinix = {
-    system = "aarch64-linux";
     includeInputs = [
       "nixos" "nixos-hardware"
       "impermanence"
@@ -49,7 +48,6 @@ inputs: {
   };
 
   rpi = {
-    system = "aarch64-linux";
     includeInputs = [
       "nixos" "nixos-hardware"
       "impermanence"
@@ -90,7 +88,6 @@ inputs: {
   };
 
   vbox-proxy = {
-    system = "x86_64-linux";
     includeInputs = [
       "nixos" "nixos-hardware"
       "impermanence"
@@ -122,7 +119,6 @@ inputs: {
   };
 
   vbox-test = {
-    system = "x86_64-linux";
     includeInputs = [
       "nixos" "nixos-hardware"
       "impermanence"
@@ -152,7 +148,6 @@ inputs: {
   };
 
   hyperv-test = {
-    system = "x86_64-linux";
     includeInputs = [
       "nixos" "nixos-hardware"
       "impermanence"
@@ -182,7 +177,6 @@ inputs: {
   };
 
   wslnix = {
-    system = "x86_64-linux";
     includeInputs = [
       "nixos" "nixos-wsl"
       "vscode-server-patch"
@@ -210,7 +204,6 @@ inputs: {
   };
 
   oci-master = {
-    system = "aarch64-linux";
     includeInputs = [
       "nixos" "nixos-hardware"
       "impermanence"

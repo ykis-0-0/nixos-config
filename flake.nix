@@ -57,7 +57,7 @@
       nixosConfigurations' = import ./nixos/systems.nix inputs;
       createSystem = inputs.nixos.lib.nixosSystem;
       mapper = host: config: createSystem {
-        inherit (config) system modules;
+        inherit (config) modules;
         specialArgs = let
           inherit (builtins) removeAttrs filter attrNames elem;
           inherit (config) includeInputs;
