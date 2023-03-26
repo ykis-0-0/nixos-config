@@ -2,7 +2,7 @@
 {
   home = {
     packages = with pkgs; [
-      jq yq-go
+      jq yq-go ripgrep
     ];
 
     shellAliases = {

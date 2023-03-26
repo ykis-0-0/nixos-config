@@ -2,6 +2,19 @@
 let
   hmlib = config.lib;
 in {
+  nix.registry.deploy-rs = {
+    from = {
+      type = "indirect";
+      id = "deploy-rs";
+    };
+
+    to = {
+      type = "github";
+      owner = "serokell";
+      repo = "deploy-rs";
+    };
+  };
+
   home = {
     packages = with pkgs; [
       git
