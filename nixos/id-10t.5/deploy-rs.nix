@@ -17,8 +17,7 @@
     description = "NixOS deployer";
     group = "nogroup";
 
-    # I don't want to do these, but I have run out of ideas...
-    extraGroups = [ "wheel" ];
+    # extraGroups = [];
     shell = pkgs.bash;
 
     hashedPassword = null;
