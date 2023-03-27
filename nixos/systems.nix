@@ -89,7 +89,6 @@ inputs: {
 
   vbox-proxy = {
     moduleArgs = [
-      "nixos-hardware"
       "impermanence"
       "secret-wrapper"
     ];
@@ -120,7 +119,6 @@ inputs: {
 
   vbox-test = {
     moduleArgs = [
-      "nixos-hardware"
       "impermanence"
       "secret-wrapper"
     ];
@@ -149,7 +147,6 @@ inputs: {
 
   hyperv-test = {
     moduleArgs = [
-      "nixos-hardware"
       "impermanence"
       "secret-wrapper"
     ];
@@ -205,7 +202,6 @@ inputs: {
 
   oci-master = {
     moduleArgs = [
-      "nixos-hardware"
       "impermanence"
       "secret-wrapper"
     ];
