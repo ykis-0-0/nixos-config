@@ -1,5 +1,5 @@
 inputs: {
-  /*includeInputs' = [
+  /*moduleArgs' = [
     "self"
     "nixos" "nixos-hardware" "nixos-wsl"
     "impermanence" "home-manager"
@@ -8,7 +8,7 @@ inputs: {
   ];*/
 
   rpinix = {
-    includeInputs = [
+    moduleArgs = [
       "nixos" "nixos-hardware"
       "impermanence"
       "vscode-server-patch" "argononed" "sched-reboot"
@@ -48,7 +48,7 @@ inputs: {
   };
 
   rpi = {
-    includeInputs = [
+    moduleArgs = [
       "nixos" "nixos-hardware"
       "impermanence"
       "vscode-server-patch" "argononed" "sched-reboot"
@@ -88,7 +88,7 @@ inputs: {
   };
 
   vbox-proxy = {
-    includeInputs = [
+    moduleArgs = [
       "nixos" "nixos-hardware"
       "impermanence"
       "secret-wrapper"
@@ -119,7 +119,7 @@ inputs: {
   };
 
   vbox-test = {
-    includeInputs = [
+    moduleArgs = [
       "nixos" "nixos-hardware"
       "impermanence"
       "secret-wrapper"
@@ -148,7 +148,7 @@ inputs: {
   };
 
   hyperv-test = {
-    includeInputs = [
+    moduleArgs = [
       "nixos" "nixos-hardware"
       "impermanence"
       "secret-wrapper"
@@ -177,7 +177,7 @@ inputs: {
   };
 
   wslnix = {
-    includeInputs = [
+    moduleArgs = [
       "nixos" "nixos-wsl"
       "vscode-server-patch"
       "secret-wrapper"
@@ -204,7 +204,7 @@ inputs: {
   };
 
   oci-master = {
-    includeInputs = [
+    moduleArgs = [
       "nixos" "nixos-hardware"
       "impermanence"
       "sched-reboot"

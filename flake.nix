@@ -60,10 +60,10 @@
         inherit (config) modules;
         specialArgs = let
           inherit (builtins) removeAttrs filter attrNames elem;
-          inherit (config) includeInputs;
+          inherit (config) moduleArgs;
         in
-          assert builtins.all (incl: elem incl (builtins.attrNames inputs)) includeInputs;
-          removeAttrs inputs (filter (input: ! elem input includeInputs) (attrNames inputs));
+          assert builtins.all (incl: elem incl (builtins.attrNames inputs)) moduleArgs;
+          removeAttrs inputs (filter (input: ! elem input moduleArgs) (attrNames inputs));
       };
     in builtins.mapAttrs mapper nixosConfigurations';
 
