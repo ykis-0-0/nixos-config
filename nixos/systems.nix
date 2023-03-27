@@ -1,19 +1,22 @@
 inputs: {
-  /*moduleArgs' = [
-    "self"
-    "nixpkgs" "nixos-hardware" "nixos-wsl"
-    "impermanence" "home-manager"
-    "vscode-server-patch" "nix-matlab" "argononed"
-    "secret-wrapper"
-  ];*/
+  /*moduleArgs' = {
+    inherit (inputs)
+    self
+    nixpkgs nixos-hardware nixos-wsl
+    impermanence home-manager
+    vscode-server-patch nix-matlab deploy-rs argononed npiperelay
+    secret-wrapper
+  };*/
 
   rpinix = {
-    moduleArgs = [
-      "nixos-hardware"
-      "impermanence"
-      "vscode-server-patch" "argononed"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      nixos-hardware
+      impermanence
+      vscode-server-patch argononed
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -48,12 +51,14 @@ inputs: {
   };
 
   rpi = {
-    moduleArgs = [
-      "nixos-hardware"
-      "impermanence"
-      "vscode-server-patch" "argononed"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      nixos-hardware
+      impermanence
+      vscode-server-patch argononed
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -88,10 +93,12 @@ inputs: {
   };
 
   vbox-proxy = {
-    moduleArgs = [
-      "impermanence"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      impermanence
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -118,10 +125,12 @@ inputs: {
   };
 
   vbox-test = {
-    moduleArgs = [
-      "impermanence"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      impermanence
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -146,10 +155,12 @@ inputs: {
   };
 
   hyperv-test = {
-    moduleArgs = [
-      "impermanence"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      impermanence
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -174,11 +185,13 @@ inputs: {
   };
 
   wslnix = {
-    moduleArgs = [
-      "nixos-wsl"
-      "vscode-server-patch"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      nixos-wsl
+      vscode-server-patch
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -201,10 +214,12 @@ inputs: {
   };
 
   oci-master = {
-    moduleArgs = [
-      "impermanence"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      impermanence
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix

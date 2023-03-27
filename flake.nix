@@ -58,12 +58,7 @@
       createSystem = inputs.nixpkgs.lib.nixosSystem;
       mapper = host: config: createSystem {
         inherit (config) modules;
-        specialArgs = let
-          inherit (builtins) removeAttrs filter attrNames elem;
-          inherit (config) moduleArgs;
-        in
-          assert builtins.all (incl: elem incl (builtins.attrNames inputs)) moduleArgs;
-          removeAttrs inputs (filter (input: ! elem input moduleArgs) (attrNames inputs));
+        specialArgs = config.moduleArgs;
       };
     in builtins.mapAttrs mapper nixosConfigurations';
 
