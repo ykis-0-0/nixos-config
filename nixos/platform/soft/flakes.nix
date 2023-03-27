@@ -1,10 +1,10 @@
-{ nixos, pkgs, ... }: {
+{ nixpkgs, pkgs, ... }: {
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
     nixPath = [
-      "nixpkgs=${nixos}"
+      "nixpkgs=${nixpkgs}"
       "nixos-config=/etc/nixos/configuration.nix"
     ];
 
@@ -14,7 +14,7 @@
           id = "nixpkgs";
           type = "indirect";
         };
-        flake = nixos;
+        flake = nixpkgs;
       };
     };
   };

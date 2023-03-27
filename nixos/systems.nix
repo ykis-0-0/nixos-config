@@ -1,7 +1,7 @@
 inputs: {
   /*moduleArgs' = [
     "self"
-    "nixos" "nixos-hardware" "nixos-wsl"
+    "nixpkgs" "nixos-hardware" "nixos-wsl"
     "impermanence" "home-manager"
     "vscode-server-patch" "nix-matlab" "argononed"
     "secret-wrapper"
