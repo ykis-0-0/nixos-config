@@ -62,6 +62,7 @@
           inherit (builtins) removeAttrs filter attrNames elem;
           inherit (config) includeInputs;
         in
+          assert builtins.all (incl: elem incl (builtins.attrNames inputs)) includeInputs;
           removeAttrs inputs (filter (input: ! elem input includeInputs) (attrNames inputs));
       };
     in builtins.mapAttrs mapper nixosConfigurations';
