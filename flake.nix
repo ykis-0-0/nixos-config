@@ -21,10 +21,12 @@
       url = "github:msteen/nixos-vscode-server/master";
       flake = false;
     };
+    /* # We aren't using MATLAB anytime soon i guess (probably forever lmao)
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    */
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
