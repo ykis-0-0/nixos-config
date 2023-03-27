@@ -215,9 +215,9 @@ inputs: {
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/oracle-cloud/default.nix
-      ./platform/0soft/oracle-cloud/storage-ol86.nix
-      # ./platform/0soft/oracle-cloud/storage-ubuntu2204.nix
+      ./platform/0soft/oci-a1flex/default.nix
+      ./platform/0soft/oci-a1flex/storage-ol86.nix
+      # ./platform/0soft/oci-a1flex/storage-ubuntu2204.nix
 
       # Firmware & Peripheral Choices
 
