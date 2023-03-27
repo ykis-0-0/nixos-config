@@ -9,7 +9,7 @@ inputs: {
 
   rpinix = {
     moduleArgs = [
-      "nixos" "nixos-hardware"
+      "nixos-hardware"
       "impermanence"
       "vscode-server-patch" "argononed"
       "secret-wrapper"
@@ -49,7 +49,7 @@ inputs: {
 
   rpi = {
     moduleArgs = [
-      "nixos" "nixos-hardware"
+      "nixos-hardware"
       "impermanence"
       "vscode-server-patch" "argononed"
       "secret-wrapper"
@@ -89,7 +89,7 @@ inputs: {
 
   vbox-proxy = {
     moduleArgs = [
-      "nixos" "nixos-hardware"
+      "nixos-hardware"
       "impermanence"
       "secret-wrapper"
     ];
@@ -120,7 +120,7 @@ inputs: {
 
   vbox-test = {
     moduleArgs = [
-      "nixos" "nixos-hardware"
+      "nixos-hardware"
       "impermanence"
       "secret-wrapper"
     ];
@@ -149,7 +149,7 @@ inputs: {
 
   hyperv-test = {
     moduleArgs = [
-      "nixos" "nixos-hardware"
+      "nixos-hardware"
       "impermanence"
       "secret-wrapper"
     ];
@@ -178,7 +178,7 @@ inputs: {
 
   wslnix = {
     moduleArgs = [
-      "nixos" "nixos-wsl"
+      "nixos-wsl"
       "vscode-server-patch"
       "secret-wrapper"
     ];
@@ -205,7 +205,7 @@ inputs: {
 
   oci-master = {
     moduleArgs = [
-      "nixos" "nixos-hardware"
+      "nixos-hardware"
       "impermanence"
       "secret-wrapper"
     ];
