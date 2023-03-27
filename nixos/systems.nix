@@ -1,19 +1,22 @@
 inputs: {
-  /*includeInputs' = [
-    "self"
-    "nixos" "nixos-hardware" "nixos-wsl"
-    "impermanence" "home-manager"
-    "vscode-server-patch" "nix-matlab" "argononed"
-    "secret-wrapper"
-  ];*/
+  /*moduleArgs' = {
+    inherit (inputs)
+    self
+    nixpkgs nixos-hardware nixos-wsl
+    impermanence home-manager
+    vscode-server-patch nix-matlab deploy-rs argononed npiperelay
+    secret-wrapper
+  };*/
 
   rpinix = {
-    includeInputs = [
-      "nixos" "nixos-hardware"
-      "impermanence"
-      "vscode-server-patch" "argononed" "sched-reboot"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      nixos-hardware
+      impermanence
+      vscode-server-patch argononed
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -48,12 +51,14 @@ inputs: {
   };
 
   rpi = {
-    includeInputs = [
-      "nixos" "nixos-hardware"
-      "impermanence"
-      "vscode-server-patch" "argononed" "sched-reboot"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      nixos-hardware
+      impermanence
+      vscode-server-patch argononed
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -88,11 +93,12 @@ inputs: {
   };
 
   vbox-proxy = {
-    includeInputs = [
-      "nixos" "nixos-hardware"
-      "impermanence"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      impermanence
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -119,11 +125,12 @@ inputs: {
   };
 
   vbox-test = {
-    includeInputs = [
-      "nixos" "nixos-hardware"
-      "impermanence"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      impermanence
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -148,11 +155,12 @@ inputs: {
   };
 
   hyperv-test = {
-    includeInputs = [
-      "nixos" "nixos-hardware"
-      "impermanence"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      impermanence
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -177,11 +185,13 @@ inputs: {
   };
 
   wslnix = {
-    includeInputs = [
-      "nixos" "nixos-wsl"
-      "vscode-server-patch"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      nixos-wsl
+      vscode-server-patch
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
@@ -204,20 +214,20 @@ inputs: {
   };
 
   oci-master = {
-    includeInputs = [
-      "nixos" "nixos-hardware"
-      "impermanence"
-      "sched-reboot"
-      "secret-wrapper"
-    ];
+    moduleArgs = {
+      inherit (inputs)
+      impermanence
+      secret-wrapper
+      ;
+    };
     modules = [
       # Common Base Configs
       ./platform/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/oracle-cloud/default.nix
-      ./platform/0soft/oracle-cloud/storage-ol86.nix
-      # ./platform/0soft/oracle-cloud/storage-ubuntu2204.nix
+      ./platform/0soft/oci-a1flex/default.nix
+      ./platform/0soft/oci-a1flex/storage-ol86.nix
+      # ./platform/0soft/oci-a1flex/storage-ubuntu2204.nix
 
       # Firmware & Peripheral Choices
 

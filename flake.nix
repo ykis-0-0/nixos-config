@@ -3,16 +3,16 @@
 
   inputs = {
     # region (Semi-)Endorsed Modules
-    nixos.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
       # flake = false;
     };
     # endregion
@@ -23,11 +23,11 @@
     };
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab/master";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # endregion
     # region Homebrew
@@ -37,7 +37,7 @@
     };
     npiperelay = {
       url = "github:ykis-0-0/npiperelay.nix";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # secret-wrapper: to be supplied on target hosts
     secret-wrapper.follows = "";
@@ -55,14 +55,10 @@
   in {
     nixosConfigurations = let
       nixosConfigurations' = import ./nixos/systems.nix inputs;
-      createSystem = inputs.nixos.lib.nixosSystem;
+      createSystem = inputs.nixpkgs.lib.nixosSystem;
       mapper = host: config: createSystem {
         inherit (config) modules;
-        specialArgs = let
-          inherit (builtins) removeAttrs filter attrNames elem;
-          inherit (config) includeInputs;
-        in
-          removeAttrs inputs (filter (input: ! elem input includeInputs) (attrNames inputs));
+        specialArgs = config.moduleArgs;
       };
     in builtins.mapAttrs mapper nixosConfigurations';
 

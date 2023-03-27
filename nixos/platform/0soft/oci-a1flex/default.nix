@@ -1,8 +1,8 @@
-{ config, lib, pkgs, nixos, ... }: {
+{ config, lib, pkgs, modulesPath, ... }: {
   imports = [
     ./configuration.nix
     ./hardware.nix
-    "${nixos}/nixos/modules/profiles/qemu-guest.nix"
+    "${modulesPath}/profiles/qemu-guest.nix"
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
