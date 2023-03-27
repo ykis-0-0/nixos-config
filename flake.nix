@@ -88,7 +88,7 @@
       };
       mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig' builders);
       homeConfigurations' = import ./nixos/homes.nix (let
-          getSystem = name: conf: conf.pkgs.stdenv.hostPlatform.system;
+          getSystem = name: conf: conf.config.nixpkgs.hostPlatform.system;
         in inputs // {
           systems' = builtins.mapAttrs getSystem self.nixosConfigurations;
         }
