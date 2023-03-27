@@ -11,7 +11,7 @@ inputs: {
     moduleArgs = [
       "nixos" "nixos-hardware"
       "impermanence"
-      "vscode-server-patch" "argononed" "sched-reboot"
+      "vscode-server-patch" "argononed"
       "secret-wrapper"
     ];
     modules = [
@@ -51,7 +51,7 @@ inputs: {
     moduleArgs = [
       "nixos" "nixos-hardware"
       "impermanence"
-      "vscode-server-patch" "argononed" "sched-reboot"
+      "vscode-server-patch" "argononed"
       "secret-wrapper"
     ];
     modules = [
@@ -207,7 +207,6 @@ inputs: {
     moduleArgs = [
       "nixos" "nixos-hardware"
       "impermanence"
-      "sched-reboot"
       "secret-wrapper"
     ];
     modules = [
