@@ -1,10 +1,11 @@
-{ nixpkgs, pkgs, ... }: {
+{ config, lib, pkgs, nixpkgs, ... }: {
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
     nixPath = [
-      "nixpkgs=${nixpkgs}"
+      # Allowed since https://github.com/NixOS/nix/issues/7026
+      "nixpkgs=flake:nixpkgs"
       "nixos-config=/etc/nixos/configuration.nix"
     ];
 

@@ -60,7 +60,9 @@
       createSystem = inputs.nixpkgs.lib.nixosSystem;
       mapper = host: config: createSystem {
         inherit (config) modules;
-        specialArgs = config.moduleArgs;
+        specialArgs = config.moduleArgs // {
+          inherit (inputs) nixpkgs; # >:(
+        };
       };
     in builtins.mapAttrs mapper nixosConfigurations';
 
