@@ -18,7 +18,8 @@
       includePath = false;
     };
 
-    docker-desktop.enable = true;
+    # BUG https://github.com/nix-community/NixOS-WSL/issues/235
+    # docker-desktop.enable = true;
   };
 
   users.users.root.hashedPassword = null;
