@@ -6,11 +6,9 @@ inputs: [
       ./home-manager/base.nix
       ./home-manager/nixos/base.nix
       ./home-manager/nixos/hosts/rpinix.nix
-      "${inputs.vscode-server-patch}/modules/vscode-server/home.nix"
+      inputs.vscode-server-patch.nixosModules.home
     ];
-    extraSpecialArgs = {
-      vscode-srv = inputs.vscode-server-patch;
-    };
+    extraSpecialArgs = {};
   }
   {
     username = "nixos";
@@ -19,7 +17,7 @@ inputs: [
       ./home-manager/base.nix
       ./home-manager/nixos/base.nix
       ./home-manager/nixos/hosts/wslnix.nix
-      "${inputs.vscode-server-patch}/modules/vscode-server/home.nix"
+      inputs.vscode-server-patch.nixosModules.home
     ];
     extraSpecialArgs = {
       npiperelay = inputs.npiperelay.packages.${inputs.systems'.wslnix}.default;

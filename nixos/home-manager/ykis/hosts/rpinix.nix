@@ -1,4 +1,4 @@
-{ pkgs, vscode-srv, ... }:
+{ config, lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
     asciinema deno
