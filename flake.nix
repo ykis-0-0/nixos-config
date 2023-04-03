@@ -19,7 +19,7 @@
     # region Thrid-party Modules
     vscode-server-patch = {
       url = "github:msteen/nixos-vscode-server/master";
-      flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     /* # We aren't using MATLAB anytime soon i guess (probably forever lmao)
     nix-matlab = {
