@@ -23,4 +23,20 @@
       credential.helper = "store";
     };
   };
+
+  programs.ssh = {
+    enable = true;
+    controlMaster = "autoask";
+
+    matchBlocks = {
+      "github.com" = {
+        hostname = "github.com";
+        user = "git";
+        extraOptions = {
+          StrictHostKeyChecking = "no";
+          UserKnownHostsFile = "/dev/null";
+        };
+      };
+    };
+  };
 }
