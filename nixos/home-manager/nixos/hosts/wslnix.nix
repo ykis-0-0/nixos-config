@@ -3,7 +3,7 @@ let
   hmlib = config.lib;
 in {
 
-  import = [
+  imports = [
     ./wslnix/keeagent.nix # KeeAgent NPipeRelay runner
   ];
 
