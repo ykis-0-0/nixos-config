@@ -31,6 +31,11 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    manix = {
+      url = "github:kulabun/manix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     # endregion
     # region Homebrew
     argononed = {
