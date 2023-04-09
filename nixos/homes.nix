@@ -21,6 +21,7 @@ inputs: [
     ];
     extraSpecialArgs = {
       npiperelay = inputs.npiperelay.packages.${inputs.systems'.wslnix}.default;
+      manix = inputs.manix.packages.${inputs.systems'.wslnix}.manix;
     };
   }
 ]

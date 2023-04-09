@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, manix, ... }:
 let
   hmlib = config.lib;
 in {
@@ -25,6 +25,7 @@ in {
       wget
       git
       rnix-lsp nil
+      manix
     ];
 
     file = {
