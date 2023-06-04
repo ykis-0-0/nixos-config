@@ -15,12 +15,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       # flake = false;
     };
-    # endregion
-    # region Thrid-party Modules
     vscode-server-patch = {
-      url = "github:msteen/nixos-vscode-server/master";
+      url = "github:nix-community/nixos-vscode-server/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # endregion
+    # region Thrid-party Modules
     /* # We aren't using MATLAB anytime soon i guess (probably forever lmao)
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab/master";
