@@ -3,7 +3,7 @@ let
   secrets = import "${secret-wrapper}/secrets.nix";
 in {
   services.ddclient = {
-    enable = false;
+    enable = true;
     interval = "12 hours";
     protocol = "noip";
     # server = "dynupdate.no-ip.com" # default

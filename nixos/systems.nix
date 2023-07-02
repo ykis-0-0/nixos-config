@@ -125,7 +125,6 @@ inputs: {
     moduleArgs = {
       inherit (inputs)
       impermanence
-      secret-wrapper
       ;
     };
     modules = [
@@ -151,7 +150,6 @@ inputs: {
 
       # Modules & Role Assignments
       ./assignments/sshd.nix
-      ./assignments/ddclient.nix
       inputs.sched-reboot.nixosModules.default
       ./assignments/zerotier.nix
     ];
