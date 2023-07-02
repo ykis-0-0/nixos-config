@@ -57,4 +57,20 @@ in {
       };
     };
   });
+
+  /*
+  oci-agent = mkDeploy self.nixosConfigurations.oci-agent ({ baseOs, d-lib }: {
+    hostname = "";
+    sshUser = "deploy-rs";
+
+    profilesOrder = [ "system" ];
+
+    profiles = {
+      system = {
+        user = "root";
+        path = d-lib.activate.nixos baseOs;
+      };
+    };
+  });
+  */
 }
