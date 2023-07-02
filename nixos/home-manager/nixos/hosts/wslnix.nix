@@ -41,4 +41,25 @@ in {
   };
 
   programs.bash.enable = true; # HACK Temporary fix, should be replaced by something like fish soon?
+
+  # Introduce delta
+  programs.git = {
+    delta = {
+      enable = true;
+      options = {
+        navigate = true;
+        light = false;
+
+        line-numbers = true;
+      };
+    };
+
+    extraConfig = {
+      merge.conflictstyle = "diff3";
+      diff = {
+        colorMoved = "dimmed-zebra";
+        colorMovedWS = "allow-indentation-change";
+      };
+    };
+  };
 }
