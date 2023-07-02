@@ -13,10 +13,13 @@
   hardware = {
     pulseaudio.enable = true;
 
+    /*
+    # BUG THESE ALL BROKEN
     raspberry-pi."4" = {
       audio.enable = true;
       fkms-3d.enable = true;
     };
+    */
 
     opengl = {
       enable = true;
