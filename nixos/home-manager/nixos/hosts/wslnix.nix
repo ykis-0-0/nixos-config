@@ -40,7 +40,10 @@ in {
     vscode-server.enable = true;
   };
 
-  programs.bash.enable = true; # HACK Temporary fix, should be replaced by something like fish soon?
+  programs.bash = {
+    enable = true; # HACK Temporary fix, should be replaced by something like fish soon?
+    historyControl = [ "ignorespace" "erasedups" ];
+  };
 
   # Introduce delta
   programs.git = {
