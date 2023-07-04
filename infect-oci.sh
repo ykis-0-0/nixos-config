@@ -210,9 +210,10 @@ SKIPPED
 
   mv -v /boot /boot.bak || { cp -a /boot /boot.bak ; rm -rf /boot/* ; umount /boot ; }
   if isEFI; then
-    mkdir -p /boot
-    mount "$esp" /boot
-    find /boot -depth ! -path /boot -exec rm -rf {} +
+    INFECT_EFI_PATH=${INFECT_EFI_PATH:-/boot}
+    mkdir -p $INFECT_EFI_PATH
+    mount "$esp" $INFECT_EFI_PATH
+    find $INFECT_EFI_PATH -depth ! -path $INFECT_EFI_PATH -exec rm -rf {} +
   fi
   /nix/var/nix/profiles/system/bin/switch-to-configuration boot
   # endregion
