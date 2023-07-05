@@ -154,4 +154,38 @@ inputs: {
       ./assignments/zerotier.nix
     ];
   };
+
+  oci-agent = {
+    moduleArgs = {
+      inherit (inputs)
+      impermanence
+      ;
+    };
+    modules = [
+      # Common Base Configs
+      ./platform/basic.nix
+
+      # Hardware Platform
+      ./platform/0soft/oci-a1flex/default.nix
+      ./platform/0soft/oci-a1flex/storage-ol86.nix
+      # ./platform/0soft/oci-a1flex/storage-ubuntu2204.nix
+
+      # Firmware & Peripheral Choices
+
+      # OS Configurations
+      ./platform/soft/flakes.nix
+
+      # Instance-specific system Overrides
+      ./netflix-adaptations/oci-agent/overrides.nix
+
+      # Allowed Users
+      ./id-10t.5/opc.nix
+      ./id-10t.5/deploy-rs.nix
+
+      # Modules & Role Assignments
+      ./assignments/sshd.nix
+      inputs.sched-reboot.nixosModules.default
+      ./assignments/zerotier.nix
+    ];
+  };
 }
