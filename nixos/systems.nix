@@ -176,7 +176,7 @@ inputs: {
       ./platform/soft/flakes.nix
 
       # Instance-specific system Overrides
-      ./netflix-adaptations/oci-support/overrides.nix
+      ./netflix-adaptations/oci-agent/overrides.nix
 
       # Allowed Users
       ./id-10t.5/opc.nix
