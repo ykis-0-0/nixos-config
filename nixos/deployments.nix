@@ -10,18 +10,12 @@ in {
     hostname = "rpinix.local";
     sshUser = "deploy-rs";
 
-    profilesOrder = [ "system" /*"nixos"*/ ];
-
     profiles = {
       system = {
         user = "root";
         path = d-lib.activate.nixos baseOs;
       };
 
-      /*nixos = {
-        user = "nixos";
-        path = d-lib.activate.home-manager self.homeConfigurations."nixos@rpi"; # TODO create
-      };*/
     };
   });
 
@@ -29,26 +23,20 @@ in {
     hostname = "rpi.local";
     sshUser = "deploy-rs";
 
-    profilesOrder = [ "system" /*"nixos"*/ ];
-
     profiles = {
       system = {
         user = "root";
         path = d-lib.activate.nixos baseOs;
       };
 
-      /*nixos = {
-        user = "nixos";
-        path = d-lib.activate.home-manager self.homeConfigurations."nixos@rpinix";
-      };*/
     };
+  } // {
+    profiles = {}; # Temporary node exclusion
   });
 
   oci-master = mkDeploy self.nixosConfigurations.oci-master ({ baseOs, d-lib }: {
-    hostname = "ykis-host.ddns.net";
+    hostname = "ykis-ocimaster.ddns.net";
     sshUser = "deploy-rs";
-
-    profilesOrder = [ "system" ];
 
     profiles = {
       system = {
@@ -58,12 +46,9 @@ in {
     };
   });
 
-  /*
   oci-agent = mkDeploy self.nixosConfigurations.oci-agent ({ baseOs, d-lib }: {
-    hostname = "";
+    hostname = "ykis-ociagent.ddns.net";
     sshUser = "deploy-rs";
-
-    profilesOrder = [ "system" ];
 
     profiles = {
       system = {
@@ -72,5 +57,4 @@ in {
       };
     };
   });
-  */
 }
