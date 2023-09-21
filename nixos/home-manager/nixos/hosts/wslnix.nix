@@ -34,6 +34,10 @@ in {
         recursive = false;
       };
     };
+
+    shellAliases = {
+      nixssh = ''NIX_SSHOPTS="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" nix '';
+    };
   };
 
   services = {
