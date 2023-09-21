@@ -1,4 +1,4 @@
-{ impermanence, ... }: {
+{ config, lib, pkgs, impermanence, ... }: {
 
   maybePersistence = {
     persistPlane = {
@@ -11,7 +11,7 @@
     };
 
     elevatedPlane = {
-      enable = true;
+      enable = lib.mkDefault true;
       mountOptions = [ "noatime" "size=3G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
     };
 
@@ -37,6 +37,7 @@
         "/var/log"
         "/root"
         "/home"
+        "/tmp"
       ];
       files = [
         "/etc/machine-id"
@@ -47,4 +48,6 @@
       ];
     };
   };
+
+  boot.tmp.cleanOnBoot = lib.mkDefault true;
 }
