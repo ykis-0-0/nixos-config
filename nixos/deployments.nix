@@ -30,6 +30,8 @@ in {
       };
 
     };
+  } // {
+    profiles = {}; # Temporary node exclusion
   });
 
   oci-master = mkDeploy self.nixosConfigurations.oci-master ({ baseOs, d-lib }: {
