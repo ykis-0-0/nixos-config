@@ -10,12 +10,9 @@ in {
     hostname = "rpinix.local";
     sshUser = "deploy-rs";
 
-    profiles = {
-      system = {
-        user = "root";
-        path = d-lib.activate.nixos baseOs;
-      };
-
+    profiles.system = {
+      user = "root";
+      path = d-lib.activate.nixos baseOs;
     };
   });
 
@@ -23,12 +20,9 @@ in {
     hostname = "rpi.local";
     sshUser = "deploy-rs";
 
-    profiles = {
-      system = {
-        user = "root";
-        path = d-lib.activate.nixos baseOs;
-      };
-
+    profiles.system = {
+      user = "root";
+      path = d-lib.activate.nixos baseOs;
     };
   } // {
     profiles = {}; # Temporary node exclusion
@@ -38,11 +32,9 @@ in {
     hostname = "ykis-ocimaster.ddns.net";
     sshUser = "deploy-rs";
 
-    profiles = {
-      system = {
-        user = "root";
-        path = d-lib.activate.nixos baseOs;
-      };
+    profiles.system = {
+      user = "root";
+      path = d-lib.activate.nixos baseOs;
     };
   });
 
@@ -50,11 +42,9 @@ in {
     hostname = "ykis-ociagent.ddns.net";
     sshUser = "deploy-rs";
 
-    profiles = {
-      system = {
-        user = "root";
-        path = d-lib.activate.nixos baseOs;
-      };
+    profiles.system = {
+      user = "root";
+      path = d-lib.activate.nixos baseOs;
     };
   });
 }
