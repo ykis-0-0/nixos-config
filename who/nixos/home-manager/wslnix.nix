@@ -3,10 +3,6 @@ let
   hmlib = config.lib;
 in {
 
-  imports = [
-    ./wslnix/keeagent.nix # KeeAgent NPipeRelay runner
-  ];
-
   nix.registry.deploy-rs = {
     from = {
       type = "indirect";

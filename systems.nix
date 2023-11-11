@@ -19,34 +19,34 @@ inputs: {
     };
     modules = [
       # Common Base Configs
-      ./platform/basic.nix
+      ./where/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/raspberrypi/default.nix
-      ./platform/0soft/raspberrypi/storage.nix
+      ./where/raspberrypi/default.nix
+      ./where/raspberrypi/storage.nix
 
       # Firmware & Peripheral Choices
-      ./platform/5soft/impermanence/default.nix
-      ./platform/5soft/argononed.nix
-      ./platform/5soft/yubikey.nix
+      ./how/impermanence/default.nix
+      ./what/argononed.nix
+      ./what/yubikey.nix
 
       # OS Configurations
-      # ./platform/soft/passwdmgr/default.nix
-      ./platform/soft/flakes.nix
-      ./platform/soft/avahi.nix
+      # ./how/passwdmgr/default.nix
+      ./what/flakes.nix
+      ./what/avahi.nix
 
       # Instance-specific system Overrides
-      ./netflix-adaptations/rpinix/overrides.nix
+      ./when/rpinix.nix
 
       # Allowed Users
-      ./id-10t.5/nixos.nix
-      ./id-10t.5/ykis.nix
-      ./id-10t.5/deploy-rs.nix
+      ./who/nixos/nixos.nix
+      ./who/ykis/nixos.nix
+      ./who/deploy-rs/nixos.nix
 
       # Modules & Role Assignments
-      ./assignments/sshd.nix
+      ./what/sshd.nix
       inputs.sched-reboot.nixosModules.default
-      ./assignments/zerotier.nix
+      ./what/zerotier.nix
     ];
   };
 
@@ -61,34 +61,34 @@ inputs: {
     };
     modules = [
       # Common Base Configs
-      ./platform/basic.nix
+      ./where/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/raspberrypi/default.nix
-      ./platform/0soft/raspberrypi/storage.nix
+      ./where/raspberrypi/default.nix
+      ./where/raspberrypi/storage.nix
 
       # Firmware & Peripheral Choices
-      ./platform/5soft/impermanence/default.nix
-      ./platform/5soft/argononed.nix
-      ./platform/5soft/yubikey.nix
+      ./how/impermanence/default.nix
+      ./what/argononed.nix
+      ./what/yubikey.nix
 
       # OS Configurations
-      # ./platform/soft/passwdmgr/default.nix
-      ./platform/soft/flakes.nix
-      ./platform/soft/avahi.nix
+      # ./how/passwdmgr/default.nix
+      ./what/flakes.nix
+      ./what/avahi.nix
 
       # Instance-specific system Overrides
-      ./netflix-adaptations/rpi/overrides.nix
+      ./when/rpi.nix
 
       # Allowed Users
-      ./id-10t.5/nixos.nix
-      ./id-10t.5/ykis.nix
-      ./id-10t.5/deploy-rs.nix
+      ./who/nixos/nixos.nix
+      ./who/ykis/nixos.nix
+      ./who/deploy-rs/nixos.nix
 
       # Modules & Role Assignments
-      ./assignments/sshd.nix
+      ./what/sshd.nix
       inputs.sched-reboot.nixosModules.default
-      ./assignments/zerotier.nix
+      ./what/zerotier.nix
     ];
   };
 
@@ -102,18 +102,18 @@ inputs: {
     };
     modules = [
       # Common Base Configs
-      ./platform/basic.nix
+      ./where/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/wsl/default.nix
+      ./where/wsl/default.nix
 
       # Firmware & Peripheral Choices
 
       # OS Configurations
-      ./platform/soft/flakes.nix
+      ./what/flakes.nix
 
       # Instance-specific system Overrides
-      ./netflix-adaptations/wslnix/overrides.nix
+      ./when/wslnix.nix
 
       # Allowed Users
 
@@ -129,29 +129,29 @@ inputs: {
     };
     modules = [
       # Common Base Configs
-      ./platform/basic.nix
+      ./where/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/oci-a1flex/default.nix
-      ./platform/0soft/oci-a1flex/storage-ol86.nix
-      # ./platform/0soft/oci-a1flex/storage-ubuntu2204.nix
+      ./where/oci-a1flex/default.nix
+      ./where/oci-a1flex/storage-ol86.nix
+      # ./where/oci-a1flex/storage-ubuntu2204.nix
 
       # Firmware & Peripheral Choices
 
       # OS Configurations
-      ./platform/soft/flakes.nix
+      ./what/flakes.nix
 
       # Instance-specific system Overrides
-      ./netflix-adaptations/oci-master/overrides.nix
+      ./when/oci-master.nix
 
       # Allowed Users
-      ./id-10t.5/opc.nix
-      ./id-10t.5/deploy-rs.nix
+      ./who/opc/nixos.nix
+      ./who/deploy-rs/nixos.nix
 
       # Modules & Role Assignments
-      ./assignments/sshd.nix
+      ./what/sshd.nix
       inputs.sched-reboot.nixosModules.default
-      ./assignments/zerotier.nix
+      ./what/zerotier.nix
     ];
   };
 
@@ -163,29 +163,29 @@ inputs: {
     };
     modules = [
       # Common Base Configs
-      ./platform/basic.nix
+      ./where/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/oci-a1flex/default.nix
-      ./platform/0soft/oci-a1flex/storage-ol86.nix
-      # ./platform/0soft/oci-a1flex/storage-ubuntu2204.nix
+      ./where/oci-a1flex/default.nix
+      ./where/oci-a1flex/storage-ol86.nix
+      # ./where/oci-a1flex/storage-ubuntu2204.nix
 
       # Firmware & Peripheral Choices
 
       # OS Configurations
-      ./platform/soft/flakes.nix
+      ./what/flakes.nix
 
       # Instance-specific system Overrides
-      ./netflix-adaptations/oci-agent/overrides.nix
+      ./when/oci-agent.nix
 
       # Allowed Users
-      ./id-10t.5/opc.nix
-      ./id-10t.5/deploy-rs.nix
+      ./who/opc/nixos.nix
+      ./who/deploy-rs/nixos.nix
 
       # Modules & Role Assignments
-      ./assignments/sshd.nix
+      ./what/sshd.nix
       inputs.sched-reboot.nixosModules.default
-      ./assignments/zerotier.nix
+      ./what/zerotier.nix
     ];
   };
 }

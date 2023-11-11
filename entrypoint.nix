@@ -3,12 +3,12 @@
   # HACK revert to normal flake input definition whether possible,
   # specifically when https://github.com/NixOS/nix/issues/6352 has merged
   inputs = inputs' // {
-    sched-reboot.nixosModules.default = ./modules/sched-reboot/default.nix;
+    sched-reboot.nixosModules.default = import ./how/sched-reboot/default.nix;
   };
   #endregion
 in {
   nixosConfigurations = let
-    nixosConfigurations' = import ./nixos/systems.nix inputs;
+    nixosConfigurations' = import ./systems.nix inputs;
     createSystem = inputs.nixpkgs.lib.nixosSystem;
     mapper = host: config: createSystem {
       inherit (config) modules;
@@ -41,7 +41,7 @@ in {
       };
     };
     mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig' builders);
-    homeConfigurations' = import ./nixos/homes.nix (let
+    homeConfigurations' = import ./homes.nix (let
         getSystem = name: conf: conf.config.nixpkgs.hostPlatform.system;
       in inputs // {
         systems' = builtins.mapAttrs getSystem self.nixosConfigurations;
@@ -50,7 +50,7 @@ in {
   in mkHomeConfigurations homeConfigurations';
 
   deploy = {
-    nodes = import ./nixos/deployments.nix inputs;
+    nodes = import ./deployments.nix inputs;
     remoteBuild = true;
   };
 }

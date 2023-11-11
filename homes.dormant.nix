@@ -4,9 +4,9 @@ inputs: [
     username = "nixos";
     host = "rpinix";
     modules = [
-      ./home-manager/base.nix
-      ./home-manager/nixos/base.nix
-      ./home-manager/nixos/hosts/rpinix.nix
+      ./who/hm-base.nix
+      ./who/nixos/home-manager/default.nix
+      ./who/nixos/home-manager/rpinix.nix
       inputs.vscode-server-patch.nixosModules.home
     ];
     extraSpecialArgs = {};
@@ -15,9 +15,9 @@ inputs: [
     username = "nixos";
     host = "vbox-proxy";
     modules = [
-      ./home-manager/base.nix
-      ./home-manager/nixos/base.nix
-      ./home-manager/nixos/hosts/vbox-proxy.nix
+      ./who/hm-base.nix
+      ./who/nixos/home-manager/default.nix
+      ./who/nixos/home-manager/vbox-proxy.nix
     ];
     extraSpecialArgs = {
       inherit (inputs) nix-matlab;
@@ -27,9 +27,9 @@ inputs: [
     username = "nixos";
     host = "vbox-test";
     modules = [
-      ./home-manager/base.nix
-      ./home-manager/nixos/base.nix
-      ./home-manager/nixos/hosts/vbox-test.nix
+      ./who/hm-base.nix
+      ./who/nixos/home-manager/default.nix
+      ./who/nixos/home-manager/vbox-test.nix
     ];
     extraSpecialArgs = {};
   }

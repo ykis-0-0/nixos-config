@@ -9,26 +9,26 @@ inputs: {
     };
     modules = [
       # Common Base Configs
-      ./platform/basic.nix
+      ./where/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/virtualbox/default.nix
-      ./platform/0soft/virtualbox/storage.nix
+      ./where/virtualbox/default.nix
+      ./where/virtualbox/storage.nix
 
       # Firmware & Peripheral Choices
-      # ./platform/5soft/pipewire.nix
+      # ./what/pipewire.nix
 
       # OS Configurations
-      ./platform/soft/flakes.nix
+      ./what/flakes.nix
 
       # Instance-specific system Overrides
-      ./netflix-adaptations/vbox-proxy/overrides.nix
+      ./when/vbox-proxy.nix
 
       # Allowed Users
-      ./id-10t.5/nixos.nix
+      ./who/nixos/nixos.nix
 
       # Modules & Role Assignments
-      ./assignments/gui/awesome.nix
+      ./what/gui/awesome.nix
     ];
   };
 
@@ -41,22 +41,22 @@ inputs: {
     };
     modules = [
       # Common Base Configs
-      ./platform/basic.nix
+      ./where/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/virtualbox/default.nix
-      ./platform/0soft/virtualbox/storage.nix
+      ./where/virtualbox/default.nix
+      ./where/virtualbox/storage.nix
 
       # Firmware & Peripheral Choices
 
       # OS Configurations
-      ./platform/soft/flakes.nix
+      ./what/flakes.nix
 
       # Instance-specific system Overrides
-      ./netflix-adaptations/vbox-test/overrides.nix
+      ./when/vbox-test.nix
 
       # Allowed Users
-      ./id-10t.5/nixos.nix
+      ./who/nixos/nixos.nix
 
       # Modules & Role Assignments
     ];
@@ -71,22 +71,22 @@ inputs: {
     };
     modules = [
       # Common Base Configs
-      ./platform/basic.nix
+      ./where/basic.nix
 
       # Hardware Platform
-      ./platform/0soft/hyperv/default.nix
-      ./platform/0soft/hyperv/storage.nix
+      ./where/hyperv/default.nix
+      ./where/hyperv/storage.nix
 
       # Firmware & Peripheral Choices
 
       # OS Configurations
-      ./platform/soft/flakes.nix
+      ./what/flakes.nix
 
       # Instance-specific system Overrides
-      ./netflix-adaptations/hyperv-test/overrides.nix
+      ./when/hyperv-test.nix
 
       # Allowed Users
-      ./id-10t.5/nixos.nix
+      ./who/nixos/nixos.nix
 
       # Modules & Role Assignments
     ];
