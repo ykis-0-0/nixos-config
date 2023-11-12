@@ -19,9 +19,9 @@ in {
   home = {
     packages = with pkgs; [
       wget
-      git
       rnix-lsp nil
       manix
+      dogdns
     ];
 
     file = {

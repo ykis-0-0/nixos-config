@@ -40,7 +40,6 @@ inputs: {
 
       # Allowed Users
       ./who/nixos/nixos.nix
-      ./who/ykis/nixos.nix
       ./who/deploy-rs/nixos.nix
 
       # Modules & Role Assignments
@@ -82,7 +81,6 @@ inputs: {
 
       # Allowed Users
       ./who/nixos/nixos.nix
-      ./who/ykis/nixos.nix
       ./who/deploy-rs/nixos.nix
 
       # Modules & Role Assignments
