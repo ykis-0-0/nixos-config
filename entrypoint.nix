@@ -3,12 +3,12 @@
   # HACK revert to normal flake input definition whether possible,
   # specifically when https://github.com/NixOS/nix/issues/6352 has merged
   inputs = inputs' // {
-    sched-reboot.nixosModules.default = ./modules/sched-reboot/default.nix;
+    sched-reboot.nixosModules.default = import ./how/sched-reboot/default.nix;
   };
   #endregion
 in {
   nixosConfigurations = let
-    nixosConfigurations' = import ./nixos/systems.nix inputs;
+    nixosConfigurations' = import ./systems.nix inputs;
     createSystem = inputs.nixpkgs.lib.nixosSystem;
     mapper = host: config: createSystem {
       inherit (config) modules;
@@ -41,7 +41,7 @@ in {
       };
     };
     mkHomeConfigurations = builders: builtins.listToAttrs (map mkHomeConfig' builders);
-    homeConfigurations' = import ./nixos/homes.nix (let
+    homeConfigurations' = import ./homes.nix (let
         getSystem = name: conf: conf.config.nixpkgs.hostPlatform.system;
       in inputs // {
         systems' = builtins.mapAttrs getSystem self.nixosConfigurations;
@@ -49,8 +49,20 @@ in {
     );
   in mkHomeConfigurations homeConfigurations';
 
+  checks = let
+    mapAttrsToList = let # Thanks https://github.com/NixOS/nixpkgs/blob/master/lib/attrsets.nix#L518 <3
+      inherit (builtins) map attrNames;
+      applier = fn: attrs: key: fn key attrs.${key};
+    in
+      fn: attrs: map (applier fn attrs) (attrNames attrs);
+    nameValuePair = name: value: { inherit name value; };
+
+    hmCfgPerSys = builtins.groupBy (nvp: nvp.value.pkgs.hostPlatform.system) (mapAttrsToList (nameValuePair) self.homeConfigurations);
+    hmChecks = builtins.mapAttrs (_: attrs: builtins.mapAttrs (_: cfg: cfg.activationPackage) (builtins.listToAttrs attrs)) hmCfgPerSys;
+  in hmChecks // {};
+
   deploy = {
-    nodes = import ./nixos/deployments.nix inputs;
+    nodes = import ./deployments.nix inputs;
     remoteBuild = true;
   };
 }

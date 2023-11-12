@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     # Empty as of now
+    # eww
   ];
 
   xsession = {

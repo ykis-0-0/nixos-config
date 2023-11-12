@@ -1,5 +1,5 @@
 {
-  description = "System Configuration(s)";
+  description = "System Configurations";
 
   inputs = {
     # region (Semi-)Endorsed Modules

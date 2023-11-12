@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   /*
-    The user used to deploy changes in NixOS Infrastructral Configurations
+    The service user for deployment of NixOS Infrastructral Configurations
   */
   users.users.deploy-rs = {
     isSystemUser = true;
@@ -22,8 +22,10 @@
 
     hashedPassword = null;
 
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINb9yp34P4vMnvrWOKp10hOtunhuhiLtFEjQqXt2dofG NixOS Deployment Key"
+    openssh.authorizedKeys.keys = let
+      pubkeys = import ../ssh-pubkeys.nix;
+    in with pubkeys; [
+      deployer
     ];
   };
 

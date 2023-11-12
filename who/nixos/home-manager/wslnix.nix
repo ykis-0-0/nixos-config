@@ -3,10 +3,6 @@ let
   hmlib = config.lib;
 in {
 
-  imports = [
-    ./wslnix/keeagent.nix # KeeAgent NPipeRelay runner
-  ];
-
   nix.registry.deploy-rs = {
     from = {
       type = "indirect";
@@ -23,9 +19,9 @@ in {
   home = {
     packages = with pkgs; [
       wget
-      git
       rnix-lsp nil
       manix
+      dogdns
     ];
 
     file = {
