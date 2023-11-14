@@ -1,5 +1,5 @@
 { self, deploy-rs, ... } @ inputs: let
-  getArch = config: config.pkgs.stdenv.hostPlatform.system;
+  getArch = config: config.pkgs.hostPlatform.system;
   mkDeploy = baseOs: deployer: let
     d-lib = deploy-rs.lib.${getArch baseOs};
   in deployer {
