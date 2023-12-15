@@ -6,7 +6,7 @@
     ];
 
     shellAliases = {
-      la = "la -lhAF";
+      la = "ls -lhAF ";
     };
   };
 

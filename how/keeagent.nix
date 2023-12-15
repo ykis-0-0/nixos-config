@@ -15,6 +15,9 @@
 
     Service = {
       Type = "simple";
+      Environment = [
+        "PATH=${pkgs.systemd}/bin:${npiperelay}/bin"
+      ];
       ExecStart = let
         nprArgs = builtins.concatStringsSep " " [
           "-ei" # Terminate on EOF from stdin
@@ -23,12 +26,12 @@
           "-s" # Send 0-byte message on EOF from stdin
           "-v" # Verbose output on stderr
         ];
-        nprCmdline = "${npiperelay}/bin/npiperelay.exe ${nprArgs} //./pipe/openssh-ssh-agent";
+        nprCmdline = "npiperelay.exe ${nprArgs} //./pipe/openssh-ssh-agent";
 
         wslSide = "UNIX-LISTEN:%t/ssh-agent,fork,umask=007";
-        windowsSide = "EXEC:\"${nprCmdline}\",nofork"; # avoid escaping
+        windowsSide = "EXEC:${nprCmdline},nofork"; # avoid escaping
       in
-        "${pkgs.socat}/bin/socat ${wslSide} ${windowsSide}";
+        "${pkgs.socat}/bin/socat '${wslSide}' '${windowsSide}'";
       Restart = "always";
     };
   };
