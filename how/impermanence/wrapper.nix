@@ -1,4 +1,5 @@
-{ config, lib, pkgs, impermanence, ... }@inputs: let
+{ config, lib, pkgs, utils, impermanence, ... }@inputs: let
+  # HACK `utils` required by impermanence module
   unject = import "${impermanence}/nixos.nix" inputs;
   wrap = let
     get = let

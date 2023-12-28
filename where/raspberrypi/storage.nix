@@ -12,7 +12,7 @@
 
     elevatedPlane = {
       enable = lib.mkDefault true;
-      mountOptions = [ "noatime" "size=3G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
+      mountOptions = [ "noatime" "size=1G" "mode=0755" ]; # 0700 will make SSH pubkey refuse to work
     };
 
     earlyBinds = [ "/boot" "/nix" ];
